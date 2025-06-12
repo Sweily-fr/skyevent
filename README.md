@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# SkyEvent - Application React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Cette application React reproduit fidèlement le site WordPress Elementor de SkyEvent, un service de traiteur événementiel spécialisé dans les sushis. L'application conserve le même design, les mêmes animations et la même structure que le site original.
 
 ## Available Scripts
 
