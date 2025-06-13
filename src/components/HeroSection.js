@@ -53,46 +53,60 @@ const Overlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
   z-index: 2;
 `;
 
 const HeroContent = styled.div`
-  max-width: 800px;
-  text-align: center;
-  padding: 0 20px;
-  position: relative;
+  position: absolute;
+  bottom: 100px;
+  left: 50px;
+  max-width: 600px;
+  text-align: left;
+  padding: 30px;
   z-index: 3;
+  background: transparent;
+  
+  @media (max-width: 768px) {
+    left: 20px;
+    bottom: 60px;
+    right: 20px;
+    max-width: none;
+  }
 `;
 
 const HeroTitle = styled(motion.h1)`
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   font-family: 'Playfair Display', serif;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   
   @media (max-width: 768px) {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 `;
 
 const HeroSubtitle = styled(motion.p)`
-  font-size: 1.5rem;
-  margin-bottom: 30px;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  line-height: 1.6;
   
   @media (max-width: 768px) {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 `;
 
 const ButtonContainer = styled(motion.div)`
   display: flex;
-  gap: 20px;
-  justify-content: center;
+  gap: 15px;
   
   @media (max-width: 576px) {
     flex-direction: column;
-    align-items: center;
+    gap: 10px;
   }
 `;
 
@@ -132,79 +146,43 @@ const SecondaryButton = styled(Link)`
 `;
 
 const HeroSection = () => {
-  const videoRef = React.useRef(null);
-
-  React.useEffect(() => {
-    if (videoRef.current) {
-      const video = videoRef.current;
-      
-      const handleCanPlay = () => {
-        console.log('La vidéo peut être lue');
-        video.play().catch(error => {
-          console.error('Erreur lors de la lecture automatique:', error);
-        });
-      };
-      
-      const handleError = (e) => {
-        console.error('Erreur de chargement de la vidéo:', e);
-        console.log('Source vidéo:', videoSource);
-      };
-      
-      video.addEventListener('canplay', handleCanPlay);
-      video.addEventListener('error', handleError);
-      
-      return () => {
-        video.removeEventListener('canplay', handleCanPlay);
-        video.removeEventListener('error', handleError);
-      };
-    }
-  }, []);
-
   return (
     <HeroContainer>
       <VideoContainer>
         <VideoBackground 
-          ref={videoRef}
           autoPlay 
           loop 
           muted 
           playsInline
           onError={(e) => console.error('Erreur vidéo:', e)}
-          src={process.env.PUBLIC_URL + videoSource}
-          type="video/mp4"
         >
-          Votre navigateur ne supporte pas la lecture de vidéos.
+          <source src={process.env.PUBLIC_URL + videoSource} type="video/mp4" />
+          <img 
+            src={process.env.PUBLIC_URL + fallbackImage} 
+            alt="Présentation de sushis"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }} 
+          />
         </VideoBackground>
-        <img 
-          src={process.env.PUBLIC_URL + fallbackImage} 
-          alt="Présentation de sushis"
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            zIndex: 1,
-            display: 'none' // Ne s'affichera que si la vidéo échoue
-          }} 
-        />
       </VideoContainer>
       <Overlay />
       <HeroContent>
         <HeroTitle
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
         >
           Traiteur Événementiel Sur Mesure
         </HeroTitle>
         <HeroSubtitle
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Nos services de traiteur événementiel : Bien plus qu'un simple repas
+          Découvrez une expérience culinaire exceptionnelle pour vos événements spéciaux. Notre équipe de chefs passionnés crée des mets délicats qui éveilleront tous les sens de vos invités.
         </HeroSubtitle>
         <ButtonContainer
           initial={{ opacity: 0, y: 30 }}

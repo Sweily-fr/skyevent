@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import HeroSection from '../components/HeroSection';
-import AboutSection from '../components/AboutSection';
-import ServicesSection from '../components/ServicesSection';
-import TestimonialsSection from '../components/TestimonialsSection';
+import EventTypesGrid from '../components/EventTypesGrid';
+import TraiteurBanner from '../components/TraiteurBanner';
+import RealisationsGrid from '../components/RealisationsGrid';
+import ImageCarousel from '../components/ImageCarousel';
 import ContactSection from '../components/ContactSection';
 
 const HomeContainer = styled.div`
@@ -19,9 +20,10 @@ const HomePage = () => {
   return (
     <HomeContainer>
       <HeroSection />
-      <AboutSection />
-      <ServicesSection />
-      <TestimonialsSection />
+      <EventTypesGrid />
+      <TraiteurBanner />
+      <RealisationsGrid />
+      <ImageCarousel />
       <ContactSection />
     </HomeContainer>
   );
