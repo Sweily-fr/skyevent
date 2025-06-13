@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import OurStorySection from '../components/OurStorySection';
+import ContactSection from '../components/ContactSection';
+import EventBanner from '../components/EventBanner';
 
 // Placeholder images - à remplacer par vos propres images
 const chefImage = 'https://images.unsplash.com/photo-1581299894007-aaa50297cf16?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
@@ -209,6 +211,8 @@ const NotrHistoirePage = () => {
           </TeamMember>
         </TeamGrid>
       </Section>
+      <ContactSection />
+      <EventBanner />
     </PageContainer>
   );
 };

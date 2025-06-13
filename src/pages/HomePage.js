@@ -6,6 +6,7 @@ import TraiteurBanner from '../components/TraiteurBanner';
 import RealisationsGrid from '../components/RealisationsGrid';
 import ImageCarousel from '../components/ImageCarousel';
 import ContactSection from '../components/ContactSection';
+import EventBanner from '../components/EventBanner';
 
 const HomeContainer = styled.div`
   min-height: 100vh;
@@ -25,6 +26,7 @@ const HomePage = () => {
       <RealisationsGrid />
       <ImageCarousel />
       <ContactSection />
+      <EventBanner />
     </HomeContainer>
   );
 };

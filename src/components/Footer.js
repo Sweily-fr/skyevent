@@ -7,7 +7,7 @@ import { faFacebookF, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-
 const FooterContainer = styled.footer`
   background-color: #f8f8f8;
   padding: 60px 0 30px;
-  margin-top: 80px;
+  margin-top: 0;
 `;
 
 const FooterContent = styled.div`
