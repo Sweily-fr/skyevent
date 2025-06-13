@@ -3,8 +3,14 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-// Placeholder image URL - vous devrez remplacer ceci par vos propres images
-const heroImageUrl = 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80';
+// Chemin vers la vidéo locale dans le dossier public
+const videoSource = '/videos/Sushi copy.mp4';
+
+// Image de secours
+const fallbackImage = '/images/sushi-fallback.jpg';
+
+// Remarque : Pour une utilisation en production, il est recommandé de télécharger la vidéo
+// et de l'héberger sur votre propre serveur pour des raisons de performance et de fiabilité.
 
 const HeroContainer = styled.section`
   height: 100vh;
@@ -17,24 +23,46 @@ const HeroContainer = styled.section`
   overflow: hidden;
   margin-top: -70px; /* Pour compenser la hauteur du header */
   padding-top: 70px;
+  background: #000;
 `;
 
-const HeroBackground = styled.div`
+const VideoBackground = styled.video`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  background: #000;
+`;
+
+const VideoContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+`;
+
+const Overlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${heroImageUrl});
-  background-size: cover;
-  background-position: center;
-  z-index: -1;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2;
 `;
 
 const HeroContent = styled.div`
   max-width: 800px;
   text-align: center;
   padding: 0 20px;
+  position: relative;
+  z-index: 3;
 `;
 
 const HeroTitle = styled(motion.h1)`
@@ -104,9 +132,65 @@ const SecondaryButton = styled(Link)`
 `;
 
 const HeroSection = () => {
+  const videoRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (videoRef.current) {
+      const video = videoRef.current;
+      
+      const handleCanPlay = () => {
+        console.log('La vidéo peut être lue');
+        video.play().catch(error => {
+          console.error('Erreur lors de la lecture automatique:', error);
+        });
+      };
+      
+      const handleError = (e) => {
+        console.error('Erreur de chargement de la vidéo:', e);
+        console.log('Source vidéo:', videoSource);
+      };
+      
+      video.addEventListener('canplay', handleCanPlay);
+      video.addEventListener('error', handleError);
+      
+      return () => {
+        video.removeEventListener('canplay', handleCanPlay);
+        video.removeEventListener('error', handleError);
+      };
+    }
+  }, []);
+
   return (
     <HeroContainer>
-      <HeroBackground />
+      <VideoContainer>
+        <VideoBackground 
+          ref={videoRef}
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          onError={(e) => console.error('Erreur vidéo:', e)}
+          src={process.env.PUBLIC_URL + videoSource}
+          type="video/mp4"
+        >
+          Votre navigateur ne supporte pas la lecture de vidéos.
+        </VideoBackground>
+        <img 
+          src={process.env.PUBLIC_URL + fallbackImage} 
+          alt="Présentation de sushis"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 1,
+            display: 'none' // Ne s'affichera que si la vidéo échoue
+          }} 
+        />
+      </VideoContainer>
+      <Overlay />
       <HeroContent>
         <HeroTitle
           initial={{ opacity: 0, y: 30 }}
