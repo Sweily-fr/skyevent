@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import OurStorySection from '../components/OurStorySection';
 
 // Placeholder images - à remplacer par vos propres images
 const chefImage = 'https://images.unsplash.com/photo-1581299894007-aaa50297cf16?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
@@ -10,30 +11,9 @@ const experienceImage = 'https://images.unsplash.com/photo-1579871494447-9811cf8
 
 const PageContainer = styled.div`
   min-height: 100vh;
-  padding-top: 80px;
 `;
 
-const HeroSection = styled.section`
-  height: 400px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${experienceImage});
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-align: center;
-`;
 
-const HeroTitle = styled.h1`
-  font-size: 3rem;
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 20px;
-  
-  @media (max-width: 768px) {
-    font-size: 2.5rem;
-  }
-`;
 
 const Section = styled.section`
   padding: 80px 20px;
@@ -119,11 +99,7 @@ const NotrHistoirePage = () => {
 
   return (
     <PageContainer>
-      <HeroSection>
-        <div>
-          <HeroTitle>Notre histoire</HeroTitle>
-        </div>
-      </HeroSection>
+      <OurStorySection />
       
       <Section>
         <Grid>

@@ -35,55 +35,98 @@ const Overlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.2) 100%);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 2;
 `;
 
 const BannerContent = styled.div`
   position: relative;
   z-index: 3;
-  text-align: center;
-  max-width: 800px;
-  padding: 0 20px;
+  text-align: left;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 40px;
+  margin-top: 100px;
+  
+  @media (max-width: 768px) {
+    padding: 0 20px;
+    margin-top: 80px;
+  }
 `;
 
-const BannerTitle = styled(motion.h2)`
-  font-size: 3.5rem;
-  font-weight: 700;
-  margin-bottom: 15px;
+const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+`;
+
+const MainTitle = styled(motion.h1)`
+  font-size: 6rem;
+  font-weight: 400;
+  margin: 0;
   font-family: 'Playfair Display', serif;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  line-height: 1;
+  letter-spacing: 2px;
+  
+  @media (max-width: 1024px) {
+    font-size: 5rem;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 3.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 2.8rem;
+  }
+`;
+
+const SubTitle = styled(motion.h2)`
+  font-size: 4rem;
+  font-weight: 300;
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  line-height: 1.2;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  
+  @media (max-width: 1024px) {
+    font-size: 3.2rem;
+  }
   
   @media (max-width: 768px) {
     font-size: 2.5rem;
   }
-`;
-
-const BannerSubtitle = styled(motion.p)`
-  font-size: 1.5rem;
-  margin-bottom: 30px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
+  @media (max-width: 480px) {
+    font-size: 2rem;
   }
 `;
 
 const BannerButton = styled(motion(Link))`
   display: inline-block;
-  background-color: white;
-  color: #333;
+  background-color: transparent;
+  color: white;
   padding: 15px 40px;
-  border-radius: 30px;
+  border: 1px solid white;
+  border-radius: 0;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1rem;
+  font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   transition: all 0.3s ease;
+  margin-top: 30px;
   
   &:hover {
-    background-color: #f0f0f0;
+    background-color: white;
+    color: #333;
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 12px 30px;
+    font-size: 0.9rem;
   }
 `;
 
@@ -93,30 +136,32 @@ const TraiteurBanner = () => {
       <BannerImage src={bannerImage} />
       <Overlay />
       <BannerContent>
-        <BannerTitle
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          Traiteur<br />Services événementiels
-        </BannerTitle>
-        <BannerSubtitle
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          Une expérience culinaire d'exception pour vos événements
-        </BannerSubtitle>
+        <TitleContainer>
+          <MainTitle
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Traiteur
+          </MainTitle>
+          <SubTitle
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            Services Événementiels
+          </SubTitle>
+        </TitleContainer>
         <BannerButton
           to="/realisations"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ letterSpacing: '2px' }}
+          whileTap={{ scale: 0.98 }}
         >
           Découvrir les événements
         </BannerButton>
