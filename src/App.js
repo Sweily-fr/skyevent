@@ -1,8 +1,7 @@
 import React, { useLayoutEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import styled, { createGlobalStyle } from 'styled-components';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import { createGlobalStyle } from 'styled-components';
+import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import NotrHistoirePage from './pages/NotrHistoirePage';
 import EvenementielPage from './pages/EvenementielPage';
@@ -64,45 +63,28 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const AppContainer = styled.div`
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-`;
-
-const MainContent = styled.main`
-  flex: 1;
-  padding-top: 120px; /* Hauteur du header par défaut */
-  
-  @media (max-width: 768px) {
-    padding-top: 100px; /* Ajustement pour mobile */
-  }
-`;
+// Les styles de conteneur ont été déplacés vers le composant Layout
 
 function App() {
   return (
     <ScrollToTopRouter>
       <GlobalStyle />
-      <AppContainer>
-        <Header />
-        <MainContent>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/notre-histoire" element={<NotrHistoirePage />} />
-            <Route path="/evenementiel" element={<EvenementielPage />} />
-            <Route path="/realisations" element={<RealisationsPage />} />
-            
-            {/* Routes pour les pages d'occasions */}
-            <Route path="/realisations/baby-shower" element={<BabyShowerPage />} />
-            <Route path="/realisations/anniversaire" element={<AnniversairePage />} />
-            <Route path="/realisations/bapteme" element={<BaptemePage />} />
-            <Route path="/realisations/mariage" element={<MariagePage />} />
-            <Route path="/realisations/evenements-dentreprise" element={<EntreprisePage />} />
-            <Route path="/realisations/evenements-de-marque" element={<MarquePage />} />
-          </Routes>
-        </MainContent>
-        <Footer />
-      </AppContainer>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/notre-histoire" element={<NotrHistoirePage />} />
+          <Route path="/evenementiel" element={<EvenementielPage />} />
+          <Route path="/realisations" element={<RealisationsPage />} />
+          
+          {/* Routes pour les pages d'occasions */}
+          <Route path="/realisations/baby-shower" element={<BabyShowerPage />} />
+          <Route path="/realisations/anniversaire" element={<AnniversairePage />} />
+          <Route path="/realisations/bapteme" element={<BaptemePage />} />
+          <Route path="/realisations/mariage" element={<MariagePage />} />
+          <Route path="/realisations/evenements-dentreprise" element={<EntreprisePage />} />
+          <Route path="/realisations/evenements-de-marque" element={<MarquePage />} />
+        </Routes>
+      </Layout>
     </ScrollToTopRouter>
   );
 }

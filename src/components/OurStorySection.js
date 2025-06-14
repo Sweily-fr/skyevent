@@ -2,17 +2,18 @@ import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { VIDEO_SOURCE, FALLBACK_IMAGE } from '../utils/constants';
 
-// Utilisation de la même vidéo que sur la page d'accueil
-const videoSource = '/videos/Sushi copy.mp4';
-// Image de secours si la vidéo ne se charge pas
-const fallbackImage = '/images/sushi-fallback.jpg';
+// Utilisation des constantes pour les sources média
+const videoSource = VIDEO_SOURCE;
+const fallbackImage = FALLBACK_IMAGE;
 
 const StoryContainer = styled.section`
   position: relative;
   width: 100%;
   margin-top: -120px; /* Pour compenser la hauteur du header et éliminer l'écart */
   padding-top: 0; /* Suppression du padding pour éliminer tout espace */
+  font-family: 'Playfair Display', serif;
 `;
 
 const VideoContainer = styled.div`
@@ -27,6 +28,7 @@ const VideoContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #000; /* Fond noir pour un aspect plus luxueux */
 `;
 
 const VideoBackground = styled.video`
@@ -56,11 +58,12 @@ const LogoContainer = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   padding-top: 30vh;
-  padding-bottom: 60vh; /* Changement de margin-bottom en padding-bottom pour un meilleur centrage */
+  padding-bottom: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  letter-spacing: 2px; /* Espacement des lettres pour un aspect luxueux */
 `;
 
 const Logo = styled.img`
@@ -72,11 +75,13 @@ const Logo = styled.img`
 
 const HeroTitle = styled.h1`
   font-size: 5rem;
-  font-weight: 700;
+  font-weight: 300; /* Plus léger pour un aspect plus élégant */
   color: white;
   margin-bottom: 20px;
   font-family: 'Playfair Display', serif;
   line-height: 1.2;
+  letter-spacing: 4px; /* Espacement des lettres pour un aspect luxueux */
+  text-transform: uppercase; /* Majuscules pour un style LV */
   
   @media (max-width: 768px) {
     font-size: 3rem;
@@ -88,6 +93,8 @@ const HeroSubtitle = styled.p`
   color: white;
   margin-top: 10px;
   font-weight: 300;
+  letter-spacing: 3px; /* Espacement des lettres pour un aspect luxueux */
+  text-transform: uppercase; /* Majuscules pour un style LV */
   
   @media (max-width: 768px) {
     font-size: 1.2rem;
@@ -168,21 +175,22 @@ const CTAContainer = styled.div`
 
 const CTAButton = styled(Link)`
   display: inline-block;
-  padding: 12px 24px;
+  padding: 14px 32px;
   background-color: ${props => props.primary ? 'white' : 'transparent'};
   color: ${props => props.primary ? '#000' : 'white'};
-  border: 2px solid white;
-  border-radius: 4px;
+  border: 1px solid white; /* Bordure plus fine pour un aspect élégant */
+  border-radius: 0; /* Coins carrés pour un style plus luxueux */
   text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
-  letter-spacing: 1px;
+  font-weight: 400;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase; /* Majuscules pour un style LV */
   transition: all 0.3s ease;
   
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    background-color: ${props => props.primary ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.1)'};
+    transform: translateY(0); /* Pas de mouvement vertical */
+    box-shadow: none; /* Pas d'ombre */
+    background-color: ${props => props.primary ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.2)'};
   }
 `;
 
@@ -216,9 +224,11 @@ const TextSection = styled(motion.div)`
 
 const StoryTitle = styled.h1`
   font-size: 3rem;
-  font-weight: 700;
+  font-weight: 300; /* Plus léger pour un aspect plus élégant */
   margin-bottom: 30px;
   font-family: 'Playfair Display', serif;
+  letter-spacing: 3px; /* Espacement des lettres pour un aspect luxueux */
+  text-transform: uppercase; /* Majuscules pour un style LV */
   
   @media (max-width: 768px) {
     font-size: 2.2rem;
@@ -229,6 +239,8 @@ const StoryText = styled.p`
   font-size: 1.2rem;
   line-height: 1.8;
   margin-bottom: 20px;
+  font-weight: 300; /* Plus léger pour un aspect plus élégant */
+  letter-spacing: 1px; /* Léger espacement des lettres */
   
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -290,8 +302,8 @@ const OurStorySection = () => {
         <ContentWrapper style={{ transform: `translateY(-${scrollY * 0.5}px)` }}>
           <LogoContainer>
             <Logo src="/images/Sky Event ..svg" alt="SkyEvent Logo" />
-            <HeroTitle>Notre Voyage Culinaire</HeroTitle>
-            <HeroSubtitle>Gastronomie Événementielle</HeroSubtitle>
+            <HeroTitle>L'Art Culinaire</HeroTitle>
+            <HeroSubtitle>Sky Event Paris</HeroSubtitle>
           </LogoContainer>
           
           <TextSection

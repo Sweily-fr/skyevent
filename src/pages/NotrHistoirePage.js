@@ -1,76 +1,192 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import OurStorySection from '../components/OurStorySection';
 import ContactSection from '../components/ContactSection';
-import EventBanner from '../components/EventBanner';
 
-// Placeholder images - à remplacer par vos propres images
-const chefImage = 'https://images.unsplash.com/photo-1581299894007-aaa50297cf16?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
-const teamImage1 = 'https://images.unsplash.com/photo-1577219491135-ce391730fb2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
-const teamImage2 = 'https://images.unsplash.com/photo-1581299894340-05b7efe78ecc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
-const experienceImage = 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
+// Images luxueuses pour le design inspiré de Louis Vuitton
+const chefImage = 'https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
+const teamImage1 = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
+const teamImage2 = 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
+const experienceImage = 'https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
+const parallaxImage = 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80';
+
 
 const PageContainer = styled.div`
   min-height: 100vh;
+  font-family: 'Playfair Display', serif;
+  color: #1a1a1a;
+  background-color: #f8f5f1; /* Fond légèrement beige pour un aspect luxueux */
+`;
+
+const FullWidthSection = styled.section`
+  width: 100%;
+  padding: 0;
+  margin: 80px 0;
+  position: relative;
+  height: 600px;
+  overflow: hidden;
+  
+  @media (max-width: 768px) {
+    height: 400px;
+    margin: 60px 0;
+  }
+`;
+
+const FullWidthImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.8);
+`;
+
+const OverlayContent = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  padding: 20px;
+`;
+
+const OverlayTitle = styled.h2`
+  font-size: 3.5rem;
+  font-weight: 300;
+  margin-bottom: 20px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
+`;
+
+const OverlayText = styled.p`
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
 
 
 const Section = styled.section`
-  padding: 80px 20px;
-  max-width: 1200px;
+  padding: 120px 40px;
+  max-width: 1400px;
   margin: 0 auto;
+  position: relative;
+  
+  @media (max-width: 768px) {
+    padding: 80px 20px;
+  }
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+  font-size: 2.8rem;
+  margin-bottom: 30px;
   font-family: 'Playfair Display', serif;
+  font-weight: 300;
   text-align: ${props => props.center ? 'center' : 'left'};
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: ${props => props.center ? '50%' : '0'};
+    transform: ${props => props.center ? 'translateX(-50%)' : 'none'};
+    width: ${props => props.center ? '100px' : '60px'};
+    height: 1px;
+    background-color: #1a1a1a;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+  }
 `;
 
 const SectionText = styled.p`
   font-size: 1.1rem;
-  color: #666;
-  margin-bottom: 20px;
-  line-height: 1.6;
+  color: #444;
+  margin-bottom: 30px;
+  line-height: 1.8;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  font-family: 'Poppins', sans-serif;
 `;
 
 const Grid = styled.div`
   display: grid;
   grid-template-columns: ${props => props.columns || '1fr 1fr'};
-  gap: 50px;
+  gap: 80px;
   align-items: center;
+  margin: 80px 0;
   
   @media (max-width: 992px) {
     grid-template-columns: 1fr;
+    gap: 60px;
+    margin: 60px 0;
   }
 `;
 
 const ImageContainer = styled(motion.div)`
   overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
+  position: relative;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: -20px;
+    bottom: -20px;
+    border: 1px solid #d4c9b6;
+    z-index: -1;
+  }
 `;
 
 const StyledImage = styled.img`
   width: 100%;
   height: auto;
   display: block;
+  filter: saturate(0.9) brightness(1.05); /* Légère modification pour un aspect plus luxueux */
 `;
 
 const TeamGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 50px;
+  gap: 60px;
+  margin-top: 80px;
 `;
 
 const TeamMember = styled(motion.div)`
-  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
+  position: relative;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: -15px;
+    bottom: -15px;
+    border: 1px solid #d4c9b6;
+    z-index: -1;
+  }
 `;
 
 const TeamMemberImage = styled.img`
@@ -86,16 +202,27 @@ const TeamMemberInfo = styled.div`
 const TeamMemberName = styled.h3`
   margin: 0 0 10px 0;
   font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-size: 1.4rem;
 `;
 
 const TeamMemberRole = styled.p`
   margin: 0;
   color: #666;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
 `;
 
 const NotrHistoirePage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
+  useLayoutEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto'
+    });
     document.title = 'Notre histoire - SkyEvent';
   }, []);
 
@@ -106,7 +233,7 @@ const NotrHistoirePage = () => {
       <Section>
         <Grid>
           <div>
-            <SectionTitle>Notre expérience</SectionTitle>
+            <SectionTitle>L'Excellence</SectionTitle>
             <SectionText>
               Appréciez l'élégance dans les moindres détails avec nos assiettes sophistiquées, 
               soigneusement dressées pour éveiller vos papilles. Parfait pour vos repas en tête-à-tête, 
@@ -140,7 +267,7 @@ const NotrHistoirePage = () => {
             <StyledImage src={chefImage} alt="Notre Chef Cuistot" />
           </ImageContainer>
           <div>
-            <SectionTitle>Notre Chef Cuistot : le maestro des saveurs</SectionTitle>
+            <SectionTitle>Le Savoir-Faire</SectionTitle>
             <SectionText>
               Chez SkyEvent, nos sushis sont l'œuvre de notre chef, un passionné de gastronomie japonaise. 
               Avec un savoir-faire unique et des années d'expérience, il marie tradition et créativité pour 
@@ -158,7 +285,7 @@ const NotrHistoirePage = () => {
       </Section>
       
       <Section>
-        <SectionTitle center>Notre Équipe : la passion au cœur de SkyEvent</SectionTitle>
+        <SectionTitle center>Notre Maison</SectionTitle>
         <SectionText>
           Appréciez l'élégance dans les moindres détails avec nos assiettes sophistiquées, 
           soigneusement dressées pour éveiller vos papilles. Parfait pour vos repas en tête-à-tête, 
@@ -211,8 +338,15 @@ const NotrHistoirePage = () => {
           </TeamMember>
         </TeamGrid>
       </Section>
+      <FullWidthSection>
+        <FullWidthImage src={parallaxImage} alt="Gastronomie de luxe" />
+        <OverlayContent>
+          <OverlayTitle>L'Art de la Table</OverlayTitle>
+          <OverlayText>Une expérience culinaire d'exception</OverlayText>
+        </OverlayContent>
+      </FullWidthSection>
+      
       <ContactSection />
-      <EventBanner />
     </PageContainer>
   );
 };
