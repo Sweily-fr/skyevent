@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -15,12 +15,14 @@ const eventImages = {
 
 const PageContainer = styled.div`
   min-height: 100vh;
-  padding-top: 80px;
+  font-family: 'Playfair Display', serif;
+  color: #1a1a1a;
+  background-color: #ffffff; /* Fond blanc */
 `;
 
 const HeroSection = styled.section`
-  height: 400px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${eventImages.hero});
+  height: 500px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${eventImages.hero});
   background-size: cover;
   background-position: center;
   display: flex;
@@ -28,37 +30,76 @@ const HeroSection = styled.section`
   justify-content: center;
   color: white;
   text-align: center;
+  margin-bottom: 40px;
 `;
 
 const HeroTitle = styled.h1`
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-family: 'Playfair Display', serif;
+  font-weight: 300;
+  letter-spacing: 4px;
+  text-transform: uppercase;
   margin-bottom: 20px;
   
   @media (max-width: 768px) {
     font-size: 2.5rem;
+    letter-spacing: 3px;
   }
 `;
 
 const Section = styled.section`
-  padding: 80px 20px;
+  padding: 100px 40px;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 1px;
+    background-color: #d4af37; /* Couleur or subtile */
+  }
+  
+  @media (max-width: 768px) {
+    padding: 60px 20px;
+  }
 `;
 
 const SectionTitle = styled.h2`
   font-size: 2.5rem;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   font-family: 'Playfair Display', serif;
+  font-weight: 300;
+  letter-spacing: 3px;
+  text-transform: uppercase;
   text-align: ${props => props.center ? 'center' : 'left'};
+  position: relative;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: ${props => props.center ? '50%' : '0'};
+    transform: ${props => props.center ? 'translateX(-50%)' : 'none'};
+    width: 40px;
+    height: 1px;
+    background-color: #d4af37; /* Couleur or subtile */
+  }
 `;
 
 const SectionSubtitle = styled.p`
   font-size: 1.2rem;
   max-width: 700px;
-  margin: ${props => props.center ? '0 auto 50px' : '0 0 50px'};
+  margin: ${props => props.center ? '0 auto 60px' : '0 0 60px'};
   color: #666;
   text-align: ${props => props.center ? 'center' : 'left'};
+  font-weight: 300;
+  letter-spacing: 1px;
+  line-height: 1.8;
 `;
 
 const Grid = styled.div`
@@ -74,8 +115,20 @@ const Grid = styled.div`
 
 const ImageContainer = styled(motion.div)`
   overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border: 1px solid #f0f0f0;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: -12px;
+    bottom: -12px;
+    border: 1px solid #d4af37;
+    z-index: -1;
+  }
 `;
 
 const StyledImage = styled.img`
@@ -89,50 +142,68 @@ const ContentContainer = styled.div``;
 const SectionText = styled.p`
   font-size: 1.1rem;
   color: #666;
-  margin-bottom: 20px;
-  line-height: 1.6;
+  margin-bottom: 30px;
+  line-height: 1.8;
+  font-weight: 300;
+  letter-spacing: 0.5px;
 `;
 
 const FeaturesList = styled.ul`
   list-style: none;
   padding: 0;
-  margin: 30px 0;
+  margin: 40px 0;
 `;
 
 const FeatureItem = styled.li`
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  font-weight: 300;
+  letter-spacing: 1px;
   
   &:before {
-    content: '✓';
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    background-color: #f0f0f0;
-    border-radius: 50%;
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: #d4af37;
     margin-right: 15px;
-    color: #333;
-    font-weight: bold;
   }
 `;
 
 const CTAButton = styled(Link)`
   display: inline-block;
-  background-color: #333;
-  color: white;
+  background-color: transparent;
+  color: #1a1a1a;
   padding: 12px 30px;
-  border-radius: 30px;
+  border: 1px solid #1a1a1a;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: #1a1a1a;
+    transition: all 0.3s ease;
+    z-index: -1;
+  }
   
   &:hover {
-    background-color: #555;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    color: white;
+    
+    &:after {
+      height: 100%;
+    }
   }
 `;
 
@@ -144,14 +215,30 @@ const ServicesGrid = styled.div`
 `;
 
 const ServiceCard = styled(motion.div)`
-  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  position: relative;
+  border: 1px solid #f0f0f0;
+  transition: all 0.4s ease;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: -10px;
+    bottom: -10px;
+    border: 1px solid #d4af37;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
   
   &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    
+    &:before {
+      opacity: 1;
+    }
   }
 `;
 
@@ -168,18 +255,28 @@ const ServiceContent = styled.div`
 
 const ServiceTitle = styled.h3`
   font-size: 1.5rem;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   font-family: 'Playfair Display', serif;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 `;
 
 const ServiceDescription = styled.p`
   color: #666;
   margin-bottom: 20px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
 `;
 
 const EvenementielPage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
+  useLayoutEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto'
+    });
     document.title = 'Événementiel - SkyEvent';
   }, []);
 

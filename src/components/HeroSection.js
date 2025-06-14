@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import { motion, useAnimation, useInView } from 'framer-motion';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 // Chemin vers la vidéo locale dans le dossier public
@@ -75,79 +75,145 @@ const HeroContent = styled.div`
 `;
 
 const HeroTitle = styled(motion.h1)`
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 15px;
+  font-size: 3.5rem;
+  font-weight: 300;
+  margin-bottom: 20px;
   font-family: 'Playfair Display', serif;
   color: #fff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  line-height: 1.1;
+  max-width: 800px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   
+  @media (max-width: 1200px) {
+    font-size: 3rem;
+  }
+  
+  @media (max-width: 992px) {
+    font-size: 2.5rem;
+  }
+  
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 2.2rem;
+    letter-spacing: 3px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.8rem;
   }
 `;
 
 const HeroSubtitle = styled(motion.p)`
   font-size: 1.2rem;
-  margin-bottom: 20px;
-  color: #fff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-  line-height: 1.6;
+  margin-bottom: 30px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 1.8;
+  max-width: 600px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   
   @media (max-width: 768px) {
+    font-size: 1.1rem;
+    padding: 0 20px;
+  }
+  
+  @media (max-width: 480px) {
     font-size: 1rem;
   }
 `;
 
 const ButtonContainer = styled(motion.div)`
   display: flex;
-  gap: 15px;
+  gap: 20px;
+  margin-top: 20px;
   
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto 0;
+  }
+  
+  @media (max-width: 480px) {
+    max-width: 100%;
   }
 `;
 
 const PrimaryButton = styled(Link)`
   display: inline-block;
-  background-color: white;
-  color: #333;
-  padding: 12px 30px;
-  border-radius: 30px;
+  background: transparent;
+  color: #fff;
+  padding: 10px 25px;
+  border: 1px solid #fff;
   text-decoration: none;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 1px;
   transition: all 0.3s ease;
   
   &:hover {
-    background-color: #f0f0f0;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    color: #1a1a1a;
+    background-color: #fff;
+    border-color: #fff;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 8px 20px;
+    font-size: 0.85rem;
   }
 `;
 
 const SecondaryButton = styled(Link)`
   display: inline-block;
-  background-color: transparent;
-  color: white;
-  padding: 12px 30px;
-  border-radius: 30px;
+  background: transparent;
+  color: #fff;
+  padding: 10px 25px;
+  border: 1px solid #fff;
   text-decoration: none;
-  font-weight: 600;
-  border: 2px solid white;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 1px;
   transition: all 0.3s ease;
   
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    color: #1a1a1a;
+    background-color: #fff;
+    border-color: #fff;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 8px 20px;
+    font-size: 0.85rem;
   }
 `;
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { 
+      duration: 0.6, 
+      ease: 'easeOut' 
+    }
+  }
+};
+
 const HeroSection = () => {
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
+
+  useEffect(() => {
+    if (isInView) {
+      controls.start('visible');
+    }
+  }, [controls, isInView]);
   return (
-    <HeroContainer>
+    <HeroContainer ref={ref}>
       <VideoContainer>
         <VideoBackground 
           autoPlay 
@@ -170,28 +236,49 @@ const HeroSection = () => {
       </VideoContainer>
       <Overlay />
       <HeroContent>
-        <HeroTitle
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+        <motion.div
+          initial="hidden"
+          animate={controls}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.2
+              }
+            }
+          }}
         >
-          Traiteur Événementiel Sur Mesure
-        </HeroTitle>
-        <HeroSubtitle
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          Découvrez une expérience culinaire exceptionnelle pour vos événements spéciaux. Notre équipe de chefs passionnés crée des mets délicats qui éveilleront tous les sens de vos invités.
-        </HeroSubtitle>
-        <ButtonContainer
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <PrimaryButton to="/realisations">Découvrir nos réalisations</PrimaryButton>
-          <SecondaryButton to="/notre-histoire">Notre histoire</SecondaryButton>
-        </ButtonContainer>
+          <HeroTitle 
+            variants={fadeInUp}
+          >
+            Notre histoire traiteur
+          </HeroTitle>
+          <HeroSubtitle
+            variants={fadeInUp}
+          >
+            Parce que chaque événement est unique, notre service traiteur événementiel crée des expériences sur mesure, alliant saveurs raffinées, présentation élégante et service impeccable. Mariages, anniversaires ou événements professionnels, nous sublimons vos réceptions avec créativité et savoir-faire.
+          </HeroSubtitle>
+
+        </motion.div>
+        <motion.div variants={fadeInUp}>
+          <ButtonContainer
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ 
+              opacity: 1, 
+              y: 0,
+              transition: { 
+                delay: 0.8,
+                duration: 0.6,
+                ease: 'easeOut' 
+              }
+            }}
+          >
+            <PrimaryButton to="/realisations">Découvrir nos réalisations</PrimaryButton>
+            <SecondaryButton to="/notre-histoire">Notre histoire</SecondaryButton>
+          </ButtonContainer>
+        </motion.div>
       </HeroContent>
     </HeroContainer>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -17,12 +17,14 @@ const realisationsImages = {
 
 const PageContainer = styled.div`
   min-height: 100vh;
-  padding-top: 80px;
+  font-family: 'Playfair Display', serif;
+  color: #1a1a1a;
+  background-color: #ffffff; /* Fond blanc */
 `;
 
 const HeroSection = styled.section`
-  height: 400px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${realisationsImages.marque});
+  height: 500px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${realisationsImages.marque});
   background-size: cover;
   background-position: center;
   display: flex;
@@ -30,97 +32,173 @@ const HeroSection = styled.section`
   justify-content: center;
   color: white;
   text-align: center;
+  margin-bottom: 40px;
 `;
 
 const HeroTitle = styled.h1`
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-family: 'Playfair Display', serif;
+  font-weight: 300;
+  letter-spacing: 4px;
+  text-transform: uppercase;
   margin-bottom: 20px;
   
   @media (max-width: 768px) {
     font-size: 2.5rem;
+    letter-spacing: 3px;
   }
 `;
 
 const Section = styled.section`
-  padding: 80px 20px;
+  padding: 100px 40px;
   max-width: 1200px;
   margin: 0 auto;
-`;
-
-const SectionTitle = styled.h2`
-  font-size: 2.5rem;
-  margin-bottom: 50px;
-  font-family: 'Playfair Display', serif;
-  text-align: center;
-`;
-
-const RealisationsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 30px;
-`;
-
-const RealisationCard = styled(motion.div)`
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-  }
-`;
-
-const RealisationImage = styled.div`
-  height: 250px;
-  background-image: url(${props => props.src});
-  background-size: cover;
-  background-position: center;
-`;
-
-const RealisationContent = styled.div`
-  padding: 20px;
-`;
-
-const RealisationTitle = styled.h3`
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  font-family: 'Playfair Display', serif;
-`;
-
-const RealisationDescription = styled.p`
-  color: #666;
-  margin-bottom: 20px;
-`;
-
-const RealisationLink = styled(Link)`
-  display: inline-block;
-  color: #333;
-  font-weight: 600;
-  text-decoration: none;
   position: relative;
   
   &:after {
     content: '';
     position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 1px;
+    background-color: #d4af37; /* Couleur or subtile */
+  }
+  
+  @media (max-width: 768px) {
+    padding: 60px 20px;
+  }
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 300;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 1px;
+    background-color: #d4af37; /* Couleur or subtile */
+  }
+`;
+
+const RealisationsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 50px;
+  margin-top: 20px;
+`;
+
+const RealisationCard = styled(motion.div)`
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #f0f0f0;
+  transition: all 0.4s ease;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: -10px;
+    bottom: -10px;
+    border: 1px solid #d4af37;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+  
+  &:hover {
+    transform: translateY(-5px);
+    
+    &:before {
+      opacity: 1;
+    }
+  }
+`;
+
+const RealisationImage = styled.div`
+  height: 300px;
+  background-image: url(${props => props.src});
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.95);
+  transition: all 0.5s ease;
+  
+  ${RealisationCard}:hover & {
+    filter: brightness(1);
+  }
+`;
+
+const RealisationContent = styled.div`
+  padding: 30px;
+  background-color: white;
+`;
+
+const RealisationTitle = styled.h3`
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+`;
+
+const RealisationDescription = styled.p`
+  color: #666;
+  margin-bottom: 25px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+`;
+
+const RealisationLink = styled(Link)`
+  display: inline-block;
+  color: #1a1a1a;
+  font-weight: 300;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 5px;
+  font-size: 0.9rem;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: 0;
     left: 0;
-    background-color: #333;
-    transition: width 0.3s ease;
+    background-color: #d4af37;
+    transform: scaleX(0.3);
+    transform-origin: left;
+    transition: transform 0.4s ease;
   }
   
   &:hover:after {
-    width: 100%;
+    transform: scaleX(1);
   }
 `;
 
 const RealisationsPage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
+  useLayoutEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto'
+    });
     document.title = 'Nos réalisations - SkyEvent';
   }, []);
 

@@ -12,26 +12,82 @@ const carouselImages = [
 ];
 
 const CarouselContainer = styled.section`
-  padding: 80px 0;
-  background-color: #f8f8f8;
+  padding: 100px 0;
+  background-color: #ffffff;
   overflow: hidden;
+  position: relative;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #d4af37, transparent);
+  }
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #d4af37, transparent);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 80px 0;
+  }
 `;
 
 const CarouselTitle = styled.h2`
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
   font-family: 'Playfair Display', serif;
+  font-weight: 300;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 20px;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 1px;
+    background-color: #d4af37;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+    padding: 0 20px 20px;
+  }
 `;
 
 const CarouselWrapper = styled.div`
   position: relative;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  height: 500px;
+  height: 600px;
+  padding: 0 40px;
+  
+  @media (max-width: 1200px) {
+    height: 500px;
+  }
   
   @media (max-width: 768px) {
-    height: 300px;
+    height: 350px;
+    padding: 0 20px;
+  }
+  
+  @media (max-width: 480px) {
+    height: 250px;
   }
 `;
 
@@ -39,9 +95,14 @@ const CarouselSlide = styled(motion.div)`
   position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s ease;
+  
+  &:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const CarouselImage = styled.div`
@@ -60,16 +121,20 @@ const CarouselControls = styled.div`
 `;
 
 const CarouselDot = styled.button`
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background-color: ${props => props.active ? '#333' : '#ddd'};
+  background-color: ${props => props.active ? '#d4af37' : '#e0e0e0'};
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin: 0 5px;
+  padding: 0;
+  outline: none;
   
   &:hover {
-    background-color: ${props => props.active ? '#333' : '#bbb'};
+    background-color: ${props => props.active ? '#d4af37' : '#c0c0c0'};
+    transform: scale(1.2);
   }
 `;
 
@@ -78,8 +143,8 @@ const CarouselArrow = styled.button`
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: none;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #f0f0f0;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -87,13 +152,17 @@ const CarouselArrow = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 1.5rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  font-size: 1.2rem;
+  color: #333;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
+  outline: none;
   
   &:hover {
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    background-color: #d4af37;
+    color: white;
+    border-color: #d4af37;
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
   }
   
   &.prev {

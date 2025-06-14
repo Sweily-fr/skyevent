@@ -3,24 +3,67 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 const SectionContainer = styled.section`
-  padding: 80px 20px;
-  max-width: 1200px;
+  padding: 100px 40px;
+  max-width: 1400px;
   margin: 0 auto;
+  position: relative;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 1px;
+    background-color: #d4af37;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 80px 20px;
+  }
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   text-align: center;
   margin-bottom: 20px;
   font-family: 'Playfair Display', serif;
+  font-weight: 300;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 20px;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 1px;
+    background-color: #d4af37;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+  }
 `;
 
 const SectionSubtitle = styled.p`
   font-size: 1.2rem;
   text-align: center;
   max-width: 700px;
-  margin: 0 auto 50px;
+  margin: 0 auto 60px;
   color: #666;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 1.8;
+  
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
 `;
 
 const ContactGrid = styled.div`
@@ -36,7 +79,33 @@ const ContactGrid = styled.div`
 const ContactForm = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
+  padding: 40px;
+  background-color: #fff;
+  border: 1px solid #f0f0f0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  position: relative;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: -10px;
+    bottom: -10px;
+    border: 1px solid #d4af37;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+  
+  &:hover:before {
+    opacity: 1;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 30px 20px;
+  }
 `;
 
 const FormGroup = styled.div`
@@ -45,51 +114,105 @@ const FormGroup = styled.div`
 `;
 
 const FormLabel = styled.label`
-  margin-bottom: 8px;
-  font-weight: 500;
+  margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  color: #444;
 `;
 
 const FormInput = styled.input`
   padding: 12px 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  border-radius: 0;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.5px;
+  color: #333;
+  background-color: #fafafa;
+  transition: all 0.3s ease;
   
   &:focus {
     outline: none;
-    border-color: #333;
+    border-color: #d4af37;
+    background-color: #fff;
+    box-shadow: 0 0 0 1px #d4af37;
+  }
+  
+  &::placeholder {
+    color: #999;
+    font-style: italic;
   }
 `;
 
 const FormTextarea = styled.textarea`
   padding: 12px 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  border-radius: 0;
   font-size: 1rem;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.5px;
+  color: #333;
+  background-color: #fafafa;
   resize: vertical;
   min-height: 150px;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
   
   &:focus {
     outline: none;
-    border-color: #333;
+    border-color: #d4af37;
+    background-color: #fff;
+    box-shadow: 0 0 0 1px #d4af37;
+  }
+  
+  &::placeholder {
+    color: #999;
+    font-style: italic;
   }
 `;
 
 const FormButton = styled(motion.button)`
-  background-color: #333;
+  background-color: #1a1a1a;
   color: white;
-  padding: 12px 30px;
-  border: none;
-  border-radius: 30px;
-  font-weight: 600;
+  padding: 14px 40px;
+  border: 1px solid #1a1a1a;
+  border-radius: 0;
+  font-weight: 400;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease;
   align-self: flex-start;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #d4af37;
+    transition: all 0.4s ease;
+    z-index: -1;
+  }
   
   &:hover {
-    background-color: #555;
+    color: #1a1a1a;
+    border-color: #d4af37;
+    
+    &:before {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    text-align: center;
   }
 `;
 
@@ -97,35 +220,111 @@ const ContactInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
+  padding: 40px;
+  background-color: #f9f9f9;
+  height: 100%;
+  border: 1px solid #f0f0f0;
+  position: relative;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: -10px;
+    bottom: -10px;
+    border: 1px solid #d4af37;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+  
+  &:hover:before {
+    opacity: 1;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 30px 20px;
+  }
 `;
 
-const InfoItem = styled.div`
+const InfoItem = styled(motion.div)`
   display: flex;
   align-items: flex-start;
-  gap: 15px;
+  gap: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  &:hover {
+    transform: translateX(5px);
+  }
 `;
 
 const InfoIcon = styled.div`
-  width: 40px;
-  height: 40px;
-  background-color: #f0f0f0;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  color: #d4af37;
+  margin-top: 4px;
+  min-width: 30px;
+  text-align: center;
+  transition: all 0.3s ease;
+  
+  ${InfoItem}:hover & {
+    transform: scale(1.1);
+  }
 `;
 
-const InfoContent = styled.div``;
+const InfoContent = styled.div`
+  flex: 1;
+`;
 
 const InfoTitle = styled.h3`
-  margin: 0 0 5px 0;
+  margin: 0 0 8px;
   font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  font-family: 'Playfair Display', serif;
 `;
 
 const InfoText = styled.p`
   margin: 0;
   color: #666;
+  line-height: 1.8;
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+  
+  a {
+    color: #1a1a1a;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: #d4af37;
+      transition: all 0.3s ease;
+    }
+    
+    &:hover {
+      color: #d4af37;
+      
+      &:after {
+        width: 100%;
+      }
+    }
+  }
 `;
 
 const SuccessMessage = styled(motion.div)`

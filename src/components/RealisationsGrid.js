@@ -14,24 +14,67 @@ const realisationImages = {
 };
 
 const SectionContainer = styled.section`
-  padding: 80px 20px;
-  max-width: 1200px;
+  padding: 100px 40px;
+  max-width: 1400px;
   margin: 0 auto;
+  position: relative;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 1px;
+    background-color: #d4af37;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 80px 20px;
+  }
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   text-align: center;
   margin-bottom: 20px;
   font-family: 'Playfair Display', serif;
+  font-weight: 300;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 20px;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 1px;
+    background-color: #d4af37;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+  }
 `;
 
 const SectionSubtitle = styled.p`
   font-size: 1.2rem;
   text-align: center;
   max-width: 700px;
-  margin: 0 auto 50px;
+  margin: 0 auto 60px;
   color: #666;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 1.8;
+  
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
 `;
 
 const RealisationsGrid = styled.div`
@@ -50,16 +93,31 @@ const RealisationsGrid = styled.div`
 
 const RealisationCard = styled(motion.div)`
   position: relative;
-  border-radius: 10px;
   overflow: hidden;
   aspect-ratio: 1;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  border: 1px solid #f0f0f0;
+  transition: all 0.4s ease;
   cursor: pointer;
   
+  &:before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: -10px;
+    bottom: -10px;
+    border: 1px solid #d4af37;
+    z-index: -1;
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+  
   &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+    
+    &:before {
+      opacity: 1;
+    }
   }
 `;
 
@@ -98,6 +156,15 @@ const RealisationTitle = styled.h3`
   color: white;
   font-size: 1.5rem;
   margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  
+  ${RealisationCard}:hover & {
+    transform: translateY(-5px);
+  }
   font-family: 'Playfair Display', serif;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 `;

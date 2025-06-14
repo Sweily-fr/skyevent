@@ -16,7 +16,7 @@ const PageContainer = styled.div`
   min-height: 100vh;
   font-family: 'Playfair Display', serif;
   color: #1a1a1a;
-  background-color: #f8f5f1; /* Fond légèrement beige pour un aspect luxueux */
+  background-color: #ffffff; /* Fond blanc */
 `;
 
 const FullWidthSection = styled.section`
