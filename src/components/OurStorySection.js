@@ -64,9 +64,10 @@ const LogoContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 120px;
+  width: 200px; /* Taille augmentée pour une meilleure visibilité */
   height: auto;
-  margin-bottom: 20px;
+  filter: brightness(0) invert(1); /* Pour forcer la couleur blanche si le SVG est noir */
+  object-fit: contain; /* Pour s'assurer que tout le logo est visible */
 `;
 
 const HeroTitle = styled.h1`
@@ -288,11 +289,9 @@ const OurStorySection = () => {
         
         <ContentWrapper style={{ transform: `translateY(-${scrollY * 0.5}px)` }}>
           <LogoContainer>
-            <Logo src="/images/Sky-Event-.webp" alt="SkyEvent Logo" />
+            <Logo src="/images/Sky Event ..svg" alt="SkyEvent Logo" />
             <HeroTitle>Notre Voyage Culinaire</HeroTitle>
             <HeroSubtitle>Gastronomie Événementielle</HeroSubtitle>
-            
-
           </LogoContainer>
           
           <TextSection

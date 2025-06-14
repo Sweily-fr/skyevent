@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // Placeholder images - à remplacer par vos propres images
 const eventImages = {
   marque: 'https://images.unsplash.com/photo-1505236858219-8359eb29e329?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
   entreprise: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
   bapteme: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-  babyShower: 'https://images.unsplash.com/photo-1554342872-034a06541948?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+  babyShower: 'https://images.unsplash.com/photo-1569072712109-6206fa3505b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
   anniversaire: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
   mariage: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
 };
@@ -67,9 +67,10 @@ const EventCard = styled(motion.div)`
 const EventImage = styled.div`
   width: 100%;
   height: 100%;
-  background-image: url(${props => props.src});
+  background-image: ${props => `url(${props.src})`};
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   transition: transform 0.5s ease;
   
   ${EventCard}:hover & {
@@ -98,6 +99,8 @@ const EventTitle = styled.h3`
 `;
 
 const EventTypesGrid = () => {
+  const navigate = useNavigate();
+  
   const events = [
     {
       id: 'babyShower',
@@ -150,8 +153,23 @@ const EventTypesGrid = () => {
         {events.map((event, index) => (
           <EventCard
             key={event.id}
-            as={Link}
-            to={event.link}
+            onClick={() => {
+              // Désactive temporairement le comportement de défilement fluide pour tout le document
+              document.documentElement.style.scrollBehavior = 'auto';
+              
+              // Force le défilement à 0 sans animation
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'auto'
+              });
+              
+              // Utilise navigate avec l'option replace et state pour indiquer qu'il ne faut pas conserver la position de défilement
+              navigate(event.link, { 
+                replace: true,
+                state: { noScroll: true }
+              });
+            }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}

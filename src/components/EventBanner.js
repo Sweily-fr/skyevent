@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const BannerContainer = styled.section`
   background-color: #000000;
@@ -10,6 +11,20 @@ const BannerContainer = styled.section`
   margin: 0;
   position: relative;
   overflow: hidden;
+  background-image: ${props => props.backgroundImage ? `url(${props.backgroundImage})` : 'none'};
+  background-size: cover;
+  background-position: center;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 0;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -33,7 +48,7 @@ const Description = styled.p`
   line-height: 1.6;
 `;
 
-const CtaButton = styled(motion.button)`
+const CtaButton = styled(motion(Link))`
   background-color: white;
   color: #2c3e50;
   border: none;
@@ -51,16 +66,16 @@ const CtaButton = styled(motion.button)`
   }
 `;
 
-const EventBanner = () => {
+const EventBanner = ({ title, subtitle, backgroundImage }) => {
   return (
-    <BannerContainer>
+    <BannerContainer backgroundImage={backgroundImage}>
       <ContentWrapper>
-        <Title>Organisez votre évènement avec nous !</Title>
+        <Title>{title || 'Organisez votre évènement avec nous !'}</Title>
         <Description>
-          Découvrez nos services sur mesure pour faire de votre évènement un moment inoubliable.
-          Notre équipe d'experts est là pour vous accompagner à chaque étape.
+          {subtitle || 'Découvrez nos services sur mesure pour faire de votre évènement un moment inoubliable. Notre équipe d\'experts est là pour vous accompagner à chaque étape.'}
         </Description>
         <CtaButton
+          to="/#contact"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
