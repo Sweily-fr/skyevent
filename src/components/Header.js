@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-const HeaderContainer = styled.header`
+const HeaderContainer = styled(({ isScrolled, ...rest }) => <header {...rest} />)`
   position: fixed;
   top: 0;
   left: 0;
@@ -29,13 +29,13 @@ const MainNav = styled.div`
   padding: 0 20px;
 `;
 
-const LogoContainer = styled.div`
+const LogoContainer = styled(({ isScrolled, ...rest }) => <div {...rest} />)`
   text-align: center;
   transition: all 0.4s ease;
   margin-bottom: ${props => props.isScrolled ? '0' : '20px'};
 `;
 
-const Logo = styled(Link)`
+const Logo = styled(({ isScrolled, ...rest }) => <Link {...rest} />)`
   font-size: ${props => props.isScrolled ? '24px' : '32px'};
   font-weight: bold;
   color: #333;
@@ -45,7 +45,7 @@ const Logo = styled(Link)`
   transition: all 0.4s ease;
 `;
 
-const NavLinks = styled.nav`
+const NavLinks = styled(({ isScrolled, ...rest }) => <nav {...rest} />)`
   display: flex;
   justify-content: center;
   width: 100%;
@@ -88,7 +88,7 @@ const NavLink = styled(Link)`
   }
 `;
 
-const MobileMenuButton = styled.button`
+const MobileMenuButton = styled(({ isScrolled, ...rest }) => <button {...rest} />)`
   display: none;
   background: none;
   border: none;

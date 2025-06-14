@@ -21,7 +21,7 @@ const AnniversairePage = () => {
       }
     ],
     mediaType: "video",
-    mediaContent: "https://www.youtube.com/embed/dQw4w9WgXcQ", // À remplacer par une vraie vidéo d'anniversaire
+    mediaContent: "https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
     carouselImages: [
       "https://images.unsplash.com/photo-1464349153735-7db50ed83c84?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
       "https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",

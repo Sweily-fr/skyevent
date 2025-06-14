@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import ContactSection from '../../components/ContactSection';
@@ -335,15 +335,6 @@ const OccasionTemplate = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   
-  // Force le défilement en haut de la page lors du montage du composant, sans animation
-  useLayoutEffect(() => {
-    // Utilise behavior: 'auto' pour éviter toute animation de défilement
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'auto'
-    });
-  }, []);
 
   const nextSlide = useCallback(() => {
     setDirection(1);

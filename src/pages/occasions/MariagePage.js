@@ -21,7 +21,7 @@ const MariagePage = () => {
       }
     ],
     mediaType: "video",
-    mediaContent: "https://www.youtube.com/embed/dQw4w9WgXcQ", // À remplacer par une vraie vidéo de mariage
+    mediaContent: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
     carouselImages: [
       "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
       "https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",

@@ -219,20 +219,9 @@ const EventTypesGrid = () => {
           <EventCard
             key={event.id}
             onClick={() => {
-              // Désactive temporairement le comportement de défilement fluide pour tout le document
-              document.documentElement.style.scrollBehavior = 'auto';
-              
-              // Force le défilement à 0 sans animation
-              window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: 'auto'
-              });
-              
-              // Utilise navigate avec l'option replace et state pour indiquer qu'il ne faut pas conserver la position de défilement
+              // Navigue sans forcer le défilement
               navigate(event.link, { 
-                replace: true,
-                state: { noScroll: true }
+                replace: true
               });
             }}
             initial={{ opacity: 0, y: 30 }}

@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-const BannerContainer = styled.section`
+const BannerContainer = styled.section.attrs(props => ({
+  style: {
+    backgroundImage: props.backgroundImage ? `url(${props.backgroundImage})` : 'none',
+  },
+}))`
   background-color: #1a1a1a;
   color: white;
   padding: 100px 20px;
@@ -11,7 +15,6 @@ const BannerContainer = styled.section`
   margin: 0;
   position: relative;
   overflow: hidden;
-  background-image: ${props => props.backgroundImage ? `url(${props.backgroundImage})` : 'none'};
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
