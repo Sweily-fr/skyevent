@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import ContactSection from '../components/ContactSection';
-import EventBanner from '../components/EventBanner';
 
 // Placeholder images - à remplacer par vos propres images
 const realisationsImages = {
@@ -278,7 +277,6 @@ const RealisationsPage = () => {
         </RealisationsGrid>
       </Section>
       <ContactSection />
-      <EventBanner />
     </PageContainer>
   );
 };

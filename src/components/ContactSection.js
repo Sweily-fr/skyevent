@@ -335,7 +335,7 @@ const ContactSection = () => {
   
   return (
     <SectionContainer>
-      <SectionTitle>Organisez votre évènement avec nous !</SectionTitle>
+      <SectionTitle>Contactez-nous pour un devis personnalisé</SectionTitle>
       <SectionSubtitle>
         Créez des moments inoubliables avec nos services traiteur sur-mesure. Que ce soit pour un mariage, 
         une réception privée ou un événement professionnel, nous vous accompagnons pour faire de votre projet une réussite totale.

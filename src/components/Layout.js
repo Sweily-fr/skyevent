@@ -21,18 +21,20 @@ const MainContent = styled.main`
 `;
 
 // Composant de mise en page partagé pour toutes les pages
-const Layout = ({ children }) => {
+const Layout = ({ children, showBanner = true }) => {
   return (
     <LayoutContainer>
       <Header />
       <MainContent>
         {children}
       </MainContent>
-      <EventBanner 
-        title={BANNER_TITLE}
-        subtitle={BANNER_SUBTITLE}
-        backgroundImage={BANNER_BACKGROUND}
-      />
+      {showBanner && (
+        <EventBanner 
+          title={BANNER_TITLE}
+          subtitle={BANNER_SUBTITLE}
+          backgroundImage={BANNER_BACKGROUND}
+        />
+      )}
       <Footer />
     </LayoutContainer>
   );

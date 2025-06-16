@@ -2,7 +2,6 @@ import React, { useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import ContactSection from '../components/ContactSection';
-import EventBanner from '../components/EventBanner';
 import StandardButton, { ButtonContainer } from '../components/StandardButton'; // Ajout de l'import de ButtonContainer
 
 // Placeholder images - à remplacer par vos propres images
@@ -361,7 +360,6 @@ const EvenementielPage = () => {
         </Grid>
       </Section>
       <ContactSection />
-      <EventBanner />
     </PageContainer>
   );
 };
