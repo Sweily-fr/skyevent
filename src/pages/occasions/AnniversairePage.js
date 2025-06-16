@@ -5,7 +5,7 @@ const AnniversairePage = () => {
   const pageData = {
     title: "Anniversaire",
     subtitle: "Rendez votre journée spéciale encore plus mémorable avec nos services de traiteur sur mesure",
-    heroImage: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    heroImage: "/images/DSC05355.jpg",
     infoBlocks: [
       {
         title: "Menus personnalisés",
@@ -21,14 +21,14 @@ const AnniversairePage = () => {
       }
     ],
     mediaType: "video",
-    mediaContent: "https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    mediaContent: "/images/DSC05355.jpg",
     carouselImages: [
-      "https://images.unsplash.com/photo-1464349153735-7db50ed83c84?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-      "https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-      "https://images.unsplash.com/photo-1533294455009-a77b7557d2d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
+      "/images/DSC05381.jpg",
+      "/images/DSC05410.jpg",
+      "/images/DSC05415.jpg",
+      "/images/DSC05372.jpg"
     ],
-    bannerImage: "https://images.unsplash.com/photo-1513267048331-5611cad62e41?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    bannerImage: "/images/DSC05270.jpg",
     useVideo: true
   };
 

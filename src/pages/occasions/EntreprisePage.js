@@ -5,7 +5,7 @@ const EntreprisePage = () => {
   const pageData = {
     title: "Événements d'entreprise",
     subtitle: "Impressionnez vos clients et motivez vos équipes avec nos prestations traiteur professionnelles",
-    heroImage: "https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    heroImage: "/images/DSC05410.jpg",
     infoBlocks: [
       {
         title: "Cocktails d'affaires",
@@ -21,16 +21,16 @@ const EntreprisePage = () => {
       }
     ],
     mediaType: "image",
-    mediaContent: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    mediaContent: "/images/DSC05410.jpg",
     carouselImages: [
-      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-      "https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
+      "/images/DSC05381.jpg",
+      "/images/DSC05270.jpg",
+      "/images/DSC05415.jpg",
+      "/images/DSC05372.jpg"
     ],
     bannerTitle: "Événements professionnels réussis",
     bannerSubtitle: "Contactez-nous pour organiser votre prochain événement d'entreprise",
-    bannerImage: "https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    bannerImage: "/images/DSC05355.jpg",
     useVideo: true
   };
 

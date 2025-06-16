@@ -7,12 +7,12 @@ import EventBanner from '../components/EventBanner';
 
 // Placeholder images - à remplacer par vos propres images
 const realisationsImages = {
-  marque: 'https://images.unsplash.com/photo-1505236858219-8359eb29e329?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
-  entreprise: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
-  bapteme: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
-  babyShower: 'https://images.unsplash.com/photo-1554342872-034a06541948?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
-  anniversaire: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
-  mariage: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
+  marque: '/images/DSC05381.jpg',
+  entreprise: '/images/DSC05410.jpg',
+  bapteme: '/images/DSC05415.jpg',
+  babyShower: '/images/DSC05372.jpg',
+  anniversaire: '/images/DSC05355.jpg',
+  mariage: '/images/DSC05270.jpg'
 };
 
 const PageContainer = styled.div`

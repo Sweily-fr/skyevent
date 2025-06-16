@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-// Placeholder images - à remplacer par vos propres images
+// Images des réalisations
 const realisationImages = {
-  realisation1: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-  realisation2: 'https://images.unsplash.com/photo-1563612116625-3012372fccce?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-  realisation3: 'https://images.unsplash.com/photo-1611143669185-af224c5e3252?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-  realisation4: 'https://images.unsplash.com/photo-1583623025817-d180a2221d0a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-  realisation5: 'https://images.unsplash.com/photo-1615361200141-f45040f367be?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-  realisation6: 'https://images.unsplash.com/photo-1676037150408-4b59a542fa7c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
+  realisation1: '/images/DSC05270.jpg',
+  realisation2: '/images/DSC05381.jpg',
+  realisation3: '/images/DSC05410.jpg',
+  realisation4: '/images/DSC05415.jpg',
+  realisation5: '/images/DSC05372.jpg',
+  realisation6: '/images/DSC05355.jpg'
 };
 
 const SectionContainer = styled.section`
@@ -18,17 +18,6 @@ const SectionContainer = styled.section`
   max-width: 1400px;
   margin: 0 auto;
   position: relative;
-  
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 1px;
-    background-color: #d4af37;
-  }
   
   @media (max-width: 768px) {
     padding: 80px 20px;
@@ -43,19 +32,7 @@ const SectionTitle = styled.h2`
   font-weight: 300;
   letter-spacing: 3px;
   text-transform: uppercase;
-  position: relative;
-  padding-bottom: 20px;
-  
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 1px;
-    background-color: #d4af37;
-  }
+  margin-bottom: 40px;
   
   @media (max-width: 768px) {
     font-size: 2.2rem;

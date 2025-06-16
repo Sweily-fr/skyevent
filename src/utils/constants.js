@@ -1,8 +1,8 @@
 // Constantes partagées pour l'application
 
 // Vidéo et image de secours pour les sections héro
-export const VIDEO_SOURCE = '/videos/Sushi copy.mp4';
-export const FALLBACK_IMAGE = '/images/sushi-fallback.jpg';
+export const VIDEO_SOURCE = '/videos/IMG_0724.MP4';
+export const FALLBACK_IMAGE = '/images/DSC05325.jpg';
 
 // Textes standard pour la bannière noire
 export const BANNER_TITLE = 'Organisez votre évènement avec nous !';

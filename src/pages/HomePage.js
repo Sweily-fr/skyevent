@@ -87,14 +87,6 @@ const HomePage = () => {
         <motion.div variants={fadeIn}>
           <ContactSection />
         </motion.div>
-        
-        <motion.div variants={fadeIn}>
-          <EventBanner 
-            title="Une Expérience Culinaire Inoubliable"
-            subtitle="Laissez-nous transformer votre événement en un moment d'exception avec une cuisine raffinée et un service irréprochable."
-            backgroundImage="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-          />
-        </motion.div>
       </motion.div>
     </HomeContainer>
   );

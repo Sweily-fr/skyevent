@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-// Placeholder image - à remplacer par votre propre image
-const bannerImage = 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80';
+// Image de bannière personnalisée
+const bannerImage = '/images/DSC05331.jpg';
 
 const BannerContainer = styled.section`
   height: 100vh;

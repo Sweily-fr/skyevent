@@ -4,12 +4,13 @@ import { motion } from 'framer-motion';
 import OurStorySection from '../components/OurStorySection';
 import ContactSection from '../components/ContactSection';
 
-// Images luxueuses pour le design inspiré de Louis Vuitton
-const chefImage = 'https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
-const teamImage1 = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
-const teamImage2 = 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
-const experienceImage = 'https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
-const parallaxImage = 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80';
+// Images uniques pour chaque section
+const chefImage = '/images/DSC05270.jpg';
+const teamImage1 = '/images/DSC05381.jpg';
+const teamImage2 = '/images/DSC05384.jpg';
+const teamImage3 = '/images/DSC05385.jpg';
+const experienceImage = '/images/DSC05354.jpg';
+const parallaxImage = '/images/DSC05297.jpg';
 
 
 const PageContainer = styled.div`
@@ -24,20 +25,24 @@ const FullWidthSection = styled.section`
   padding: 0;
   margin: 80px 0;
   position: relative;
-  height: 600px;
+  height: 80vh;
+  min-height: 500px;
   overflow: hidden;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(${props => props.bgImage || 'none'});
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   @media (max-width: 768px) {
-    height: 400px;
+    height: 60vh;
+    min-height: 400px;
     margin: 60px 0;
+    background-attachment: scroll;
   }
-`;
-
-const FullWidthImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.8);
 `;
 
 const OverlayContent = styled.div`
@@ -330,7 +335,7 @@ const NotrHistoirePage = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true, margin: "-100px" }}
           >
-            <TeamMemberImage src={teamImage1} alt="Membre de l'équipe" />
+            <TeamMemberImage src={teamImage3} alt="Membre de l'équipe" />
             <TeamMemberInfo>
               <TeamMemberName>Thomas Leroy</TeamMemberName>
               <TeamMemberRole>Chef de Cuisine</TeamMemberRole>
@@ -338,8 +343,11 @@ const NotrHistoirePage = () => {
           </TeamMember>
         </TeamGrid>
       </Section>
-      <FullWidthSection>
-        <FullWidthImage src={parallaxImage} alt="Gastronomie de luxe" />
+      <FullWidthSection 
+        bgImage={parallaxImage}
+        data-aos="fade"
+        data-aos-duration="1000"
+      >
         <OverlayContent>
           <OverlayTitle>L'Art de la Table</OverlayTitle>
           <OverlayText>Une expérience culinaire d'exception</OverlayText>

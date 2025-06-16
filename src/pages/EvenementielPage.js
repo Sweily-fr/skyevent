@@ -7,10 +7,10 @@ import EventBanner from '../components/EventBanner';
 
 // Placeholder images - à remplacer par vos propres images
 const eventImages = {
-  hero: 'https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
-  event1: 'https://images.unsplash.com/photo-1470753937643-efeb931202a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
-  event2: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
-  event3: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'
+  hero: '/images/DSC05270.jpg',
+  event1: '/images/DSC05381.jpg',
+  event2: '/images/DSC05410.jpg',
+  event3: '/images/DSC05415.jpg'
 };
 
 const PageContainer = styled.div`

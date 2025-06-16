@@ -5,7 +5,7 @@ const MariagePage = () => {
   const pageData = {
     title: "Mariage",
     subtitle: "Faites de votre jour le plus beau un moment inoubliable avec notre service traiteur d'exception",
-    heroImage: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    heroImage: "/images/DSC05270.jpg",
     infoBlocks: [
       {
         title: "Menu gastronomique",
@@ -21,14 +21,14 @@ const MariagePage = () => {
       }
     ],
     mediaType: "video",
-    mediaContent: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    mediaContent: "/images/DSC05270.jpg",
     carouselImages: [
-      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-      "https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-      "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
+      "/images/DSC05381.jpg",
+      "/images/DSC05410.jpg",
+      "/images/DSC05415.jpg",
+      "/images/DSC05372.jpg"
     ],
-    bannerImage: "https://images.unsplash.com/photo-1507504031003-b417219a0fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    bannerImage: "/images/DSC05355.jpg",
     useVideo: true
   };
 

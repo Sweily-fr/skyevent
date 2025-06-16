@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 // Chemin vers la vidéo locale dans le dossier public
-const videoSource = '/videos/Sushi copy.mp4';
+const videoSource = '/videos/IMG_0724.MP4';
 
 // Image de secours
-const fallbackImage = '/images/sushi-fallback.jpg';
+const fallbackImage = '/images/DSC05331.jpg';
 
 // Remarque : Pour une utilisation en production, il est recommandé de télécharger la vidéo
 // et de l'héberger sur votre propre serveur pour des raisons de performance et de fiabilité.

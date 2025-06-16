@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Placeholder images - à remplacer par vos propres images
+// Images de la galerie
 const carouselImages = [
-  'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80',
-  'https://images.unsplash.com/photo-1563612116625-3012372fccce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80',
-  'https://images.unsplash.com/photo-1611143669185-af224c5e3252?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80',
-  'https://images.unsplash.com/photo-1583623025817-d180a2221d0a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80',
-  'https://images.unsplash.com/photo-1615361200141-f45040f367be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80'
+  '/images/DSC05270.jpg',
+  '/images/DSC05381.jpg',
+  '/images/DSC05410.jpg',
+  '/images/DSC05415.jpg',
+  '/images/DSC05372.jpg'
 ];
 
 const CarouselContainer = styled.section`
@@ -121,16 +121,18 @@ const CarouselControls = styled.div`
 `;
 
 const CarouselDot = styled.button`
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
+  min-width: 12px;
   border-radius: 50%;
   background-color: ${props => props.active ? '#d4af37' : '#e0e0e0'};
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin: 0 5px;
+  margin: 0 4px;
   padding: 0;
   outline: none;
+  flex-shrink: 0;
   
   &:hover {
     background-color: ${props => props.active ? '#d4af37' : '#c0c0c0'};

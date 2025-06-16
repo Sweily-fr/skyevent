@@ -5,7 +5,7 @@ const MarquePage = () => {
   const pageData = {
     title: "Événements de marque",
     subtitle: "Renforcez l'image de votre marque avec des expériences culinaires exceptionnelles",
-    heroImage: "https://images.unsplash.com/photo-1505236858219-8359eb29e329?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    heroImage: "/images/DSC05381.jpg",
     infoBlocks: [
       {
         title: "Lancement de produit",
@@ -21,14 +21,14 @@ const MarquePage = () => {
       }
     ],
     mediaType: "image",
-    mediaContent: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    mediaContent: "/images/DSC05381.jpg",
     carouselImages: [
-      "https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-      "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-      "https://images.unsplash.com/photo-1560523159-4a9692d222f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
-      "https://images.unsplash.com/photo-1505236858219-8359eb29e329?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
+      "/images/DSC05410.jpg",
+      "/images/DSC05415.jpg",
+      "/images/DSC05372.jpg",
+      "/images/DSC05270.jpg"
     ],
-    bannerImage: "https://images.unsplash.com/photo-1550305080-4e029753abcf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    bannerImage: "/images/DSC05355.jpg",
     useVideo: true
   };
 
