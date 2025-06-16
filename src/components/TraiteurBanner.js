@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import StandardButton from './StandardButton';
 
 // Image de bannière personnalisée
 const bannerImage = '/images/DSC05331.jpg';
@@ -159,31 +159,8 @@ const SubTitle = styled(motion.h2)`
   }
 `;
 
-const BannerButton = styled(motion(Link))`
-  display: inline-block;
-  background-color: transparent;
-  color: white;
-  padding: 15px 40px;
-  border: 1px solid white;
-  border-radius: 0;
-  text-decoration: none;
-  font-weight: 400;
-  font-size: 1rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
+const ButtonWrapper = styled.div`
   margin-top: 30px;
-  
-  &:hover {
-    background-color: white;
-    color: #333;
-    transform: translateY(-3px);
-  }
-  
-  @media (max-width: 768px) {
-    padding: 12px 30px;
-    font-size: 0.9rem;
-  }
 `;
 
 const TraiteurBanner = () => {
@@ -210,17 +187,18 @@ const TraiteurBanner = () => {
             Services Événementiels
           </SubTitle>
         </TitleContainer>
-        <BannerButton
-          to="/realisations"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-          whileHover={{ letterSpacing: '2px' }}
-          whileTap={{ scale: 0.98 }}
-        >
-          Découvrir les événements
-        </BannerButton>
+        <ButtonWrapper>
+          <StandardButton
+            to="/realisations"
+            darkBackground={true}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            Découvrir les événements
+          </StandardButton>
+        </ButtonWrapper>
       </BannerContent>
     </BannerContainer>
   );

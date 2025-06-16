@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import StandardButton from './StandardButton';
 
 // Placeholder images - à remplacer par vos propres images
 const serviceImages = {
@@ -78,28 +78,11 @@ const ServiceDescription = styled.p`
   margin-bottom: 20px;
 `;
 
-const ServiceLink = styled(Link)`
-  display: inline-block;
-  color: #333;
-  font-weight: 600;
-  text-decoration: none;
-  position: relative;
-  
-  &:after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: #333;
-    transition: width 0.3s ease;
-  }
-  
-  &:hover:after {
-    width: 100%;
-  }
+// ServiceLink remplacé par le composant StandardButton
+const ServiceButtonWrapper = styled.div`
+  margin-top: 15px;
 `;
+
 
 const ServicesSection = () => {
   const services = [
@@ -167,7 +150,9 @@ const ServicesSection = () => {
             <ServiceContent>
               <ServiceTitle>{service.title}</ServiceTitle>
               <ServiceDescription>{service.description}</ServiceDescription>
-              <ServiceLink to={service.link}>En savoir plus</ServiceLink>
+              <ServiceButtonWrapper>
+                <StandardButton to={service.link} darkBackground={false} small={true}>En savoir plus</StandardButton>
+              </ServiceButtonWrapper>
             </ServiceContent>
           </ServiceCard>
         ))}

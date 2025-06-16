@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import StandardButton from './StandardButton';
 import { VIDEO_SOURCE, FALLBACK_IMAGE } from '../utils/constants';
 
 // Utilisation des constantes pour les sources média
@@ -173,26 +173,7 @@ const CTAContainer = styled.div`
   }
 `;
 
-const CTAButton = styled(Link)`
-  display: inline-block;
-  padding: 14px 32px;
-  background-color: ${props => props.primary ? 'white' : 'transparent'};
-  color: ${props => props.primary ? '#000' : 'white'};
-  border: 1px solid white; /* Bordure plus fine pour un aspect élégant */
-  border-radius: 0; /* Coins carrés pour un style plus luxueux */
-  text-decoration: none;
-  font-weight: 400;
-  font-size: 0.9rem;
-  letter-spacing: 2px;
-  text-transform: uppercase; /* Majuscules pour un style LV */
-  transition: all 0.3s ease;
-  
-  &:hover {
-    transform: translateY(0); /* Pas de mouvement vertical */
-    box-shadow: none; /* Pas d'ombre */
-    background-color: ${props => props.primary ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.2)'};
-  }
-`;
+// Ancien CTAButton remplacé par le composant StandardButton
 
 const ContentWrapper = styled.div`
   position: absolute;
@@ -315,8 +296,8 @@ const OurStorySection = () => {
             <StoryText>{storyTexts[0].text}</StoryText>
             
             <CTAContainer>
-              <CTAButton to="/evenementiel" primary>Découvrir nos services</CTAButton>
-              <CTAButton to="/realisations">Voir nos réalisations</CTAButton>
+              <StandardButton to="/evenementiel" darkBackground={true}>Découvrir nos services</StandardButton>
+              <StandardButton to="/realisations" darkBackground={true}>Voir nos réalisations</StandardButton>
             </CTAContainer>
           </TextSection>
         </ContentWrapper>

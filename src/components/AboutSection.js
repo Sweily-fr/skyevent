@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import StandardButton from './StandardButton';
 
 // Placeholder image - à remplacer par votre propre image
 const aboutImageUrl = 'https://images.unsplash.com/photo-1607301406259-dfb186e15de8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
@@ -52,22 +52,11 @@ const SectionText = styled.p`
   line-height: 1.6;
 `;
 
-const AboutButton = styled(Link)`
-  display: inline-block;
-  background-color: #333;
-  color: white;
-  padding: 12px 30px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    background-color: #555;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  }
+// AboutButton remplacé par le composant StandardButton
+const ButtonWrapper = styled.div`
+  margin-top: 20px;
 `;
+
 
 const AboutSection = () => {
   return (
@@ -93,7 +82,9 @@ const AboutSection = () => {
           Avec un savoir-faire unique et des années d'expérience, il marie tradition et créativité pour 
           vous offrir des créations aussi délicieuses que surprenantes.
         </SectionText>
-        <AboutButton to="/notre-histoire">En savoir plus sur nous</AboutButton>
+        <ButtonWrapper>
+          <StandardButton to="/notre-histoire" darkBackground={false}>En savoir plus sur nous</StandardButton>
+        </ButtonWrapper>
       </ContentContainer>
     </SectionContainer>
   );

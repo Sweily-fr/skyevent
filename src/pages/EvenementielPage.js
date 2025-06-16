@@ -1,9 +1,9 @@
 import React, { useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import ContactSection from '../components/ContactSection';
 import EventBanner from '../components/EventBanner';
+import StandardButton, { ButtonContainer } from '../components/StandardButton'; // Ajout de l'import de ButtonContainer
 
 // Placeholder images - à remplacer par vos propres images
 const eventImages = {
@@ -171,41 +171,7 @@ const FeatureItem = styled.li`
   }
 `;
 
-const CTAButton = styled(Link)`
-  display: inline-block;
-  background-color: transparent;
-  color: #1a1a1a;
-  padding: 12px 30px;
-  border: 1px solid #1a1a1a;
-  text-decoration: none;
-  font-weight: 300;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 0;
-    background-color: #1a1a1a;
-    transition: all 0.3s ease;
-    z-index: -1;
-  }
-  
-  &:hover {
-    color: white;
-    
-    &:after {
-      height: 100%;
-    }
-  }
-`;
+// Ancien CTAButton remplacé par le composant StandardButton
 
 const ServicesGrid = styled.div`
   display: grid;
@@ -324,7 +290,10 @@ const EvenementielPage = () => {
               <FeatureItem>Expérience client complète</FeatureItem>
               <FeatureItem>Flexibilité pour tous types d'événements</FeatureItem>
             </FeaturesList>
-            <CTAButton to="/realisations">Découvrir nos réalisations</CTAButton>
+            <ButtonContainer>
+              <StandardButton to="/realisations" darkBackground={false}>Découvrir nos réalisations</StandardButton>
+              <StandardButton to="/contact" darkBackground={false}>Nous contacter</StandardButton>
+            </ButtonContainer>
           </ContentContainer>
           <ImageContainer
             initial={{ opacity: 0, x: 50 }}
@@ -384,7 +353,10 @@ const EvenementielPage = () => {
               événement soit un succès. Notre flexibilité et notre créativité nous permettent de nous adapter à tous 
               types d'occasions, qu'il s'agisse d'un mariage intime ou d'un grand événement d'entreprise.
             </SectionText>
-            <CTAButton to="/realisations">Voir nos réalisations</CTAButton>
+            <ButtonContainer>
+              <StandardButton to="/realisations" darkBackground={false}>Voir nos réalisations</StandardButton>
+              <StandardButton to="/contact" darkBackground={false}>Demander un devis</StandardButton>
+            </ButtonContainer>
           </ContentContainer>
         </Grid>
       </Section>

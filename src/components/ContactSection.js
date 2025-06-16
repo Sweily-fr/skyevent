@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import StandardButton from './StandardButton';
 
 const SectionContainer = styled.section`
   padding: 100px 40px;
@@ -171,49 +172,8 @@ const FormTextarea = styled.textarea`
   }
 `;
 
-const FormButton = styled(motion.button)`
-  background-color: #1a1a1a;
-  color: white;
-  padding: 14px 40px;
-  border: 1px solid #1a1a1a;
-  border-radius: 0;
-  font-weight: 400;
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
+const ButtonWrapper = styled.div`
   align-self: flex-start;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background-color: #d4af37;
-    transition: all 0.4s ease;
-    z-index: -1;
-  }
-  
-  &:hover {
-    color: #1a1a1a;
-    border-color: #d4af37;
-    
-    &:before {
-      width: 100%;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    width: 100%;
-    text-align: center;
-  }
 `;
 
 const ContactInfo = styled.div`
@@ -452,13 +412,17 @@ const ContactSection = () => {
             />
           </FormGroup>
           
-          <FormButton 
-            type="submit"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Demander un devis
-          </FormButton>
+          <ButtonWrapper>
+            <StandardButton 
+              as="button"
+              type="submit"
+              darkBackground={false}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Demander un devis
+            </StandardButton>
+          </ButtonWrapper>
         </ContactForm>
         
         <ContactInfo>

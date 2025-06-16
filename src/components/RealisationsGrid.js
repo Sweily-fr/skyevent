@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import StandardButton from './StandardButton';
 
 // Images des réalisations
 const realisationImages = {
@@ -146,23 +147,11 @@ const RealisationTitle = styled.h3`
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 `;
 
-const ViewAllButton = styled(Link)`
-  display: block;
-  width: fit-content;
-  margin: 40px auto 0;
-  background-color: #333;
-  color: white;
-  padding: 12px 30px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    background-color: #555;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  }
+// ViewAllButton remplacé par le composant StandardButton
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
 `;
 
 const RealisationsSection = () => {
@@ -231,9 +220,11 @@ const RealisationsSection = () => {
         ))}
       </RealisationsGrid>
       
-      <ViewAllButton to="/realisations">
-        Voir toutes nos réalisations
-      </ViewAllButton>
+      <ButtonContainer>
+        <StandardButton to="/realisations" darkBackground={false}>
+          Voir toutes nos réalisations
+        </StandardButton>
+      </ButtonContainer>
     </SectionContainer>
   );
 };

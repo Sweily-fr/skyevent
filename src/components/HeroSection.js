@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import StandardButton from './StandardButton';
 
 // Chemin vers la vidéo locale dans le dossier public
 const videoSource = '/videos/IMG_0724.MP4';
@@ -60,17 +60,26 @@ const HeroContent = styled.div`
   position: absolute;
   bottom: 100px;
   left: 50px;
-  max-width: 600px;
+  max-width: 800px;
   text-align: left;
   padding: 30px;
   z-index: 3;
   background: transparent;
+  width: calc(100% - 100px);
+  
+  @media (max-width: 992px) {
+    max-width: 90%;
+    left: 5%;
+    right: 5%;
+    width: auto;
+  }
   
   @media (max-width: 768px) {
-    left: 20px;
     bottom: 60px;
+    padding: 20px;
+    max-width: 100%;
+    left: 20px;
     right: 20px;
-    max-width: none;
   }
 `;
 
@@ -127,68 +136,32 @@ const HeroSubtitle = styled(motion.p)`
 const ButtonContainer = styled(motion.div)`
   display: flex;
   gap: 20px;
-  margin-top: 20px;
+  margin: 30px 0 0;
+  justify-content: flex-start;
+  width: 100%;
+  flex-wrap: nowrap;
   
-  @media (max-width: 768px) {
-    flex-direction: column;
+  /* Pour les tablettes */
+  @media (max-width: 992px) {
     gap: 15px;
-    width: 100%;
-    max-width: 300px;
-    margin: 20px auto 0;
   }
   
+  /* Pour les mobiles */
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
+  
+  /* Pour les très petits écrans */
   @media (max-width: 480px) {
-    max-width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
   }
 `;
 
-const PrimaryButton = styled(Link)`
-  display: inline-block;
-  background: transparent;
-  color: #fff;
-  padding: 10px 25px;
-  border: 1px solid #fff;
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 300;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    color: #1a1a1a;
-    background-color: #fff;
-    border-color: #fff;
-  }
-  
-  @media (max-width: 768px) {
-    padding: 8px 20px;
-    font-size: 0.85rem;
-  }
-`;
+// PrimaryButton remplacé par le composant StandardButton
 
-const SecondaryButton = styled(Link)`
-  display: inline-block;
-  background: transparent;
-  color: #fff;
-  padding: 10px 25px;
-  border: 1px solid #fff;
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 300;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    color: #1a1a1a;
-    background-color: #fff;
-    border-color: #fff;
-  }
-  
-  @media (max-width: 768px) {
-    padding: 8px 20px;
-    font-size: 0.85rem;
-  }
-`;
+// SecondaryButton remplacé par le composant StandardButton
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -275,8 +248,8 @@ const HeroSection = () => {
               }
             }}
           >
-            <PrimaryButton to="/realisations">Découvrir nos réalisations</PrimaryButton>
-            <SecondaryButton to="/notre-histoire">Notre histoire</SecondaryButton>
+            <StandardButton to="/realisations" darkBackground={true}>Découvrir nos réalisations</StandardButton>
+            <StandardButton to="/notre-histoire" darkBackground={true}>Notre histoire</StandardButton>
           </ButtonContainer>
         </motion.div>
       </HeroContent>

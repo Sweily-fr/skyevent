@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import StandardButton from './StandardButton';
 
 const BannerContainer = styled.section.attrs(props => ({
   style: {
@@ -101,50 +101,14 @@ const Description = styled(motion.p)`
   }
 `;
 
-const CtaButton = styled(motion(Link))`
-  background-color: transparent;
-  color: #ffffff;
-  border: 1px solid #d4af37;
-  padding: 16px 45px;
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  font-family: 'Playfair Display', serif;
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-  
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background-color: #d4af37;
-    transition: all 0.4s ease;
-    z-index: -1;
-  }
-  
-  &:hover {
-    color: #1a1a1a;
-    
-    &:before {
-      width: 100%;
-    }
-  }
-  
+// Styles pour les boutons sur mobile
+const ButtonContainer = styled.div`
   @media (max-width: 768px) {
-    padding: 14px 35px;
-    font-size: 0.9rem;
+    margin-top: 20px;
   }
 `;
 
-const EventBanner = ({ title, subtitle, backgroundImage }) => {
+const EventBanner = ({ title, subtitle, backgroundImage, buttonText = 'Planifiez maintenant', buttonLink = '/#contact' }) => {
   return (
     <BannerContainer backgroundImage={backgroundImage}>
       <ContentWrapper>
@@ -152,13 +116,14 @@ const EventBanner = ({ title, subtitle, backgroundImage }) => {
         <Description>
           {subtitle || 'Découvrez nos services sur mesure pour faire de votre évènement un moment inoubliable. Notre équipe d\'experts est là pour vous accompagner à chaque étape.'}
         </Description>
-        <CtaButton
-          to="/#contact"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Planifiez maintenant
-        </CtaButton>
+        <ButtonContainer>
+          <StandardButton
+            to={buttonLink}
+            darkBackground={true}
+          >
+            {buttonText}
+          </StandardButton>
+        </ButtonContainer>
       </ContentWrapper>
     </BannerContainer>
   );
