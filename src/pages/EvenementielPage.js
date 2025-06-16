@@ -1,6 +1,7 @@
 import React, { useLayoutEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import ContactSection from '../components/ContactSection';
 import StandardButton, { ButtonContainer } from '../components/StandardButton'; // Ajout de l'import de ButtonContainer
 
@@ -9,7 +10,13 @@ const eventImages = {
   hero: '/images/DSC05270.jpg',
   event1: '/images/DSC05381.jpg',
   event2: '/images/DSC05410.jpg',
-  event3: '/images/DSC05415.jpg'
+  event3: '/images/DSC05415.jpg',
+  marque: '/images/DSC05381.jpg',
+  entreprise: '/images/DSC05410.jpg',
+  bapteme: '/images/DSC05415.jpg',
+  babyShower: '/images/DSC05372.jpg',
+  anniversaire: '/images/DSC05355.jpg',
+  mariage: '/images/DSC05270.jpg'
 };
 
 const PageContainer = styled.div`
@@ -174,8 +181,8 @@ const FeatureItem = styled.li`
 
 const ServicesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 50px;
   margin-top: 50px;
 `;
 
@@ -208,14 +215,21 @@ const ServiceCard = styled(motion.div)`
 `;
 
 const ServiceImage = styled.div`
-  height: 200px;
+  height: 300px;
   background-image: url(${props => props.src});
   background-size: cover;
   background-position: center;
+  filter: brightness(0.95);
+  transition: all 0.5s ease;
+  
+  ${ServiceCard}:hover & {
+    filter: brightness(1);
+  }
 `;
 
 const ServiceContent = styled.div`
-  padding: 20px;
+  padding: 30px;
+  background-color: white;
 `;
 
 const ServiceTitle = styled.h3`
@@ -229,10 +243,39 @@ const ServiceTitle = styled.h3`
 
 const ServiceDescription = styled.p`
   color: #666;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   font-weight: 300;
   letter-spacing: 0.5px;
   line-height: 1.6;
+`;
+
+const ServiceLink = styled(Link)`
+  display: inline-block;
+  color: #1a1a1a;
+  font-weight: 300;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 5px;
+  font-size: 0.9rem;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: #d4af37;
+    transform: scaleX(0.3);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  
+  &:hover:after {
+    transform: scaleX(1);
+  }
 `;
 
 const EvenementielPage = () => {
@@ -247,22 +290,46 @@ const EvenementielPage = () => {
 
   const services = [
     {
-      id: 1,
-      title: 'Menu personnalisé',
-      description: 'Des menus sur mesure adaptés à votre événement et à vos préférences.',
-      image: eventImages.event1
+      id: 'marque',
+      title: 'Évènements de marque',
+      description: 'Des expériences culinaires sur mesure pour valoriser votre marque et impressionner vos invités.',
+      image: eventImages.marque,
+      link: '/evenementiel/evenements-de-marque'
     },
     {
-      id: 2,
-      title: 'Service complet',
-      description: 'Du personnel qualifié pour assurer un service impeccable lors de votre événement.',
-      image: eventImages.event2
+      id: 'entreprise',
+      title: 'Évènements d\'entreprise',
+      description: 'Sublimez vos événements professionnels avec nos prestations traiteur haut de gamme.',
+      image: eventImages.entreprise,
+      link: '/evenementiel/evenements-dentreprise'
     },
     {
-      id: 3,
-      title: 'Décoration thématique',
-      description: 'Des options de décoration pour créer une ambiance parfaitement adaptée à votre événement.',
-      image: eventImages.event3
+      id: 'bapteme',
+      title: 'Baptême',
+      description: 'Célébrez ce moment important avec une offre gastronomique raffinée et personnalisée.',
+      image: eventImages.bapteme,
+      link: '/evenementiel/bapteme'
+    },
+    {
+      id: 'babyShower',
+      title: 'Baby Shower',
+      description: 'Créez un moment de partage inoubliable avec nos délices adaptés à cette occasion spéciale.',
+      image: eventImages.babyShower,
+      link: '/evenementiel/baby-shower'
+    },
+    {
+      id: 'anniversaire',
+      title: 'Anniversaire',
+      description: 'Marquez cette journée spéciale avec une expérience culinaire exceptionnelle.',
+      image: eventImages.anniversaire,
+      link: '/evenementiel/anniversaire'
+    },
+    {
+      id: 'mariage',
+      title: 'Mariage',
+      description: 'Rendez votre jour J mémorable avec notre service traiteur élégant et personnalisé.',
+      image: eventImages.mariage,
+      link: '/evenementiel/mariage'
     }
   ];
 
@@ -306,7 +373,7 @@ const EvenementielPage = () => {
       </Section>
       
       <Section>
-        <SectionTitle center>Nos services événementiels</SectionTitle>
+        <SectionTitle center>Nos prestations événementielles</SectionTitle>
         <SectionSubtitle center>
           Que vous planifiez une célébration intime ou un grand événement, nous sommes à vos côtés pour prendre soin de chaque détail.
         </SectionSubtitle>
@@ -324,6 +391,7 @@ const EvenementielPage = () => {
               <ServiceContent>
                 <ServiceTitle>{service.title}</ServiceTitle>
                 <ServiceDescription>{service.description}</ServiceDescription>
+                <ServiceLink to={service.link}>Voir les détails</ServiceLink>
               </ServiceContent>
             </ServiceCard>
           ))}

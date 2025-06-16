@@ -1,29 +1,36 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import ContactSection from '../components/ContactSection';
 
 // Placeholder images - à remplacer par vos propres images
-const realisationsImages = {
-  marque: '/images/DSC05381.jpg',
-  entreprise: '/images/DSC05410.jpg',
-  bapteme: '/images/DSC05415.jpg',
-  babyShower: '/images/DSC05372.jpg',
-  anniversaire: '/images/DSC05355.jpg',
-  mariage: '/images/DSC05270.jpg'
-};
+const realisationsImages = [
+  '/images/DSC05381.jpg',
+  '/images/DSC05410.jpg',
+  '/images/DSC05415.jpg',
+  '/images/DSC05372.jpg',
+  '/images/DSC05355.jpg',
+  '/images/DSC05270.jpg',
+  // Ajoutez plus d'images pour un vrai effet de scroll infini
+  '/images/DSC05381.jpg',
+  '/images/DSC05410.jpg',
+  '/images/DSC05415.jpg',
+  '/images/DSC05372.jpg',
+  '/images/DSC05355.jpg',
+  '/images/DSC05270.jpg'
+];
 
 const PageContainer = styled.div`
   min-height: 100vh;
   font-family: 'Playfair Display', serif;
   color: #1a1a1a;
   background-color: #ffffff; /* Fond blanc */
+  overflow-x: hidden;
 `;
 
 const HeroSection = styled.section`
   height: 500px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${realisationsImages.marque});
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${realisationsImages[0]});
   background-size: cover;
   background-position: center;
   display: flex;
@@ -94,101 +101,92 @@ const SectionTitle = styled.h2`
 
 const RealisationsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 50px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   margin-top: 20px;
+  
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const RealisationCard = styled(motion.div)`
   overflow: hidden;
   position: relative;
-  border: 1px solid #f0f0f0;
+  aspect-ratio: 1;
+  cursor: pointer;
   transition: all 0.4s ease;
   
-  &:before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: -10px;
-    bottom: -10px;
-    border: 1px solid #d4af37;
-    z-index: -1;
-    opacity: 0;
-    transition: all 0.4s ease;
-  }
-  
   &:hover {
-    transform: translateY(-5px);
-    
-    &:before {
-      opacity: 1;
-    }
+    transform: scale(1.02);
   }
 `;
 
 const RealisationImage = styled.div`
-  height: 300px;
+  width: 100%;
+  height: 100%;
   background-image: url(${props => props.src});
   background-size: cover;
   background-position: center;
-  filter: brightness(0.95);
-  transition: all 0.5s ease;
+  transition: transform 0.5s ease;
   
   ${RealisationCard}:hover & {
-    filter: brightness(1);
+    transform: scale(1.05);
   }
 `;
 
-const RealisationContent = styled.div`
-  padding: 30px;
-  background-color: white;
-`;
-
-const RealisationTitle = styled.h3`
-  font-size: 1.5rem;
-  margin-bottom: 15px;
+const LoadMoreButton = styled.button`
+  background-color: transparent;
+  border: 1px solid #d4af37;
+  color: #1a1a1a;
+  padding: 12px 30px;
   font-family: 'Playfair Display', serif;
-  font-weight: 300;
+  font-size: 1rem;
   letter-spacing: 2px;
   text-transform: uppercase;
-`;
-
-const RealisationDescription = styled.p`
-  color: #666;
-  margin-bottom: 25px;
-  font-weight: 300;
-  letter-spacing: 0.5px;
-  line-height: 1.6;
-`;
-
-const RealisationLink = styled(Link)`
-  display: inline-block;
-  color: #1a1a1a;
-  font-weight: 300;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  text-decoration: none;
-  position: relative;
-  padding-bottom: 5px;
-  font-size: 0.9rem;
+  margin: 40px auto 0;
+  display: block;
+  cursor: pointer;
+  transition: all 0.3s ease;
   
-  &:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    bottom: 0;
-    left: 0;
+  &:hover {
     background-color: #d4af37;
-    transform: scaleX(0.3);
-    transform-origin: left;
-    transition: transform 0.4s ease;
+    color: white;
   }
-  
-  &:hover:after {
-    transform: scaleX(1);
-  }
+`;
+
+const ImageModal = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: ${props => props.isOpen ? 'flex' : 'none'};
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+const ModalImage = styled.img`
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
 `;
 
 const RealisationsPage = () => {
@@ -200,51 +198,29 @@ const RealisationsPage = () => {
     });
     document.title = 'Nos réalisations - SkyEvent';
   }, []);
-
-  const realisations = [
-    {
-      id: 'marque',
-      title: 'Évènements de marque',
-      description: 'Des expériences culinaires sur mesure pour valoriser votre marque et impressionner vos invités.',
-      image: realisationsImages.marque,
-      link: '/realisations/evenements-de-marque'
-    },
-    {
-      id: 'entreprise',
-      title: 'Évènements d\'entreprise',
-      description: 'Sublimez vos événements professionnels avec nos prestations traiteur haut de gamme.',
-      image: realisationsImages.entreprise,
-      link: '/realisations/evenements-dentreprise'
-    },
-    {
-      id: 'bapteme',
-      title: 'Baptême',
-      description: 'Célébrez ce moment important avec une offre gastronomique raffinée et personnalisée.',
-      image: realisationsImages.bapteme,
-      link: '/realisations/bapteme'
-    },
-    {
-      id: 'babyShower',
-      title: 'Baby Shower',
-      description: 'Créez un moment de partage inoubliable avec nos délices adaptés à cette occasion spéciale.',
-      image: realisationsImages.babyShower,
-      link: '/realisations/baby-shower'
-    },
-    {
-      id: 'anniversaire',
-      title: 'Anniversaire',
-      description: 'Marquez cette journée spéciale avec une expérience culinaire exceptionnelle.',
-      image: realisationsImages.anniversaire,
-      link: '/realisations/anniversaire'
-    },
-    {
-      id: 'mariage',
-      title: 'Mariage',
-      description: 'Rendez votre jour J mémorable avec notre service traiteur élégant et personnalisé.',
-      image: realisationsImages.mariage,
-      link: '/realisations/mariage'
-    }
-  ];
+  
+  const [visibleImages, setVisibleImages] = useState(9); // Nombre d'images initialement visibles
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const gridRef = useRef(null);
+  
+  // Fonction pour charger plus d'images
+  const loadMoreImages = () => {
+    setVisibleImages(prev => Math.min(prev + 6, realisationsImages.length));
+  };
+  
+  // Ouvrir l'image en modal
+  const openImageModal = (imageSrc) => {
+    setSelectedImage(imageSrc);
+    setIsModalOpen(true);
+    document.body.style.overflow = 'hidden'; // Empêcher le scroll du body
+  };
+  
+  // Fermer le modal
+  const closeImageModal = () => {
+    setIsModalOpen(false);
+    document.body.style.overflow = 'auto'; // Réactiver le scroll du body
+  };
 
   return (
     <PageContainer>
@@ -257,24 +233,31 @@ const RealisationsPage = () => {
       <Section>
         <SectionTitle>Découvrez nos plus belles réalisations</SectionTitle>
         
-        <RealisationsGrid>
-          {realisations.map((realisation, index) => (
+        <RealisationsGrid ref={gridRef}>
+          {realisationsImages.slice(0, visibleImages).map((imageSrc, index) => (
             <RealisationCard
-              key={realisation.id}
+              key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index % 6 * 0.1 }}
               viewport={{ once: true, margin: "-100px" }}
+              onClick={() => openImageModal(imageSrc)}
             >
-              <RealisationImage src={realisation.image} />
-              <RealisationContent>
-                <RealisationTitle>{realisation.title}</RealisationTitle>
-                <RealisationDescription>{realisation.description}</RealisationDescription>
-                <RealisationLink to={realisation.link}>Voir les détails</RealisationLink>
-              </RealisationContent>
+              <RealisationImage src={imageSrc} />
             </RealisationCard>
           ))}
         </RealisationsGrid>
+        
+        {visibleImages < realisationsImages.length && (
+          <LoadMoreButton onClick={loadMoreImages}>
+            Voir plus de réalisations
+          </LoadMoreButton>
+        )}
+        
+        <ImageModal isOpen={isModalOpen} onClick={closeImageModal}>
+          <CloseButton onClick={closeImageModal}>×</CloseButton>
+          {selectedImage && <ModalImage src={selectedImage} />}
+        </ImageModal>
       </Section>
       <ContactSection />
     </PageContainer>
