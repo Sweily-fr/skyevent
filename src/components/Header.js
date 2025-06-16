@@ -10,9 +10,10 @@ const HeaderContainer = styled(({ isScrolled, ...rest }) => <header {...rest} />
   right: 0;
   background-color: white;
   z-index: 1000;
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   height: ${props => props.isScrolled ? '60px' : '120px'};
+  transform: ${props => props.isScrolled === 'hidden' ? 'translateY(-100%)' : 'translateY(0)'};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -143,10 +144,17 @@ const Header = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // Simple toggle pour l'état scrolled
-      if (currentScrollY > 100) {
+      // Si on défile vers le bas et que la scroll position est > 100px, on réduit la navbar
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsScrolled(true);
-      } else if (currentScrollY < 50) {
+      } 
+      // Si on remonte, on affiche la navbar en grand
+      else if (currentScrollY < lastScrollY) {
+        setIsScrolled(false);
+      }
+      
+      // Si on est tout en haut de la page, on s'assure que la navbar est en grand
+      if (currentScrollY < 50) {
         setIsScrolled(false);
       }
       
