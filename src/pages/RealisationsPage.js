@@ -188,26 +188,6 @@ const RealisationImage = styled.div`
   }
 `;
 
-const LoadMoreButton = styled.button`
-  background-color: transparent;
-  border: 1px solid #d4af37;
-  color: #1a1a1a;
-  padding: 12px 30px;
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin: 40px auto 0;
-  display: block;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    background-color: #d4af37;
-    color: white;
-  }
-`;
-
 const ImageModal = styled.div`
   position: fixed;
   top: 0;
@@ -307,9 +287,11 @@ const RealisationsPage = () => {
         </RealisationsGrid>
         
         {visibleImages < realisationsImages.length && (
-          <LoadMoreButton onClick={loadMoreImages}>
-            Voir plus de réalisations
-          </LoadMoreButton>
+          <div style={{ textAlign: 'center', margin: '40px 0' }}>
+            <StandardButton onClick={loadMoreImages}>
+              Voir plus de réalisations
+            </StandardButton>
+          </div>
         )}
         
         {visibleImages === realisationsImages.length && (
