@@ -6,12 +6,18 @@ import StandardButton from './StandardButton';
 
 // Images des réalisations
 const realisationImages = {
-  realisation1: '/images/DSC05270.jpg',
-  realisation2: '/images/DSC05381.jpg',
-  realisation3: '/images/DSC05410.jpg',
-  realisation4: '/images/DSC05415.jpg',
-  realisation5: '/images/DSC05372.jpg',
-  realisation6: '/images/DSC05355.jpg'
+  realisation1: '/images/DSC05266.jpg',
+  realisation2: '/images/DSC05275.jpg',
+  realisation3: '/images/DSC05278.jpg',
+  realisation4: '/images/DSC05281.jpg',
+  realisation5: '/images/DSC05287-2.jpg',
+  realisation6: '/images/DSC05289.jpg',
+  realisation7: '/images/DSC05290.jpg',
+  realisation8: '/images/DSC05291.jpg',
+  realisation9: '/images/DSC05292.jpg',
+  realisation10: '/images/DSC05294.jpg',
+  realisation11: '/images/DSC05297.jpg',
+  realisation12: '/images/DSC05299.jpg'
 };
 
 const SectionContainer = styled.section`
@@ -75,7 +81,6 @@ const RealisationCard = styled(motion.div)`
   aspect-ratio: 1;
   border: 1px solid #f0f0f0;
   transition: all 0.4s ease;
-  cursor: pointer;
   
   &:before {
     content: '';
@@ -205,8 +210,6 @@ const RealisationsSection = () => {
         {realisations.map((realisation, index) => (
           <RealisationCard
             key={realisation.id}
-            as={Link}
-            to={realisation.link}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}

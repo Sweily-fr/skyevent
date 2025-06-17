@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -7,7 +7,7 @@ import StandardButton, { ButtonContainer } from '../components/StandardButton'; 
 
 // Placeholder images - à remplacer par vos propres images
 const eventImages = {
-  hero: '/images/DSC05270.jpg',
+  hero: '/images/DSC05294.jpg',
   event1: '/images/DSC05381.jpg',
   event2: '/images/DSC05410.jpg',
   event3: '/images/DSC05415.jpg',
@@ -27,16 +27,18 @@ const PageContainer = styled.div`
 `;
 
 const HeroSection = styled.section`
-  height: 500px;
+  height: 600px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${eventImages.hero});
   background-size: cover;
   background-position: center;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   color: white;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
+  padding: 0 20px;
 `;
 
 const HeroTitle = styled.h1`
@@ -49,7 +51,18 @@ const HeroTitle = styled.h1`
   
   @media (max-width: 768px) {
     font-size: 2.5rem;
-    letter-spacing: 3px;
+  }`;
+
+const HeroSubtitle = styled.p`
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 30px;
+  max-width: 800px;
+  line-height: 1.6;
+  
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+    padding: 0 20px;
   }
 `;
 
@@ -279,7 +292,7 @@ const ServiceLink = styled(Link)`
 `;
 
 const EvenementielPage = () => {
-  useLayoutEffect(() => {
+  useEffect(() => {
     window.scrollTo({
       top: 0,
       left: 0,
@@ -336,11 +349,21 @@ const EvenementielPage = () => {
   return (
     <PageContainer>
       <HeroSection>
-        <div>
-          <HeroTitle>Événementiel</HeroTitle>
-        </div>
+        <HeroTitle>Événementiel</HeroTitle>
+        <HeroSubtitle>Créons ensemble des moments inoubliables</HeroSubtitle>
+        <p style={{ maxWidth: '800px', margin: '0 auto 30px', fontSize: '1.1rem', lineHeight: '1.6' }}>
+          Découvrez nos services sur mesure pour des événements exceptionnels. 
+          De l'idée à la réalisation, nous nous occupons de tout pour faire de votre événement un succès.
+        </p>
+        <ButtonContainer>
+          <StandardButton to="/realisations" darkBackground={true}>
+            Voir nos réalisations
+          </StandardButton>
+          <StandardButton to="/contact" darkBackground={true}>
+            Demander un devis
+          </StandardButton>
+        </ButtonContainer>
       </HeroSection>
-      
       <Section>
         <Grid>
           <ContentContainer>

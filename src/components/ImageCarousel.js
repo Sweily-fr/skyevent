@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // Images de la galerie
 const carouselImages = [
-  '/images/DSC05270.jpg',
-  '/images/DSC05381.jpg',
   '/images/DSC05410.jpg',
-  '/images/DSC05415.jpg',
+  '/images/DSC05407.jpg',
+  '/images/DSC05400.jpg',
+  '/images/DSC05351.jpg',
   '/images/DSC05372.jpg'
 ];
 
@@ -16,6 +16,9 @@ const CarouselContainer = styled.section`
   background-color: #ffffff;
   overflow: hidden;
   position: relative;
+  width: 100%;
+  max-width: 100vw;
+  margin: 0 auto;
   
   &:before {
     content: '';
@@ -73,9 +76,12 @@ const CarouselTitle = styled.h2`
 const CarouselWrapper = styled.div`
   position: relative;
   max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
   height: 600px;
-  padding: 0 40px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  overflow: hidden;
   
   @media (max-width: 1200px) {
     height: 500px;
@@ -83,17 +89,20 @@ const CarouselWrapper = styled.div`
   
   @media (max-width: 768px) {
     height: 350px;
-    padding: 0 20px;
+    padding: 0 15px;
   }
   
   @media (max-width: 480px) {
     height: 250px;
+    padding: 0 10px;
   }
 `;
 
 const CarouselSlide = styled(motion.div)`
   position: absolute;
-  width: 100%;
+  width: calc(100% - 40px);
+  left: 20px;
+  right: 20px;
   height: 100%;
   overflow: hidden;
   border: 1px solid #f0f0f0;
@@ -159,6 +168,7 @@ const CarouselArrow = styled.button`
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   outline: none;
+  margin: 0 20px;
   
   &:hover {
     background-color: #d4af37;
