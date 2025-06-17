@@ -1,22 +1,22 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import ContactSection from '../components/ContactSection';
 import StandardButton, { ButtonContainer } from '../components/StandardButton'; // Ajout de l'import de ButtonContainer
 
-// Placeholder images - à remplacer par vos propres images
+// Images des différents types d'événements
 const eventImages = {
+  marque: '/images/DSC05297.jpg',
+  entreprise: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+  bapteme: '/images/DSC05354.jpg',
+  babyShower: '/images/DSC05351.jpg',
+  anniversaire: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+  mariage: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
   hero: '/images/DSC05294.jpg',
   event1: '/images/DSC05381.jpg',
   event2: '/images/DSC05410.jpg',
-  event3: '/images/DSC05415.jpg',
-  marque: '/images/DSC05381.jpg',
-  entreprise: '/images/DSC05410.jpg',
-  bapteme: '/images/DSC05415.jpg',
-  babyShower: '/images/DSC05372.jpg',
-  anniversaire: '/images/DSC05355.jpg',
-  mariage: '/images/DSC05270.jpg'
+  event3: '/images/DSC05415.jpg'
 };
 
 const PageContainer = styled.div`
@@ -197,6 +197,10 @@ const ServicesGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 50px;
   margin-top: 50px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 `;
 
 const ServiceCard = styled(motion.div)`
@@ -204,6 +208,7 @@ const ServiceCard = styled(motion.div)`
   position: relative;
   border: 1px solid #f0f0f0;
   transition: all 0.4s ease;
+  cursor: pointer;
   
   &:before {
     content: '';
@@ -291,7 +296,11 @@ const ServiceLink = styled(Link)`
   }
 `;
 
+
+
 const EvenementielPage = () => {
+  const navigate = useNavigate();
+  
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -303,46 +312,46 @@ const EvenementielPage = () => {
 
   const services = [
     {
-      id: 'marque',
-      title: 'Évènements de marque',
-      description: 'Des expériences culinaires sur mesure pour valoriser votre marque et impressionner vos invités.',
-      image: eventImages.marque,
-      link: '/evenementiel/evenements-de-marque'
-    },
-    {
-      id: 'entreprise',
-      title: 'Évènements d\'entreprise',
-      description: 'Sublimez vos événements professionnels avec nos prestations traiteur haut de gamme.',
-      image: eventImages.entreprise,
-      link: '/evenementiel/evenements-dentreprise'
-    },
-    {
-      id: 'bapteme',
-      title: 'Baptême',
-      description: 'Célébrez ce moment important avec une offre gastronomique raffinée et personnalisée.',
-      image: eventImages.bapteme,
-      link: '/evenementiel/bapteme'
-    },
-    {
       id: 'babyShower',
       title: 'Baby Shower',
       description: 'Créez un moment de partage inoubliable avec nos délices adaptés à cette occasion spéciale.',
       image: eventImages.babyShower,
-      link: '/evenementiel/baby-shower'
+      link: '/realisations/baby-shower'
     },
     {
       id: 'anniversaire',
       title: 'Anniversaire',
       description: 'Marquez cette journée spéciale avec une expérience culinaire exceptionnelle.',
       image: eventImages.anniversaire,
-      link: '/evenementiel/anniversaire'
+      link: '/realisations/anniversaire'
+    },
+    {
+      id: 'bapteme',
+      title: 'Baptême',
+      description: 'Célébrez ce moment important avec une offre gastronomique raffinée et personnalisée.',
+      image: eventImages.bapteme,
+      link: '/realisations/bapteme'
     },
     {
       id: 'mariage',
       title: 'Mariage',
       description: 'Rendez votre jour J mémorable avec notre service traiteur élégant et personnalisé.',
       image: eventImages.mariage,
-      link: '/evenementiel/mariage'
+      link: '/realisations/mariage'
+    },
+    {
+      id: 'entreprise',
+      title: 'Évènement d\'entreprise',
+      description: 'Sublimez vos événements professionnels avec nos prestations traiteur haut de gamme.',
+      image: eventImages.entreprise,
+      link: '/realisations/evenements-dentreprise'
+    },
+    {
+      id: 'marque',
+      title: 'Évènement de marque',
+      description: 'Des expériences culinaires sur mesure pour valoriser votre marque et impressionner vos invités.',
+      image: eventImages.marque,
+      link: '/realisations/evenements-de-marque'
     }
   ];
 
@@ -409,6 +418,7 @@ const EvenementielPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true, margin: "-100px" }}
+              onClick={() => navigate(service.link, { replace: true })}
             >
               <ServiceImage src={service.image} />
               <ServiceContent>
