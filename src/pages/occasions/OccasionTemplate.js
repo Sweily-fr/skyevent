@@ -598,6 +598,14 @@ const OccasionTemplate = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [videoError, setVideoError] = useState(false);
+  
+  // Fonction pour gérer les erreurs de chargement vidéo
+  const handleVideoError = (e) => {
+    console.error('Erreur de chargement de la vidéo:', e);
+    console.log('Chemin de la vidéo:', process.env.PUBLIC_URL + mediaContent);
+    setVideoError(true);
+  };
   
 
   const nextSlide = useCallback(() => {
@@ -624,28 +632,45 @@ const OccasionTemplate = ({
     <>
       <HeroContainer>
         {useVideo ? (
-          <VideoContainer>
-            <VideoBackground 
-              autoPlay 
-              loop 
-              muted 
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            overflow: 'hidden',
+            zIndex: 1
+          }}>
+            <video
+              autoPlay
+              loop
+              muted
               playsInline
-              onError={(e) => console.error('Erreur vidéo:', e)}
+              onError={handleVideoError}
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                minWidth: '100%',
+                minHeight: '100%',
+                width: 'auto',
+                height: 'auto',
+                transform: 'translate(-50%, -50%)',
+                objectFit: 'cover'
+              }}
             >
-              <source src={process.env.PUBLIC_URL + mediaContent} type="video/mp4" />
-              <img 
-                src={process.env.PUBLIC_URL + FALLBACK_IMAGE} 
-                alt="Présentation de sushis"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                }} 
+              <source 
+                src={`${process.env.PUBLIC_URL}${mediaContent}`} 
+                type="video/mp4"
               />
-            </VideoBackground>
-          </VideoContainer>
+              Votre navigateur ne supporte pas la lecture de vidéos.
+            </video>
+          </div>
         ) : (
-          <HeroImage src={heroImage} />
+          <HeroImage 
+            src={videoError ? `${process.env.PUBLIC_URL}${FALLBACK_IMAGE}` : heroImage} 
+            alt={title}
+          />
         )}
         <Overlay />
         <HeroContent>

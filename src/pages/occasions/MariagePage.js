@@ -20,8 +20,7 @@ const MariagePage = () => {
         text: "Notre personnel expérimenté assure un service impeccable tout au long de votre réception, pour que vous puissiez profiter pleinement de votre journée."
       }
     ],
-    mediaType: "video",
-    mediaContent: "/images/DSC05270.jpg",
+    mediaContent: "/videos/IMG_0725.MP4",
     carouselImages: [
       "/images/DSC05270.jpg",
       "/images/DSC05275.jpg",

@@ -20,8 +20,7 @@ const EntreprisePage = () => {
         text: "Nous organisons des activités culinaires originales pour renforcer la cohésion de vos équipes et créer des souvenirs mémorables."
       }
     ],
-    mediaType: "image",
-    mediaContent: "/images/DSC05410.jpg",
+    mediaContent: "/videos/IMG_0722.MP4",
     carouselImages: [
       "/images/DSC05410.jpg",
       "/images/DSC05361.jpg",

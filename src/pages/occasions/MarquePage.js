@@ -20,8 +20,7 @@ const MarquePage = () => {
         text: "Nous concevons des expériences gastronomiques exclusives pour vos clients privilégiés et vos partenaires stratégiques."
       }
     ],
-    mediaType: "image",
-    mediaContent: "/images/DSC05381.jpg",
+    mediaContent: "/videos/IMG_0737.MP4",
     carouselImages: [
       "/images/DSC05381.jpg",
       "/images/DSC05383.jpg",

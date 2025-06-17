@@ -20,8 +20,7 @@ const BaptemePage = () => {
         text: "Notre personnel discret et professionnel veille à ce que tous vos invités soient servis avec attention et bienveillance."
       }
     ],
-    mediaType: "image",
-    mediaContent: "/images/DSC05415.jpg",
+    mediaContent: "/videos/IMG_0703.MP4",
     carouselImages: [
       "/images/DSC05415.jpg",
       "/images/DSC05410.jpg",

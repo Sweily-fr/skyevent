@@ -6,6 +6,8 @@ const AnniversairePage = () => {
     title: "Anniversaire",
     subtitle: "Rendez votre journée spéciale encore plus mémorable avec nos services de traiteur sur mesure",
     heroImage: "/images/DSC05355.jpg",
+    useVideo: true,
+    mediaContent: '/videos/IMG_0701.MP4', // Vidéo d'anniversaire
     infoBlocks: [
       {
         title: "Menus personnalisés",
@@ -20,8 +22,6 @@ const AnniversairePage = () => {
         text: "De la mise en place à la vaisselle, notre équipe s'occupe de tout pour que vous puissiez profiter pleinement de votre journée spéciale."
       }
     ],
-    mediaType: "video",
-    mediaContent: "/images/DSC05355.jpg",
     carouselImages: [
       "/images/DSC05355.jpg",
       "/images/DSC05351.jpg",
@@ -30,8 +30,7 @@ const AnniversairePage = () => {
       "/images/DSC05336.jpg",
       "/images/DSC05335.jpg"
     ],
-    bannerImage: "/images/DSC05270.jpg",
-    useVideo: true
+    bannerImage: "/images/DSC05270.jpg"
   };
 
   return <OccasionTemplate {...pageData} occasionType="anniversaire" />;

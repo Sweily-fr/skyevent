@@ -15,6 +15,8 @@ const BabyShowerPage = () => {
     title: "Baby Shower",
     subtitle: "Célébrez l'arrivée de votre bébé avec un événement inoubliable et des mets délicats",
     heroImage: "/images/DSC05372.jpg",
+    useVideo: true,
+    mediaContent: '/videos/IMG_0777.MP4', // Vidéo de baby shower
     infoBlocks: [
       {
         title: "Buffet sur mesure",
@@ -29,8 +31,6 @@ const BabyShowerPage = () => {
         text: "Profitez pleinement de votre événement grâce à notre service complet qui inclut le service à table et des animations adaptées à l'occasion."
       }
     ],
-    mediaType: "video",
-    mediaContent: "/videos/sushi.mp4",
     carouselImages: [
       "/images/DSC05372.jpg",
       "/images/DSC05381.jpg",
@@ -39,8 +39,7 @@ const BabyShowerPage = () => {
       "/images/DSC05270.jpg",
       "/images/DSC05355.jpg"
     ],
-    bannerImage: "/images/DSC05355.jpg",
-    useVideo: true
+    bannerImage: "/images/DSC05355.jpg"
   };
 
   return <OccasionTemplate {...pageData} occasionType="babyshower" />;
