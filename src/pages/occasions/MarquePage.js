@@ -23,16 +23,18 @@ const MarquePage = () => {
     mediaType: "image",
     mediaContent: "/images/DSC05381.jpg",
     carouselImages: [
-      "/images/DSC05410.jpg",
-      "/images/DSC05415.jpg",
-      "/images/DSC05372.jpg",
-      "/images/DSC05270.jpg"
+      "/images/DSC05381.jpg",
+      "/images/DSC05383.jpg",
+      "/images/DSC05384-2.jpg",
+      "/images/DSC05385-2.jpg",
+      "/images/DSC05384.jpg",
+      "/images/DSC05385.jpg"
     ],
     bannerImage: "/images/DSC05355.jpg",
     useVideo: true
   };
 
-  return <OccasionTemplate {...pageData} />;
+  return <OccasionTemplate {...pageData} occasionType="marque" />;
 };
 
 export default MarquePage;

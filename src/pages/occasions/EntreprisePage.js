@@ -23,10 +23,12 @@ const EntreprisePage = () => {
     mediaType: "image",
     mediaContent: "/images/DSC05410.jpg",
     carouselImages: [
-      "/images/DSC05381.jpg",
-      "/images/DSC05270.jpg",
-      "/images/DSC05415.jpg",
-      "/images/DSC05372.jpg"
+      "/images/DSC05410.jpg",
+      "/images/DSC05361.jpg",
+      "/images/DSC05363.jpg",
+      "/images/DSC05374.jpg",
+      "/images/DSC05377.jpg",
+      "/images/DSC05379.jpg"
     ],
     bannerTitle: "Événements professionnels réussis",
     bannerSubtitle: "Contactez-nous pour organiser votre prochain événement d'entreprise",
@@ -34,7 +36,7 @@ const EntreprisePage = () => {
     useVideo: true
   };
 
-  return <OccasionTemplate {...pageData} />;
+  return <OccasionTemplate {...pageData} occasionType="entreprise" />;
 };
 
 export default EntreprisePage;

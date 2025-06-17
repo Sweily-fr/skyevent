@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
-// Placeholder images - à remplacer par vos propres images
+// Images des différents types d'événements
 const eventImages = {
-  marque: 'https://images.unsplash.com/photo-1505236858219-8359eb29e329?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+  marque: '/images/DSC05297.jpg',
   entreprise: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-  bapteme: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
-  babyShower: 'https://images.unsplash.com/photo-1569072712109-6206fa3505b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+  bapteme: '/images/DSC05354.jpg',
+  babyShower: '/images/DSC05351.jpg',
   anniversaire: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
   mariage: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
 };

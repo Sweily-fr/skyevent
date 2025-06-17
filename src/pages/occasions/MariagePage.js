@@ -23,16 +23,18 @@ const MariagePage = () => {
     mediaType: "video",
     mediaContent: "/images/DSC05270.jpg",
     carouselImages: [
-      "/images/DSC05381.jpg",
-      "/images/DSC05410.jpg",
-      "/images/DSC05415.jpg",
-      "/images/DSC05372.jpg"
+      "/images/DSC05270.jpg",
+      "/images/DSC05275.jpg",
+      "/images/DSC05278.jpg",
+      "/images/DSC05281.jpg",
+      "/images/DSC05287.jpg",
+      "/images/DSC05289.jpg"
     ],
     bannerImage: "/images/DSC05355.jpg",
     useVideo: true
   };
 
-  return <OccasionTemplate {...pageData} />;
+  return <OccasionTemplate {...pageData} occasionType="mariage" />;
 };
 
 export default MariagePage;

@@ -29,19 +29,21 @@ const BabyShowerPage = () => {
         text: "Profitez pleinement de votre événement grâce à notre service complet qui inclut le service à table et des animations adaptées à l'occasion."
       }
     ],
-    mediaType: "image",
-    mediaContent: "/images/DSC05372.jpg",
+    mediaType: "video",
+    mediaContent: "/videos/sushi.mp4",
     carouselImages: [
+      "/images/DSC05372.jpg",
       "/images/DSC05381.jpg",
       "/images/DSC05410.jpg",
       "/images/DSC05415.jpg",
-      "/images/DSC05270.jpg"
+      "/images/DSC05270.jpg",
+      "/images/DSC05355.jpg"
     ],
     bannerImage: "/images/DSC05355.jpg",
     useVideo: true
   };
 
-  return <OccasionTemplate {...pageData} />;
+  return <OccasionTemplate {...pageData} occasionType="babyshower" />;
 };
 
 export default BabyShowerPage;

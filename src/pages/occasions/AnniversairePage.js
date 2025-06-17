@@ -23,16 +23,18 @@ const AnniversairePage = () => {
     mediaType: "video",
     mediaContent: "/images/DSC05355.jpg",
     carouselImages: [
-      "/images/DSC05381.jpg",
-      "/images/DSC05410.jpg",
-      "/images/DSC05415.jpg",
-      "/images/DSC05372.jpg"
+      "/images/DSC05355.jpg",
+      "/images/DSC05351.jpg",
+      "/images/DSC05340.jpg",
+      "/images/DSC05338.jpg",
+      "/images/DSC05336.jpg",
+      "/images/DSC05335.jpg"
     ],
     bannerImage: "/images/DSC05270.jpg",
     useVideo: true
   };
 
-  return <OccasionTemplate {...pageData} />;
+  return <OccasionTemplate {...pageData} occasionType="anniversaire" />;
 };
 
 export default AnniversairePage;

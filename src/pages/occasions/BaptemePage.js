@@ -23,16 +23,18 @@ const BaptemePage = () => {
     mediaType: "image",
     mediaContent: "/images/DSC05415.jpg",
     carouselImages: [
-      "/images/DSC05381.jpg",
+      "/images/DSC05415.jpg",
       "/images/DSC05410.jpg",
-      "/images/DSC05270.jpg",
-      "/images/DSC05372.jpg"
+      "/images/DSC05407.jpg",
+      "/images/DSC05400.jpg",
+      "/images/DSC05384.jpg",
+      "/images/DSC05385.jpg"
     ],
     bannerImage: "/images/DSC05355.jpg",
     useVideo: true
   };
 
-  return <OccasionTemplate {...pageData} />;
+  return <OccasionTemplate {...pageData} occasionType="bapteme" />;
 };
 
 export default BaptemePage;

@@ -87,23 +87,6 @@ const ContactForm = styled.form`
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
   position: relative;
   
-  &:before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: -10px;
-    bottom: -10px;
-    border: 1px solid #d4af37;
-    z-index: -1;
-    opacity: 0;
-    transition: all 0.4s ease;
-  }
-  
-  &:hover:before {
-    opacity: 1;
-  }
-  
   @media (max-width: 768px) {
     padding: 30px 20px;
   }
@@ -185,23 +168,6 @@ const ContactInfo = styled.div`
   height: 100%;
   border: 1px solid #f0f0f0;
   position: relative;
-  
-  &:before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: -10px;
-    bottom: -10px;
-    border: 1px solid #d4af37;
-    z-index: -1;
-    opacity: 0;
-    transition: all 0.4s ease;
-  }
-  
-  &:hover:before {
-    opacity: 1;
-  }
   
   @media (max-width: 768px) {
     padding: 30px 20px;
