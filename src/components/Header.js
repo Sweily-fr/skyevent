@@ -41,13 +41,16 @@ const Logo = styled(({ isScrolled, ...rest }) => <Link {...rest} />)`
   font-weight: bold;
   color: #333;
   text-decoration: none;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Inter', sans-serif;
   letter-spacing: 1px;
   transition: all 0.4s ease;
+  text-transform: uppercase;
 `;
 
 const NavLinks = styled(({ isScrolled, ...rest }) => <nav {...rest} />)`
   display: flex;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
   justify-content: center;
   width: 100%;
   max-width: 800px;

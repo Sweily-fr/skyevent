@@ -39,8 +39,8 @@ const SectionTitle = styled.h2`
   font-size: 2.8rem;
   text-align: center;
   margin-bottom: 20px;
-  font-family: 'Playfair Display', serif;
-  font-weight: 300;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
   position: relative;
@@ -68,6 +68,7 @@ const SectionSubtitle = styled.p`
   max-width: 800px;
   margin: 0 auto 60px;
   color: #666;
+  font-family: 'Poppins', sans-serif;
   font-weight: 300;
   letter-spacing: 0.5px;
   line-height: 1.8;
@@ -151,8 +152,8 @@ const EventTitle = styled.h3`
   color: white;
   font-size: 1.5rem;
   margin: 0;
-  font-family: 'Playfair Display', serif;
-  font-weight: 300;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
   letter-spacing: 2px;
   text-transform: uppercase;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);

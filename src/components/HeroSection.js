@@ -59,44 +59,42 @@ const Overlay = styled.div`
 const HeroContent = styled.div`
   position: absolute;
   bottom: 100px;
-  left: 50px;
+  left: 50%;
+  transform: translateX(-50%);
   max-width: 800px;
-  text-align: left;
+  text-align: center;
   padding: 30px;
   z-index: 3;
   background: transparent;
-  width: calc(100% - 100px);
+  width: 90%;
   
   @media (max-width: 992px) {
     max-width: 90%;
-    left: 5%;
-    right: 5%;
-    width: auto;
+    width: 90%;
   }
   
   @media (max-width: 768px) {
     bottom: 60px;
     padding: 20px;
     max-width: 100%;
-    left: 20px;
-    right: 20px;
+    width: 90%;
   }
 `;
 
 const HeroTitle = styled(motion.h1)`
-  font-size: 3.5rem;
-  font-weight: 300;
+  font-size: 2.8rem;
+  font-weight: 700;
   margin-bottom: 20px;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Inter', sans-serif;
   color: #fff;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  line-height: 1.1;
+  line-height: 1.2;
   max-width: 800px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   
   @media (max-width: 1200px) {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
   
   @media (max-width: 992px) {
@@ -115,12 +113,13 @@ const HeroTitle = styled(motion.h1)`
 
 const HeroSubtitle = styled(motion.p)`
   font-size: 1.2rem;
-  margin-bottom: 30px;
+  margin: 0 auto 30px;
   color: rgba(255, 255, 255, 0.9);
   font-weight: 300;
   letter-spacing: 0.5px;
   line-height: 1.8;
   max-width: 600px;
+  text-align: center;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   
   @media (max-width: 768px) {
@@ -136,8 +135,8 @@ const HeroSubtitle = styled(motion.p)`
 const ButtonContainer = styled(motion.div)`
   display: flex;
   gap: 20px;
-  margin: 30px 0 0;
-  justify-content: flex-start;
+  margin: 30px auto 0;
+  justify-content: center;
   width: 100%;
   flex-wrap: nowrap;
   
@@ -223,31 +222,27 @@ const HeroSection = () => {
             }
           }}
         >
-          <HeroTitle 
-            variants={fadeInUp}
-          >
+          <HeroSubtitle variants={fadeInUp}>
+            L'événementiel, un savoir-faire
+          </HeroSubtitle>
+          <HeroTitle variants={fadeInUp}>
             Notre histoire traiteur
           </HeroTitle>
-          <HeroSubtitle
-            variants={fadeInUp}
-          >
-            Parce que chaque événement est unique, notre service traiteur événementiel crée des expériences sur mesure, alliant saveurs raffinées, présentation élégante et service impeccable. Mariages, anniversaires ou événements professionnels, nous sublimons vos réceptions avec créativité et savoir-faire.
-          </HeroSubtitle>
-
         </motion.div>
-        <motion.div variants={fadeInUp}>
-          <ButtonContainer
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ 
-              opacity: 1, 
-              y: 0,
-              transition: { 
-                delay: 0.8,
-                duration: 0.6,
-                ease: 'easeOut' 
-              }
-            }}
-          >
+        <motion.div 
+          variants={fadeInUp}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ 
+            opacity: 1, 
+            y: 0,
+            transition: { 
+              delay: 0.8,
+              duration: 0.6,
+              ease: 'easeOut' 
+            }
+          }}
+        >
+          <ButtonContainer>
             <StandardButton to="/realisations" darkBackground={true}>Découvrir nos réalisations</StandardButton>
             <StandardButton to="/notre-histoire" darkBackground={true}>Notre histoire</StandardButton>
           </ButtonContainer>

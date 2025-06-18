@@ -11,7 +11,7 @@ const BannerContainer = styled.section`
   min-height: 700px;
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   color: white;
   overflow: hidden;
@@ -56,8 +56,8 @@ const BannerContent = styled.div`
   text-align: left;
   max-width: 1400px;
   width: 100%;
-  padding: 0 80px;
-  margin-top: 100px;
+  padding: 0 80px 100px 80px;
+  margin-top: auto;
   
   @media (max-width: 992px) {
     padding: 0 40px;
@@ -77,19 +77,18 @@ const TitleContainer = styled.div`
 `;
 
 const MainTitle = styled(motion.h1)`
-  font-size: 5.5rem;
-  font-weight: 300;
-  margin: 0;
-  font-family: 'Playfair Display', serif;
-  line-height: 1.1;
-  letter-spacing: 4px;
-  text-transform: uppercase;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  font-family: 'Inter', sans-serif;
   color: #fff;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  max-width: 800px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   position: relative;
-  display: inline-block;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
+  display: block;
   
   &:after {
     content: '';
@@ -126,10 +125,10 @@ const MainTitle = styled(motion.h1)`
 `;
 
 const SubTitle = styled(motion.h2)`
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 300;
-  margin: 30px 0 0;
-  font-family: 'Playfair Display', serif;
+  margin: 5px 0 0;
+  font-family: 'Inter', sans-serif;
   line-height: 1.6;
   letter-spacing: 1px;
   color: #f0f0f0;
@@ -160,7 +159,7 @@ const SubTitle = styled(motion.h2)`
 `;
 
 const ButtonWrapper = styled.div`
-  margin-top: 30px;
+  margin-top: 15px;
 `;
 
 const TraiteurBanner = () => {
@@ -184,7 +183,7 @@ const TraiteurBanner = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Services Événementiels
+            Services événementiels
           </SubTitle>
         </TitleContainer>
         <ButtonWrapper>
