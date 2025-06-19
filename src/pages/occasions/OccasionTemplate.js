@@ -633,7 +633,7 @@ const OccasionTemplate = ({
   // Fonction pour gérer les erreurs de chargement vidéo
   const handleVideoError = (e) => {
     console.error('Erreur de chargement de la vidéo:', e);
-    console.log('Chemin de la vidéo:', process.env.PUBLIC_URL + mediaContent);
+    console.log('Chemin de la vidéo:', mediaContent);
     setVideoError(true);
   };
   
@@ -690,7 +690,7 @@ const OccasionTemplate = ({
               }}
             >
               <source 
-                src={`${process.env.PUBLIC_URL}${mediaContent}`} 
+                src={mediaContent} 
                 type="video/mp4"
               />
               Votre navigateur ne supporte pas la lecture de vidéos.
@@ -698,7 +698,7 @@ const OccasionTemplate = ({
           </div>
         ) : (
           <HeroImage 
-            src={videoError ? `${process.env.PUBLIC_URL}${FALLBACK_IMAGE}` : heroImage} 
+            src={videoError ? FALLBACK_IMAGE : heroImage} 
             alt={title}
           />
         )}
@@ -726,7 +726,7 @@ const OccasionTemplate = ({
         <OfferGrid>
           {OCCASION_OFFERS[occasionType]?.map((offer, index) => (
             <OfferItem key={index}>
-              <OfferImage image={process.env.PUBLIC_URL + offer.image} />
+              <OfferImage image={offer.image} />
               <OfferOverlay className="offer-overlay" />
               <OfferContent className="offer-content">
                 <OfferTitle>{offer.title}</OfferTitle>

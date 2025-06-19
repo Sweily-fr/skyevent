@@ -174,7 +174,10 @@ const Header = () => {
   
   const handleLinkClick = (path) => {
     setActiveLink(path);
-    setMobileMenuOpen(false);
+    // Ajouter un délai avant de fermer le menu mobile pour permettre à la page de se charger correctement
+    setTimeout(() => {
+      setMobileMenuOpen(false);
+    }, 50);
   };
   
   return (

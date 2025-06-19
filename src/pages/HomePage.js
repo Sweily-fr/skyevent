@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef, useEffect } from 'react';
-import { motion, useAnimation, useInView } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import styled from 'styled-components';
 import HeroSection from '../components/HeroSection';
 import EventTypesGrid from '../components/EventTypesGrid';
@@ -7,7 +7,6 @@ import TraiteurBanner from '../components/TraiteurBanner';
 import RealisationsGrid from '../components/RealisationsGrid';
 import ImageCarousel from '../components/ImageCarousel';
 import ContactSection from '../components/ContactSection';
-import EventBanner from '../components/EventBanner';
 
 const HomeContainer = styled.div`
   min-height: 100vh;
@@ -39,13 +38,11 @@ const staggerContainer = {
 const HomePage = () => {
   const controls = useAnimation();
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   useEffect(() => {
-    if (isInView) {
-      controls.start('visible');
-    }
-  }, [controls, isInView]);
+    // Démarrer les animations dès que le composant est monté
+    controls.start('visible');
+  }, [controls]);
   
   useLayoutEffect(() => {
     window.scrollTo({
