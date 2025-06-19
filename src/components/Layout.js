@@ -16,7 +16,7 @@ const MainContent = styled.main`
   padding-top: 120px; /* Hauteur du header par défaut */
   
   @media (max-width: 768px) {
-    padding-top: 100px; /* Ajustement pour mobile */
+    padding-top: 60px; /* Ajustement pour mobile - correspond exactement à la hauteur de la navbar */
   }
 `;
 

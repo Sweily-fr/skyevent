@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+
 
 const HeaderContainer = styled(({ isScrolled, ...rest }) => <header {...rest} />)`
   position: fixed;
@@ -17,6 +17,12 @@ const HeaderContainer = styled(({ isScrolled, ...rest }) => <header {...rest} />
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  @media (max-width: 768px) {
+    height: 60px;
+    box-shadow: none;
+    border-bottom: none;
+  }
 `;
 
 const MainNav = styled.div`
@@ -34,6 +40,10 @@ const LogoContainer = styled(({ isScrolled, ...rest }) => <div {...rest} />)`
   text-align: center;
   transition: all 0.4s ease;
   margin-bottom: ${props => props.isScrolled ? '0' : '20px'};
+  
+  @media (max-width: 768px) {
+    margin-bottom: 0;
+  }
 `;
 
 const Logo = styled(({ isScrolled, ...rest }) => <Link {...rest} />)`
@@ -102,25 +112,40 @@ const MobileMenuButton = styled(({ isScrolled, ...rest }) => <button {...rest} /
   right: 20px;
   top: ${props => props.isScrolled ? '15px' : '30px'};
   transition: all 0.4s ease;
+  color: #000;
   
   @media (max-width: 768px) {
     display: block;
+    top: 50%;
+    transform: translateY(-50%);
   }
 `;
 
-const MobileMenu = styled(motion.div)`
+const MobileMenu = styled.div`
   position: fixed;
-  top: ${props => props.isScrolled ? '60px' : '120px'};
+  top: 60px;
   left: 0;
   right: 0;
   background-color: white;
   padding: 20px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
+  display: none;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   z-index: 999;
-  transition: all 0.4s ease;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  
+  &.visible {
+    display: flex;
+    opacity: 1;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 `;
 
 const MobileNavLink = styled(Link)`
@@ -146,17 +171,21 @@ const Header = () => {
     
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const isMobile = window.innerWidth <= 768;
       
-      // Si on défile vers le bas et que la scroll position est > 100px, on réduit la navbar
+      // Sur mobile, on ne fait rien (pas d'effet de scroll)
+      if (isMobile) {
+        return;
+      }
+      
+      // Sur desktop, effet de scroll normal
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsScrolled(true);
       } 
-      // Si on remonte, on affiche la navbar en grand
       else if (currentScrollY < lastScrollY) {
         setIsScrolled(false);
       }
       
-      // Si on est tout en haut de la page, on s'assure que la navbar est en grand
       if (currentScrollY < 50) {
         setIsScrolled(false);
       }
@@ -167,6 +196,21 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
+  
+  // Effet séparé pour gérer le mode mobile
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setIsScrolled(false);
+      }
+    };
+    
+    // Initialisation
+    handleResize();
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -225,40 +269,35 @@ const Header = () => {
         </MainNav>
       </HeaderContainer>
       
-      {mobileMenuOpen && (
-        <MobileMenu
-          isScrolled={isScrolled}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
+      <MobileMenu 
+        $isScrolled={isScrolled}
+        className={mobileMenuOpen ? 'visible' : ''}
+      >
+        <MobileNavLink 
+          to="/" 
+          onClick={() => handleLinkClick('/')}
         >
-          <MobileNavLink 
-            to="/" 
-            onClick={() => handleLinkClick('/')}
-          >
-            ACCUEIL
-          </MobileNavLink>
-          <MobileNavLink 
-            to="/notre-histoire" 
-            onClick={() => handleLinkClick('/notre-histoire')}
-          >
-            NOTRE HISTOIRE
-          </MobileNavLink>
-          <MobileNavLink 
-            to="/evenementiel" 
-            onClick={() => handleLinkClick('/evenementiel')}
-          >
-            ÉVÈNEMENTIEL
-          </MobileNavLink>
-          <MobileNavLink 
-            to="/realisations" 
-            onClick={() => handleLinkClick('/realisations')}
-          >
-            RÉALISATIONS
-          </MobileNavLink>
-        </MobileMenu>
-      )}
+          ACCUEIL
+        </MobileNavLink>
+        <MobileNavLink 
+          to="/notre-histoire" 
+          onClick={() => handleLinkClick('/notre-histoire')}
+        >
+          NOTRE HISTOIRE
+        </MobileNavLink>
+        <MobileNavLink 
+          to="/evenementiel" 
+          onClick={() => handleLinkClick('/evenementiel')}
+        >
+          ÉVÈNEMENTIEL
+        </MobileNavLink>
+        <MobileNavLink 
+          to="/realisations" 
+          onClick={() => handleLinkClick('/realisations')}
+        >
+          RÉALISATIONS
+        </MobileNavLink>
+      </MobileMenu>
     </>
   );
 };
