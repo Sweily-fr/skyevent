@@ -37,7 +37,7 @@ const ButtonBase = styled(motion.div)`
   overflow: hidden;
   z-index: 1;
   cursor: pointer;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   background-color: transparent;
   font-size: ${props => props.small ? '0.85rem' : '1rem'};
   

@@ -49,8 +49,8 @@ const CarouselTitle = styled.h2`
   font-size: 2.8rem;
   text-align: center;
   margin-bottom: 60px;
-  font-family: 'Playfair Display', serif;
-  font-weight: 300;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
   position: relative;

@@ -74,30 +74,33 @@ const Logo = styled.img`
 `;
 
 const HeroTitle = styled.h1`
-  font-size: 5rem;
-  font-weight: 300; /* Plus léger pour un aspect plus élégant */
+  font-size: 4.5rem;
+  font-weight: 500; /* Poids réduit pour un aspect plus élégant */
   color: white;
   margin-bottom: 20px;
-  font-family: 'Playfair Display', serif;
-  line-height: 1.2;
-  letter-spacing: 4px; /* Espacement des lettres pour un aspect luxueux */
-  text-transform: uppercase; /* Majuscules pour un style LV */
+  font-family: 'Inter', sans-serif;
+  line-height: 1.1;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   
   @media (max-width: 768px) {
-    font-size: 3rem;
+    font-size: 2.8rem;
   }
 `;
 
 const HeroSubtitle = styled.p`
   font-size: 1.5rem;
   color: white;
-  margin-top: 10px;
-  font-weight: 300;
-  letter-spacing: 3px; /* Espacement des lettres pour un aspect luxueux */
-  text-transform: uppercase; /* Majuscules pour un style LV */
+  margin-top: 15px;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   
   @media (max-width: 768px) {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 `;
 
@@ -116,10 +119,13 @@ const ScrollIndicator = styled.div`
 `;
 
 const ScrollText = styled.p`
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin-bottom: 10px;
-  font-weight: 300;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
   letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.9;
 `;
 
 const ScrollLine = styled.div`
@@ -204,27 +210,32 @@ const TextSection = styled(motion.div)`
 `;
 
 const StoryTitle = styled.h1`
-  font-size: 3rem;
-  font-weight: 300; /* Plus léger pour un aspect plus élégant */
+  font-size: 2.8rem;
+  font-weight: 600;
   margin-bottom: 30px;
-  font-family: 'Playfair Display', serif;
-  letter-spacing: 3px; /* Espacement des lettres pour un aspect luxueux */
-  text-transform: uppercase; /* Majuscules pour un style LV */
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: white;
+  line-height: 1.2;
   
   @media (max-width: 768px) {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 `;
 
 const StoryText = styled.p`
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   line-height: 1.8;
-  margin-bottom: 20px;
-  font-weight: 300; /* Plus léger pour un aspect plus élégant */
-  letter-spacing: 1px; /* Léger espacement des lettres */
+  margin-bottom: 25px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.3px;
   
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
   }
 `;
 

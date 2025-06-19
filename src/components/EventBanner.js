@@ -52,8 +52,8 @@ const ContentWrapper = styled.div`
 const Title = styled(motion.h2)`
   font-size: 3.5rem;
   margin: 0 auto 30px;
-  font-family: 'Playfair Display', serif;
-  font-weight: 300;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500; /* Réduit de 700 à 500 pour un rendu plus léger */
   letter-spacing: 3px;
   text-transform: uppercase;
   max-width: 900px;
@@ -91,6 +91,7 @@ const Description = styled(motion.p)`
   max-width: 800px;
   margin: 0 auto 40px;
   line-height: 1.8;
+  font-family: 'Poppins', sans-serif;
   font-weight: 300;
   letter-spacing: 0.5px;
   color: #f0f0f0;

@@ -46,10 +46,11 @@ const realisationsImages = [
 
 const PageContainer = styled.div`
   min-height: 100vh;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   color: #1a1a1a;
-  background-color: #ffffff; /* Fond blanc */
+  background-color: #ffffff;
   overflow-x: hidden;
+  line-height: 1.6;
 `;
 
 const HeroSection = styled.section`
@@ -87,12 +88,13 @@ const HeroSection = styled.section`
 
 const HeroTitle = styled.h1`
   font-size: 3.5rem;
-  font-family: 'Playfair Display', serif;
-  font-weight: 300;
-  letter-spacing: 3px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
   margin-bottom: 20px;
   color: #ffffff;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   
   @media (max-width: 768px) {
     font-size: 2.2rem;
@@ -103,9 +105,11 @@ const HeroDescription = styled.p`
   max-width: 800px;
   margin: 0 auto 30px;
   font-size: 1.2rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
   line-height: 1.8;
-  color: #ffffff;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 `;
 
 const ButtonWrapper = styled.div`
@@ -113,9 +117,11 @@ const ButtonWrapper = styled.div`
   gap: 20px;
   margin-top: 20px;
   
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     flex-direction: column;
     gap: 15px;
+    width: 100%;
+    max-width: 300px;
   }
 `;
 
@@ -128,13 +134,15 @@ const GallerySection = styled.section`
 
 const SectionTitle = styled.h2`
   font-size: 2.5rem;
-  font-weight: 300;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
   margin-bottom: 40px;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   position: relative;
   display: inline-block;
   padding-bottom: 10px;
+  color: #1a1a1a;
   
   &::after {
     content: '';
@@ -144,7 +152,7 @@ const SectionTitle = styled.h2`
     transform: translateX(-50%);
     width: 80px;
     height: 2px;
-    background-color: #1a1a1a;
+    background-color: #d4af37;
   }
 `;
 
@@ -168,10 +176,13 @@ const RealisationCard = styled(motion.div)`
   position: relative;
   aspect-ratio: 1;
   cursor: pointer;
-  transition: all 0.4s ease;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   
   &:hover {
-    transform: scale(1.02);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -181,10 +192,10 @@ const RealisationImage = styled.div`
   background-image: url(${props => props.src});
   background-size: cover;
   background-position: center;
-  transition: transform 0.5s ease;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
   
   ${RealisationCard}:hover & {
-    transform: scale(1.05);
+    transform: scale(1.1);
   }
 `;
 

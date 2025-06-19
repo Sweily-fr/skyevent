@@ -29,8 +29,8 @@ const SectionTitle = styled.h2`
   font-size: 2.8rem;
   text-align: center;
   margin-bottom: 20px;
-  font-family: 'Playfair Display', serif;
-  font-weight: 300;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
   position: relative;
@@ -58,6 +58,7 @@ const SectionSubtitle = styled.p`
   max-width: 700px;
   margin: 0 auto 60px;
   color: #666;
+  font-family: 'Poppins', sans-serif;
   font-weight: 300;
   letter-spacing: 0.5px;
   line-height: 1.8;
@@ -98,6 +99,7 @@ const FormGroup = styled.div`
 `;
 
 const FormLabel = styled.label`
+  font-family: 'Poppins', sans-serif;
   margin-bottom: 10px;
   font-weight: 400;
   font-size: 0.95rem;
@@ -215,7 +217,7 @@ const InfoTitle = styled.h3`
   letter-spacing: 1px;
   color: #1a1a1a;
   text-transform: uppercase;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
 `;
 
 const InfoText = styled.p`
@@ -224,6 +226,7 @@ const InfoText = styled.p`
   line-height: 1.8;
   font-size: 1rem;
   font-weight: 300;
+  font-family: 'Poppins', sans-serif;
   letter-spacing: 0.3px;
   
   a {

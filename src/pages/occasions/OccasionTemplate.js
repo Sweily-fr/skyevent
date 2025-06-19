@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import ContactSection from '../../components/ContactSection';
@@ -20,26 +20,27 @@ const HeroContainer = styled.div`
   background: #000;
 `;
 
-const VideoBackground = styled.video`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  background: #000;
-`;
+// Composants vidéo pour utilisation future
+// const VideoBackground = styled.video`
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   object-fit: cover;
+//   z-index: 1;
+//   background: #000;
+// `;
 
-const VideoContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 1;
-`;
+// const VideoContainer = styled.div`
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   overflow: hidden;
+//   z-index: 1;
+// `;
 
 const Overlay = styled.div`
   position: absolute;
@@ -94,8 +95,13 @@ const HeroContent = styled.div`
 const HeroTitle = styled(motion.h1)`
   font-size: 3.5rem;
   margin-bottom: 20px;
-  font-family: 'Playfair Display', serif;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  color: white;
+  line-height: 1.2;
   
   @media (max-width: 768px) {
     font-size: 2.5rem;
@@ -103,104 +109,97 @@ const HeroTitle = styled(motion.h1)`
 `;
 
 const HeroSubtitle = styled(motion.p)`
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin-bottom: 30px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  line-height: 1.8;
+  max-width: 90%;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  color: white;
+  line-height: 1.2;
   
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 1.8rem;
   }
 `;
 
-const ContentSection = styled.section`
-  padding: 80px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
+// Section de contenu générique
+// const ContentSection = styled.section`
+//   padding: 80px 5%;
+//   max-width: 1400px;
+//   margin: 0 auto;
+//   font-family: 'Poppins', sans-serif;
+//   line-height: 1.8;
+//   color: #444;
+// `;
 
 const SectionTitle = styled.h2`
   font-size: 2.5rem;
+  margin-bottom: 30px;
   text-align: center;
-  margin-bottom: 50px;
-  font-family: 'Playfair Display', serif;
-`;
-
-const InfoBlocks = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  margin-bottom: 60px;
-  
-  @media (max-width: 992px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const InfoBlock = styled.div`
-  background-color: #f8f8f8;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-const BlockTitle = styled.h3`
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  font-family: 'Playfair Display', serif;
-`;
-
-const BlockText = styled.p`
-  font-size: 1rem;
-  color: #666;
-  line-height: 1.6;
-`;
-
-
-
-const OfferSection = styled.section`
-  padding: 100px 0;
-  background-color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  color: #1a1a1a;
   position: relative;
-  overflow: hidden;
-  
-  @media (max-width: 768px) {
-    padding: 60px 0;
-  }
-`;
-
-const OfferSectionTitle = styled.h2`
-  font-size: 2.8rem;
-  text-align: center;
-  margin-bottom: 60px;
-  font-family: 'Playfair Display', serif;
-  font-weight: 300;
-  letter-spacing: 2px;
+  padding-bottom: 15px;
   text-transform: uppercase;
-  position: relative;
-  padding-bottom: 20px;
+  letter-spacing: 1px;
   
-  &:after {
+  &::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 80px;
-    height: 1px;
+    height: 2px;
     background-color: #d4af37;
   }
   
   @media (max-width: 768px) {
     font-size: 2.2rem;
-    padding: 0 20px 20px;
+  }
+`;
+
+// const InfoBlocks = styled.div`
+//   display: grid;
+//   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+//   gap: 30px;
+//   margin: 50px 0;
+// `;
+
+// const BlockTitle = styled.h3`
+//   font-size: 1.5rem;
+//   margin-bottom: 15px;
+//   color: #1a1a1a;
+//   font-family: 'Inter', sans-serif;
+//   font-weight: 600;
+//   text-transform: uppercase;
+//   letter-spacing: 0.5px;
+//   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+//   color: white;
+// `;
+
+// const BlockText = styled.p`
+//   font-size: 1rem;
+//   color: #666;
+//   line-height: 1.8;
+//   margin-bottom: 20px;
+//   font-weight: 400;
+//   font-family: 'Poppins', sans-serif;
+// `;
+
+const OfferSection = styled.section`
+  padding: 80px 5%;
+  background-color: #f9f9f9;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+  
+  @media (max-width: 768px) {
+    padding: 60px 0;
   }
 `;
 
@@ -219,28 +218,18 @@ const OfferGrid = styled.div`
   }
 `;
 
-const OfferItem = styled.div`
-  position: relative;
+const OfferCard = styled(motion.div)`
+  background: white;
+  border-radius: 8px;
   overflow: hidden;
-  height: 600px;
-  cursor: pointer;
-  transition: all 0.5s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid #f0f0f0;
   
   &:hover {
-    transform: translateY(-10px);
-    
-    .offer-overlay {
-      opacity: 0.9;
-    }
-    
-    .offer-content {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
-  @media (max-width: 992px) {
-    height: 500px;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-color: #e0e0e0;
   }
 `;
 
@@ -278,29 +267,98 @@ const OfferContent = styled.div`
 `;
 
 const OfferTitle = styled.h3`
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+  color: #1a1a1a;
   margin-bottom: 15px;
-  font-weight: 400;
-  letter-spacing: 1px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
   text-transform: uppercase;
-  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.5px;
 `;
 
 const OfferDescription = styled.p`
-  font-size: 1rem;
-  line-height: 1.6;
+  color: #444;
+  line-height: 1.8;
   margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
   font-weight: 300;
+  color: #444;
+  font-family: 'Poppins', sans-serif;
 `;
 
+const OfferItem = styled(OfferCard)`
+  position: relative;
+  overflow: hidden;
+  height: 600px;
+  cursor: pointer;
+  padding: 0;
+  
+  &:hover {
+    transform: translateY(-5px);
+    
+    .offer-overlay {
+      opacity: 0.9;
+    }
+    
+    .offer-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+`;
+
+const OfferSectionTitle = styled(SectionTitle)`
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  color: #1a1a1a;
+  
+  &::after {
+    bottom: -15px;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 2.2rem;
+    padding: 0 20px 20px;
+  }
+`;
+
+const CarouselTitle = styled.h2`
+  font-family: 'Inter', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #1a1a1a;
+  margin-bottom: 50px;
+  position: relative;
+  padding-bottom: 15px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background-color: #d4af37;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+`;
 
 const CarouselSection = styled.section`
-  padding: 100px 0;
+  padding: 100px 5%;
   background-color: #ffffff;
   overflow: hidden;
   position: relative;
   width: 100%;
-  max-width: 100vw;
+  max-width: 1400px;
   margin: 0 auto;
   
   &:before {
@@ -325,34 +383,6 @@ const CarouselSection = styled.section`
   
   @media (max-width: 768px) {
     padding: 80px 0;
-  }
-`;
-
-const CarouselTitle = styled.h2`
-  font-size: 2.8rem;
-  text-align: center;
-  margin-bottom: 60px;
-  font-family: 'Playfair Display', serif;
-  font-weight: 300;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  position: relative;
-  padding-bottom: 20px;
-  
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 1px;
-    background-color: #d4af37;
-  }
-  
-  @media (max-width: 768px) {
-    font-size: 2.2rem;
-    padding: 0 20px 20px;
   }
 `;
 

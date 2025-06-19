@@ -31,6 +31,7 @@ const FooterSection = styled.div`
 const FooterTitle = styled.h3`
   font-size: 18px;
   margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
   font-weight: 600;
 `;
 

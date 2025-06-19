@@ -35,8 +35,8 @@ const SectionTitle = styled.h2`
   font-size: 2.8rem;
   text-align: center;
   margin-bottom: 20px;
-  font-family: 'Playfair Display', serif;
-  font-weight: 300;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
   margin-bottom: 40px;
@@ -55,6 +55,7 @@ const SectionSubtitle = styled.p`
   font-weight: 300;
   letter-spacing: 0.5px;
   line-height: 1.8;
+  font-family: 'Poppins', sans-serif;
   
   @media (max-width: 768px) {
     padding: 0 20px;
@@ -139,8 +140,8 @@ const RealisationTitle = styled.h3`
   color: white;
   font-size: 1.5rem;
   margin: 0;
-  font-family: 'Playfair Display', serif;
-  font-weight: 300;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
   transition: all 0.3s ease;
@@ -148,7 +149,6 @@ const RealisationTitle = styled.h3`
   ${RealisationCard}:hover & {
     transform: translateY(-5px);
   }
-  font-family: 'Playfair Display', serif;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 `;
 

@@ -21,9 +21,10 @@ const eventImages = {
 
 const PageContainer = styled.div`
   min-height: 100vh;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   color: #1a1a1a;
-  background-color: #ffffff; /* Fond blanc */
+  background-color: #ffffff;
+  line-height: 1.6;
 `;
 
 const HeroSection = styled.section`
@@ -43,9 +44,9 @@ const HeroSection = styled.section`
 
 const HeroTitle = styled.h1`
   font-size: 3.5rem;
-  font-family: 'Playfair Display', serif;
-  font-weight: 300;
-  letter-spacing: 4px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 20px;
   
@@ -54,14 +55,16 @@ const HeroTitle = styled.h1`
   }`;
 
 const HeroSubtitle = styled.p`
-  font-size: 1.5rem;
-  font-weight: 300;
-  margin-bottom: 30px;
+  font-size: 1.3rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  margin: 0 auto 30px;
   max-width: 800px;
-  line-height: 1.6;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
   
   @media (max-width: 768px) {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     padding: 0 20px;
   }
 `;
@@ -91,12 +94,13 @@ const Section = styled.section`
 const SectionTitle = styled.h2`
   font-size: 2.5rem;
   margin-bottom: 30px;
-  font-family: 'Playfair Display', serif;
-  font-weight: 300;
-  letter-spacing: 3px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
   text-transform: uppercase;
   text-align: ${props => props.center ? 'center' : 'left'};
   position: relative;
+  color: #1a1a1a;
   
   &:after {
     content: '';
@@ -111,12 +115,14 @@ const SectionTitle = styled.h2`
 `;
 
 const SectionSubtitle = styled.p`
-  font-size: 1.2rem;
+  font-size: 1.15rem;
+  font-family: 'Poppins', sans-serif;
   max-width: 700px;
   margin: ${props => props.center ? '0 auto 60px' : '0 0 60px'};
-  color: #666;
+  color: #444;
   text-align: ${props => props.center ? 'center' : 'left'};
-  font-weight: 300;
+  font-weight: 400;
+  line-height: 1.7;
   letter-spacing: 1px;
   line-height: 1.8;
 `;
@@ -251,32 +257,37 @@ const ServiceContent = styled.div`
 `;
 
 const ServiceTitle = styled.h3`
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   margin-bottom: 15px;
-  font-family: 'Playfair Display', serif;
-  font-weight: 300;
-  letter-spacing: 2px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  letter-spacing: 1px;
   text-transform: uppercase;
+  color: #1a1a1a;
 `;
 
 const ServiceDescription = styled.p`
-  color: #666;
+  color: #444;
   margin-bottom: 25px;
-  font-weight: 300;
-  letter-spacing: 0.5px;
-  line-height: 1.6;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  line-height: 1.7;
+  font-size: 0.95rem;
 `;
 
 const ServiceLink = styled(Link)`
   display: inline-block;
   color: #1a1a1a;
-  font-weight: 300;
-  letter-spacing: 1.5px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  letter-spacing: 1px;
   text-transform: uppercase;
   text-decoration: none;
   position: relative;
   padding-bottom: 5px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  transition: color 0.3s ease;
   
   &:after {
     content: '';
@@ -359,11 +370,10 @@ const EvenementielPage = () => {
     <PageContainer>
       <HeroSection>
         <HeroTitle>Événementiel</HeroTitle>
-        <HeroSubtitle>Créons ensemble des moments inoubliables</HeroSubtitle>
-        <p style={{ maxWidth: '800px', margin: '0 auto 30px', fontSize: '1.1rem', lineHeight: '1.6' }}>
+        <HeroSubtitle>
           Découvrez nos services sur mesure pour des événements exceptionnels. 
           De l'idée à la réalisation, nous nous occupons de tout pour faire de votre événement un succès.
-        </p>
+        </HeroSubtitle>
         <ButtonContainer>
           <StandardButton to="/realisations" darkBackground={true}>
             Voir nos réalisations

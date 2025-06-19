@@ -15,7 +15,7 @@ const parallaxImage = '/images/DSC05297.jpg';
 
 const PageContainer = styled.div`
   min-height: 100vh;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
   color: #1a1a1a;
   background-color: #ffffff; /* Fond blanc */
 `;
@@ -62,7 +62,8 @@ const OverlayContent = styled.div`
 
 const OverlayTitle = styled.h2`
   font-size: 3.5rem;
-  font-weight: 300;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
   margin-bottom: 20px;
   letter-spacing: 4px;
   text-transform: uppercase;
@@ -74,7 +75,8 @@ const OverlayTitle = styled.h2`
 
 const OverlayText = styled.p`
   font-size: 1.5rem;
-  font-weight: 300;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
   letter-spacing: 2px;
   
   @media (max-width: 768px) {
@@ -98,8 +100,8 @@ const Section = styled.section`
 const SectionTitle = styled.h2`
   font-size: 2.8rem;
   margin-bottom: 30px;
-  font-family: 'Playfair Display', serif;
-  font-weight: 300;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
   text-align: ${props => props.center ? 'center' : 'left'};
   letter-spacing: 2px;
   text-transform: uppercase;
