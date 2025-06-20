@@ -176,26 +176,55 @@ const RealisationCard = styled(motion.div)`
   position: relative;
   aspect-ratio: 1;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  will-change: transform, opacity;
   
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 2;
   }
 `;
 
-const RealisationImage = styled.div`
+const RealisationImage = styled(motion.div)`
   width: 100%;
   height: 100%;
   background-image: url(${props => props.src});
   background-size: cover;
   background-position: center;
-  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: transform;
   
   ${RealisationCard}:hover & {
-    transform: scale(1.1);
+    transform: scale(1.05);
+  }
+`;
+
+const ImagePlaceholder = styled(motion.div)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #f8f8f8;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, #f8f8f8 0px, #f0f0f0 50%, #f8f8f8 100%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite linear;
+  }
+  
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
   }
 `;
 
@@ -230,6 +259,12 @@ const CloseButton = styled.button`
 `;
 
 const RealisationsPage = () => {
+  const [visibleImages, setVisibleImages] = useState(9);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loadedImages, setLoadedImages] = useState({});
+  const gridRef = useRef(null);
+  
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -237,12 +272,19 @@ const RealisationsPage = () => {
       behavior: 'auto'
     });
     document.title = 'Nos réalisations - SkyEvent';
+    
+    // Préchargement des images
+    realisationsImages.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        setLoadedImages(prev => ({
+          ...prev,
+          [src]: true
+        }));
+      };
+    });
   }, []);
-  
-  const [visibleImages, setVisibleImages] = useState(9); // Nombre d'images initialement visibles
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const gridRef = useRef(null);
   
   // Fonction pour charger plus d'images
   const loadMoreImages = () => {
@@ -287,12 +329,37 @@ const RealisationsPage = () => {
             <RealisationCard
               key={index}
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index % 6 * 0.1 }}
-              viewport={{ once: true, margin: "-100px" }}
+              animate={{
+                opacity: loadedImages[imageSrc] ? 1 : 0,
+                y: loadedImages[imageSrc] ? 0 : 30
+              }}
+              transition={{
+                opacity: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
+                y: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
+                delay: index % 6 * 0.05
+              }}
+              viewport={{ once: true, margin: "-100px 0px -100px 0px" }}
               onClick={() => openImageModal(imageSrc)}
             >
-              <RealisationImage src={imageSrc} />
+              <RealisationImage 
+                src={imageSrc}
+                initial={false}
+                animate={{
+                  opacity: loadedImages[imageSrc] ? 1 : 0,
+                  scale: loadedImages[imageSrc] ? 1 : 0.95
+                }}
+                transition={{
+                  opacity: { duration: 0.3 },
+                  scale: { duration: 0.5, ease: [0.4, 0, 0.2, 1] }
+                }}
+              />
+              {!loadedImages[imageSrc] && (
+                <ImagePlaceholder 
+                  initial={{ opacity: 1 }}
+                  animate={{ opacity: loadedImages[imageSrc] ? 0 : 1 }}
+                  transition={{ duration: 0.2 }}
+                />
+              )}
             </RealisationCard>
           ))}
         </RealisationsGrid>

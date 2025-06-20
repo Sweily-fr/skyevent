@@ -87,13 +87,13 @@ const OverlayText = styled.p`
 
 
 const Section = styled.section`
-  padding: 120px 40px;
+  padding: 60px 40px;
   max-width: 1400px;
   margin: 0 auto;
   position: relative;
   
   @media (max-width: 768px) {
-    padding: 80px 20px;
+    padding: 40px 20px;
   }
 `;
 
@@ -137,14 +137,14 @@ const SectionText = styled.p`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: ${props => props.columns || '1fr 1fr'};
-  gap: 80px;
+  gap: 40px;
   align-items: center;
-  margin: 80px 0;
+  margin: 40px 0;
   
   @media (max-width: 992px) {
     grid-template-columns: 1fr;
-    gap: 60px;
-    margin: 60px 0;
+    gap: 30px;
+    margin: 30px 0;
   }
   
   &.savoir-faire-grid {
@@ -159,6 +159,17 @@ const Grid = styled.div`
       .image-content {
         order: 2;
         margin-top: 30px;
+      }
+    }
+    
+    /* Ordre pour les écrans plus grands */
+    @media (min-width: 769px) {
+      .text-content {
+        order: 2;
+      }
+      .image-content {
+        order: 1;
+        margin-top: 0;
       }
     }
   }
