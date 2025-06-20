@@ -146,6 +146,22 @@ const Grid = styled.div`
     gap: 60px;
     margin: 60px 0;
   }
+  
+  &.savoir-faire-grid {
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      
+      .text-content {
+        order: 1;
+      }
+      
+      .image-content {
+        order: 2;
+        margin-top: 30px;
+      }
+    }
+  }
 `;
 
 const ImageContainer = styled(motion.div)`
@@ -264,16 +280,8 @@ const NotrHistoirePage = () => {
       </Section>
       
       <Section>
-        <Grid>
-          <ImageContainer
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            <StyledImage src={chefImage} alt="Notre Chef Cuistot" />
-          </ImageContainer>
-          <div>
+        <Grid className="savoir-faire-grid">
+          <div className="text-content">
             <SectionTitle>Le Savoir-Faire</SectionTitle>
             <SectionText>
               Chez SkyEvent, nos sushis sont l'œuvre de notre chef, un passionné de gastronomie japonaise. 
@@ -288,6 +296,15 @@ const NotrHistoirePage = () => {
               Laissez-vous tenter par l'univers savoureux de notre chef, où chaque détail compte.
             </SectionText>
           </div>
+          <ImageContainer
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="image-content"
+          >
+            <StyledImage src={chefImage} alt="Notre Chef Cuistot" />
+          </ImageContainer>
         </Grid>
       </Section>
       
