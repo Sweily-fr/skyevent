@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import StandardButton from './StandardButton';
 
 // Images des réalisations
@@ -81,26 +80,34 @@ const RealisationCard = styled(motion.div)`
   overflow: hidden;
   aspect-ratio: 1;
   border: 1px solid #f0f0f0;
-  transition: all 0.4s ease;
   
-  &:before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: -10px;
-    bottom: -10px;
-    border: 1px solid #d4af37;
-    z-index: -1;
-    opacity: 0;
-    transition: all 0.4s ease;
-  }
-  
-  &:hover {
-    transform: translateY(-5px);
+  /* Désactiver les animations sur mobile */
+  @media (min-width: 769px) {
+    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.4s ease;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform;
     
     &:before {
-      opacity: 1;
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: -10px;
+      bottom: -10px;
+      border: 1px solid #d4af37;
+      z-index: -1;
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      
+      &:before {
+        opacity: 1;
+      }
     }
   }
 `;
@@ -111,10 +118,16 @@ const RealisationImage = styled.div`
   background-image: url(${props => props.src});
   background-size: cover;
   background-position: center;
-  transition: transform 0.5s ease;
   
-  ${RealisationCard}:hover & {
-    transform: scale(1.1);
+  /* Désactiver le zoom sur mobile */
+  @media (min-width: 769px) {
+    transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transform-origin: center center;
+    will-change: transform;
+    
+    ${RealisationCard}:hover & {
+      transform: scale(1.1);
+    }
   }
 `;
 
@@ -132,6 +145,10 @@ const RealisationOverlay = styled.div`
   transition: opacity 0.3s ease;
   
   ${RealisationCard}:hover & {
+    opacity: 1;
+  }
+  
+  @media (max-width: 768px) {
     opacity: 1;
   }
 `;
@@ -159,7 +176,7 @@ const ButtonContainer = styled.div`
   margin-top: 40px;
 `;
 
-const RealisationsSection = () => {
+const RealisationsGridComponent = ({ limit }) => {
   const realisations = [
     {
       id: 'realisation1',
@@ -210,10 +227,14 @@ const RealisationsSection = () => {
         {realisations.map((realisation, index) => (
           <RealisationCard
             key={realisation.id}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true, margin: "-100px" }}
+            transition={{
+              duration: 0.3,
+              delay: Math.min(index * 0.05, 0.3), // Délai limité pour éviter les problèmes sur iOS
+              ease: "easeOut"
+            }}
+            viewport={{ once: true, margin: "-50px" }}
           >
             <RealisationImage src={realisation.image} />
             <RealisationOverlay>
@@ -232,4 +253,4 @@ const RealisationsSection = () => {
   );
 };
 
-export default RealisationsSection;
+export default RealisationsGridComponent;

@@ -61,12 +61,15 @@ const HeroContent = styled.div`
   bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
+  -webkit-transform: translateX(-50%); /* Compatibilité iOS */
   max-width: 800px;
   text-align: center;
   padding: 30px;
   z-index: 3;
   background: transparent;
   width: 90%;
+  -webkit-backface-visibility: hidden; /* Prévenir le scintillement sur iOS */
+  -webkit-transform-style: preserve-3d; /* Améliorer le rendu sur iOS */
   
   @media (max-width: 992px) {
     max-width: 90%;

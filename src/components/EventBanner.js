@@ -3,11 +3,8 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import StandardButton from './StandardButton';
 
-const BannerContainer = styled.section.attrs(props => ({
-  style: {
-    backgroundImage: props.backgroundImage ? `url(${props.backgroundImage})` : 'none',
-  },
-}))`
+const BannerContainer = styled.section`
+  background-image: ${props => props.backgroundImage ? `url(${props.backgroundImage})` : 'none'};
   background-color: #1a1a1a;
   color: white;
   padding: 100px 20px;

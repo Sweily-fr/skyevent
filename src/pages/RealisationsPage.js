@@ -191,10 +191,25 @@ const RealisationImage = styled(motion.div)`
   background-image: url(${props => props.src});
   background-size: cover;
   background-position: center;
-  will-change: transform;
   
-  ${RealisationCard}:hover & {
-    transform: scale(1.05);
+  /* Désactiver les transitions sur iOS pour éviter les sauts */
+  @media not all and (-webkit-min-device-pixel-ratio:0) {
+    transition: transform 0.3s ease;
+    will-change: transform;
+  }
+  
+  /* Désactiver les animations sur iOS */
+  @supports (-webkit-touch-callout: none) {
+    ${RealisationCard}:hover & {
+      /* Pas d'animation sur iOS */
+    }
+  }
+  
+  /* Activer les animations sur les autres navigateurs */
+  @supports not (-webkit-touch-callout: none) {
+    ${RealisationCard}:hover & {
+      transform: scale(1.05);
+    }
   }
 `;
 

@@ -53,38 +53,40 @@ const HomePage = () => {
     document.title = 'SkyEvent - Traiteur Événementiel Sur Mesure';
   }, []);
 
+  // Pas besoin de créer des versions animées des composants
+
   return (
     <HomeContainer>
-      <motion.div
+      <motion.main
         initial="hidden"
         animate={controls}
         variants={staggerContainer}
         ref={ref}
       >
-        <motion.div variants={fadeIn}>
+        <motion.section variants={fadeIn}>
           <HeroSection />
-        </motion.div>
+        </motion.section>
         
-        <motion.div variants={fadeIn}>
+        <motion.section variants={fadeIn}>
           <EventTypesGrid />
-        </motion.div>
+        </motion.section>
         
-        <motion.div variants={fadeIn}>
+        <motion.section variants={fadeIn}>
           <TraiteurBanner />
-        </motion.div>
+        </motion.section>
         
-        <motion.div variants={fadeIn}>
+        <motion.section variants={fadeIn}>
           <RealisationsGrid />
-        </motion.div>
+        </motion.section>
         
-        <motion.div variants={fadeIn}>
+        <motion.section variants={fadeIn}>
           <ImageCarousel />
-        </motion.div>
+        </motion.section>
         
-        <motion.div variants={fadeIn}>
+        <motion.section variants={fadeIn}>
           <ContactSection />
-        </motion.div>
-      </motion.div>
+        </motion.section>
+      </motion.main>
     </HomeContainer>
   );
 };

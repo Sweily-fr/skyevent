@@ -137,15 +137,29 @@ const CarouselDot = styled.button`
   background-color: ${props => props.active ? '#d4af37' : '#e0e0e0'};
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
   margin: 0 4px;
   padding: 0;
   outline: none;
   flex-shrink: 0;
   
-  &:hover {
-    background-color: ${props => props.active ? '#d4af37' : '#c0c0c0'};
-    transform: scale(1.2);
+  /* Désactiver les transitions sur iOS pour éviter les sauts */
+  @media not all and (-webkit-min-device-pixel-ratio:0) {
+    transition: all 0.3s ease;
+  }
+  
+  /* Désactiver les animations sur iOS */
+  @supports (-webkit-touch-callout: none) {
+    &:hover {
+      background-color: ${props => props.active ? '#d4af37' : '#c0c0c0'};
+    }
+  }
+  
+  /* Activer les animations sur les autres navigateurs */
+  @supports not (-webkit-touch-callout: none) {
+    &:hover {
+      background-color: ${props => props.active ? '#d4af37' : '#c0c0c0'};
+      transform: scale(1.2);
+    }
   }
 `;
 

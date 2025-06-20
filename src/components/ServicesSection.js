@@ -45,14 +45,29 @@ const ServicesGrid = styled.div`
 `;
 
 const ServiceCard = styled(motion.div)`
-  border-radius: 10px;
+  background: white;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
   
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  /* Désactiver les transitions sur iOS pour éviter les sauts */
+  @media not all and (-webkit-min-device-pixel-ratio:0) {
+    transition: all 0.3s ease;
+  }
+  
+  /* Désactiver les animations sur iOS */
+  @supports (-webkit-touch-callout: none) {
+    &:hover {
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+  }
+  
+  /* Activer les animations sur les autres navigateurs */
+  @supports not (-webkit-touch-callout: none) {
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
   }
 `;
 

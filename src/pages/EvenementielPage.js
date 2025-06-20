@@ -229,11 +229,23 @@ const ServiceCard = styled(motion.div)`
     transition: all 0.4s ease;
   }
   
-  &:hover {
-    transform: translateY(-5px);
-    
-    &:before {
-      opacity: 1;
+  /* Désactiver les animations sur iOS */
+  @supports (-webkit-touch-callout: none) {
+    &:hover {
+      &:before {
+        opacity: 1;
+      }
+    }
+  }
+  
+  /* Activer les animations sur les autres navigateurs */
+  @supports not (-webkit-touch-callout: none) {
+    &:hover {
+      transform: translateY(-5px);
+      
+      &:before {
+        opacity: 1;
+      }
     }
   }
 `;
@@ -244,10 +256,24 @@ const ServiceImage = styled.div`
   background-size: cover;
   background-position: center;
   filter: brightness(0.95);
-  transition: all 0.5s ease;
   
-  ${ServiceCard}:hover & {
-    filter: brightness(1);
+  /* Désactiver les transitions sur iOS pour éviter les sauts */
+  @media not all and (-webkit-min-device-pixel-ratio:0) {
+    transition: all 0.5s ease;
+  }
+  
+  /* Désactiver les animations sur iOS */
+  @supports (-webkit-touch-callout: none) {
+    ${ServiceCard}:hover & {
+      filter: brightness(1);
+    }
+  }
+  
+  /* Activer les animations sur les autres navigateurs */
+  @supports not (-webkit-touch-callout: none) {
+    ${ServiceCard}:hover & {
+      filter: brightness(1);
+    }
   }
 `;
 

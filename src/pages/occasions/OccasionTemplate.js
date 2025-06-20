@@ -443,11 +443,25 @@ const CarouselDot = styled.button`
   background-color: ${props => props.active ? '#d4af37' : '#e0e0e0'};
   cursor: pointer;
   padding: 0;
-  transition: all 0.3s ease;
   
-  &:hover {
-    transform: scale(1.2);
-    background-color: #d4af37;
+  /* Désactiver les transitions sur iOS pour éviter les sauts */
+  @media not all and (-webkit-min-device-pixel-ratio:0) {
+    transition: all 0.3s ease;
+  }
+  
+  /* Désactiver les animations sur iOS */
+  @supports (-webkit-touch-callout: none) {
+    &:hover {
+      background-color: #d4af37;
+    }
+  }
+  
+  /* Activer les animations sur les autres navigateurs */
+  @supports not (-webkit-touch-callout: none) {
+    &:hover {
+      transform: scale(1.2);
+      background-color: #d4af37;
+    }
   }
 `;
 
@@ -754,7 +768,7 @@ const OccasionTemplate = ({
               opacity: { duration: 0.2 }
             }}
           >
-            <CarouselImage style={{ backgroundImage: `url(${carouselImages[currentIndex]})` }} />
+            <CarouselImage style={{ background: `url(${carouselImages[currentIndex]}) center/cover no-repeat` }} />
           </CarouselSlide>
           
           <CarouselArrow className="prev" onClick={prevSlide}>

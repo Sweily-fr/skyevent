@@ -97,27 +97,35 @@ const EventCard = styled(motion.div)`
   overflow: hidden;
   aspect-ratio: 1;
   border: 1px solid #f0f0f0;
-  transition: all 0.4s ease;
   cursor: pointer;
   
-  &:before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: -10px;
-    bottom: -10px;
-    border: 1px solid #d4af37;
-    z-index: -1;
-    opacity: 0;
-    transition: all 0.4s ease;
-  }
-  
-  &:hover {
-    transform: translateY(-5px);
+  /* Désactiver les animations sur mobile */
+  @media (min-width: 769px) {
+    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.4s ease;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform;
     
     &:before {
-      opacity: 1;
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: -10px;
+      bottom: -10px;
+      border: 1px solid #d4af37;
+      z-index: -1;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      
+      &:before {
+        opacity: 1;
+      }
     }
   }
 `;
@@ -125,14 +133,19 @@ const EventCard = styled(motion.div)`
 const EventImage = styled.div`
   width: 100%;
   height: 100%;
-  background-image: ${props => `url(${props.src})`};
+  background-image: url(${props => props.src});
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  transition: transform 0.5s ease;
   
-  ${EventCard}:hover & {
-    transform: scale(1.1);
+  /* Désactiver le zoom sur mobile */
+  @media (min-width: 769px) {
+    transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transform-origin: center center;
+    will-change: transform;
+    
+    ${EventCard}:hover & {
+      transform: scale(1.1);
+    }
   }
 `;
 
@@ -146,6 +159,16 @@ const EventOverlay = styled.div`
   display: flex;
   align-items: flex-end;
   padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  
+  ${EventCard}:hover & {
+    opacity: 1;
+  }
+  
+  @media (max-width: 768px) {
+    opacity: 1;
+  }
 `;
 
 const EventTitle = styled.h3`
@@ -157,10 +180,18 @@ const EventTitle = styled.h3`
   letter-spacing: 2px;
   text-transform: uppercase;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s ease;
   
-  ${EventCard}:hover & {
-    transform: translateY(-5px);
+  @media (min-width: 769px) {
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+    
+    ${EventCard}:hover & {
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    transform: translateY(0);
   }
 `;
 
