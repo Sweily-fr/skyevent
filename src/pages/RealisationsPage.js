@@ -180,8 +180,11 @@ const RealisationCard = styled(motion.div)`
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   will-change: transform, opacity;
   
-  &:hover {
-    z-index: 2;
+  /* Désactiver le z-index sur mobile */
+  @media (min-width: 769px) {
+    &:hover {
+      z-index: 2;
+    }
   }
 `;
 
@@ -192,21 +195,11 @@ const RealisationImage = styled(motion.div)`
   background-size: cover;
   background-position: center;
   
-  /* Désactiver les transitions sur iOS pour éviter les sauts */
-  @media not all and (-webkit-min-device-pixel-ratio:0) {
-    transition: transform 0.3s ease;
+  /* Activer le zoom uniquement sur desktop */
+  @media (min-width: 769px) {
+    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
     will-change: transform;
-  }
-  
-  /* Désactiver les animations sur iOS */
-  @supports (-webkit-touch-callout: none) {
-    ${RealisationCard}:hover & {
-      /* Pas d'animation sur iOS */
-    }
-  }
-  
-  /* Activer les animations sur les autres navigateurs */
-  @supports not (-webkit-touch-callout: none) {
+    
     ${RealisationCard}:hover & {
       transform: scale(1.05);
     }
@@ -361,11 +354,20 @@ const RealisationsPage = () => {
                 initial={false}
                 animate={{
                   opacity: loadedImages[imageSrc] ? 1 : 0,
-                  scale: loadedImages[imageSrc] ? 1 : 0.95
+                  scale: loadedImages[imageSrc] ? 1 : 0.97
                 }}
                 transition={{
                   opacity: { duration: 0.3 },
-                  scale: { duration: 0.5, ease: [0.4, 0, 0.2, 1] }
+                  scale: { 
+                    duration: 0.4, 
+                    ease: [0.4, 0, 0.2, 1],
+                    delay: window.innerWidth < 769 ? 0 : 0.1
+                  }
+                }}
+                style={{
+                  transformOrigin: 'center center',
+                  transformStyle: 'preserve-3d',
+                  backfaceVisibility: 'hidden'
                 }}
               />
               {!loadedImages[imageSrc] && (

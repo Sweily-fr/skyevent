@@ -82,6 +82,9 @@ const CarouselWrapper = styled.div`
   padding: 0 20px;
   box-sizing: border-box;
   overflow: hidden;
+  perspective: 1000px; /* Ajout d'une perspective pour les animations 3D */
+  -webkit-backface-visibility: hidden; /* Empêche les effets de scintillement sur iOS */
+  -webkit-transform-style: preserve-3d; /* Optimisation pour les animations */
   
   @media (max-width: 1200px) {
     height: 500px;
@@ -107,10 +110,18 @@ const CarouselSlide = styled(motion.div)`
   overflow: hidden;
   border: 1px solid #f0f0f0;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
-  transition: all 0.4s ease;
+  will-change: transform, opacity; /* Optimisation des performances */
+  backface-visibility: hidden; /* Empêche les effets de scintillement */
+  -webkit-backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+  transform: translateZ(0); /* Force l'accélération matérielle */
+  -webkit-transform: translateZ(0);
   
-  &:hover {
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  /* Désactiver les animations au survol sur mobile */
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    }
   }
 `;
 
@@ -120,6 +131,12 @@ const CarouselImage = styled.div`
   background-image: url(${props => props.src});
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  will-change: transform; /* Optimisation des performances */
+  transform: translateZ(0); /* Force l'accélération matérielle */
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 `;
 
 const CarouselControls = styled.div`
@@ -163,11 +180,17 @@ const CarouselDot = styled.button`
   }
 `;
 
+// Détection de Safari
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
 const CarouselArrow = styled.button`
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
+  transform: translateY(-50%) translateZ(0);
+  -webkit-transform: translateY(-50%) translateZ(0);
+  z-index: 1000;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
   background-color: rgba(255, 255, 255, 0.9);
   border: 1px solid #f0f0f0;
   width: 50px;
@@ -185,10 +208,21 @@ const CarouselArrow = styled.button`
   margin: 0 20px;
   
   &:hover {
-    background-color: #d4af37;
+    background-color: #d4af37 !important;
     color: white;
-    border-color: #d4af37;
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    border-color: #d4af37 !important;
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3) !important;
+    transform: translateY(-50%) scale(1.1) translateZ(0);
+    -webkit-transform: translateY(-50%) scale(1.1) translateZ(0);
+  }
+  
+  /* Styles spécifiques pour le mode tactile sur iOS */
+  @media (hover: none) and (pointer: coarse) {
+    &:active {
+      background-color: #d4af37 !important;
+      transform: translateY(-50%) scale(0.95) translateZ(0);
+      -webkit-transform: translateY(-50%) scale(0.95) translateZ(0);
+    }
   }
   
   &.prev {
@@ -209,18 +243,30 @@ const CarouselArrow = styled.button`
 const slideVariants = {
   enter: (direction) => {
     return {
-      x: direction > 0 ? '100%' : '-100%',
-      opacity: 0
+      x: direction > 0 ? '101%' : '-101%', // 101% pour éviter les bordures visibles
+      opacity: 0,
+      transition: {
+        x: { type: 'spring', stiffness: 300, damping: 35 },
+        opacity: { duration: 0.1 }
+      }
     };
   },
   center: {
     x: 0,
-    opacity: 1
+    opacity: 1,
+    transition: {
+      x: { type: 'spring', stiffness: 300, damping: 35 },
+      opacity: { duration: 0.1 }
+    }
   },
   exit: (direction) => {
     return {
-      x: direction < 0 ? '100%' : '-100%',
-      opacity: 0
+      x: direction < 0 ? '101%' : '-101%',
+      opacity: 0,
+      transition: {
+        x: { type: 'spring', stiffness: 300, damping: 35 },
+        opacity: { duration: 0.1 }
+      }
     };
   }
 };
@@ -229,7 +275,19 @@ const ImageCarousel = () => {
   const [[currentIndex, direction], setCurrentIndex] = useState([0, 0]);
   const [autoplay, setAutoplay] = useState(true);
 
-  const nextSlide = () => {
+  const nextSlide = (e) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      // Force le reflow pour Safari
+      if (isSafari) {
+        const carousel = document.querySelector('.carousel-wrapper');
+        if (carousel) carousel.style.overflow = 'hidden';
+        setTimeout(() => {
+          if (carousel) carousel.style.overflow = '';
+        }, 10);
+      }
+    }
     setCurrentIndex(prev => {
       const newDirection = 1;
       const newIndex = (prev[0] + 1) % carouselImages.length;
@@ -237,13 +295,39 @@ const ImageCarousel = () => {
     });
   };
 
-  const prevSlide = () => {
+  const prevSlide = (e) => {
+    if (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      // Force le reflow pour Safari
+      if (isSafari) {
+        const carousel = document.querySelector('.carousel-wrapper');
+        if (carousel) carousel.style.overflow = 'hidden';
+        setTimeout(() => {
+          if (carousel) carousel.style.overflow = '';
+        }, 10);
+      }
+    }
     setCurrentIndex(prev => {
       const newDirection = -1;
       const newIndex = (prev[0] - 1 + carouselImages.length) % carouselImages.length;
       return [newIndex, newDirection];
     });
   };
+  
+  // Gestion des touches du clavier
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowRight') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const goToSlide = (index) => {
     setCurrentIndex(prev => {
@@ -267,8 +351,16 @@ const ImageCarousel = () => {
     <CarouselContainer>
       <CarouselTitle>Notre galerie d'images</CarouselTitle>
       <CarouselWrapper 
+        className="carousel-wrapper"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        role="region"
+        aria-label="Galerie d'images"
+        tabIndex="0"
+        style={{
+          WebkitOverflowScrolling: 'touch',
+          WebkitTransform: 'translateZ(0)'
+        }}
       >
         <AnimatePresence initial={false} custom={direction}>
           <CarouselSlide
@@ -287,10 +379,22 @@ const ImageCarousel = () => {
           </CarouselSlide>
         </AnimatePresence>
         
-        <CarouselArrow className="prev" onClick={prevSlide}>
+        <CarouselArrow 
+          className="prev" 
+          onClick={prevSlide}
+          aria-label="Image précédente"
+          onKeyDown={(e) => e.key === 'Enter' && prevSlide(e)}
+          tabIndex={0}
+        >
           &#8249;
         </CarouselArrow>
-        <CarouselArrow className="next" onClick={nextSlide}>
+        <CarouselArrow 
+          className="next" 
+          onClick={nextSlide}
+          aria-label="Image suivante"
+          onKeyDown={(e) => e.key === 'Enter' && nextSlide(e)}
+          tabIndex={0}
+        >
           &#8250;
         </CarouselArrow>
       </CarouselWrapper>
