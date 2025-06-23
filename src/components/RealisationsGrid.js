@@ -173,7 +173,26 @@ const RealisationTitle = styled.h3`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin: 40px 0 0;
+  
+  & > a {
+    white-space: nowrap;
+    font-size: 1rem;
+    padding: 12px 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  @media (max-width: 768px) {
+    & > a {
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+  }
 `;
 
 const RealisationsGridComponent = ({ limit }) => {

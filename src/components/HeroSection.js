@@ -137,27 +137,41 @@ const HeroSubtitle = styled(motion.p)`
 
 const ButtonContainer = styled(motion.div)`
   display: flex;
-  gap: 20px;
+  gap: 15px;
   margin: 30px auto 0;
   justify-content: center;
   width: 100%;
   flex-wrap: nowrap;
   
+  & > a {
+    white-space: nowrap;
+    font-size: 0.9rem;
+    padding: 10px 15px;
+  }
+  
   /* Pour les tablettes */
   @media (max-width: 992px) {
-    gap: 15px;
+    gap: 12px;
+    
+    & > a {
+      padding: 8px 12px;
+      font-size: 0.85rem;
+    }
   }
   
   /* Pour les mobiles */
   @media (max-width: 768px) {
-    flex-wrap: wrap;
-  }
-  
-  /* Pour les très petits écrans */
-  @media (max-width: 480px) {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
+    align-items: center;
+    gap: 12px;
+    
+    & > a {
+      width: 100%;
+      max-width: 280px;
+      text-align: center;
+      padding: 10px 15px;
+      font-size: 0.9rem;
+    }
   }
 `;
 

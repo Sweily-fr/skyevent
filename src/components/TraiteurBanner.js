@@ -20,6 +20,7 @@ const BannerContainer = styled.section`
   @media (max-width: 768px) {
     min-height: 600px;
     margin: 80px 0;
+    align-items: center;
   }
 `;
 
@@ -65,8 +66,13 @@ const BannerContent = styled.div`
   
   @media (max-width: 768px) {
     padding: 0 30px;
-    margin-top: 80px;
+    margin: 0 auto;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
   }
 `;
 
@@ -160,6 +166,19 @@ const SubTitle = styled(motion.h2)`
 
 const ButtonWrapper = styled.div`
   margin-top: 15px;
+  white-space: nowrap;
+  
+  @media (max-width: 480px) {
+    width: 100%;
+    text-align: center;
+    
+    & > a {
+      display: inline-block;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+  }
 `;
 
 const TraiteurBanner = () => {

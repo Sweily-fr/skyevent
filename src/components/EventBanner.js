@@ -33,7 +33,7 @@ const BannerContainer = styled.section`
   }
   
   @media (max-width: 768px) {
-    padding: 80px 20px;
+    padding: 80px 10px;
     background-attachment: scroll;
   }
 `;
@@ -75,7 +75,7 @@ const Title = styled(motion.h2)`
   
   @media (max-width: 768px) {
     font-size: 2.2rem;
-    padding: 0 20px 20px;
+    padding: 0 10px 20px;
   }
   
   @media (max-width: 480px) {
@@ -95,7 +95,7 @@ const Description = styled(motion.p)`
   
   @media (max-width: 768px) {
     font-size: 1.1rem;
-    padding: 0 20px;
+    padding: 0 10px;
   }
 `;
 

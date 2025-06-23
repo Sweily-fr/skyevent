@@ -144,6 +144,10 @@ const ImageContainer = styled(motion.div)`
   border: 1px solid #f0f0f0;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
   
+  /* Optimisation pour iOS */
+  will-change: transform;
+  -webkit-transform: translateZ(0);
+  
   &:before {
     content: '';
     position: absolute;
@@ -213,8 +217,10 @@ const ServiceCard = styled(motion.div)`
   overflow: hidden;
   position: relative;
   border: 1px solid #f0f0f0;
-  transition: all 0.4s ease;
   cursor: pointer;
+  
+  /* Utiliser will-change pour optimiser les performances */
+  will-change: transform;
   
   &:before {
     content: '';
@@ -226,20 +232,27 @@ const ServiceCard = styled(motion.div)`
     border: 1px solid #d4af37;
     z-index: -1;
     opacity: 0;
-    transition: all 0.4s ease;
   }
   
-  /* Désactiver les animations sur iOS */
+  /* Styles spécifiques pour iOS/Safari */
   @supports (-webkit-touch-callout: none) {
-    &:hover {
-      &:before {
-        opacity: 1;
-      }
+    /* Désactiver la transition de transform pour éviter les sauts */
+    transition: none;
+    
+    &:hover:before {
+      opacity: 1;
+      transition: opacity 0.4s ease;
     }
   }
   
-  /* Activer les animations sur les autres navigateurs */
+  /* Styles pour les autres navigateurs */
   @supports not (-webkit-touch-callout: none) {
+    transition: transform 0.4s ease;
+    
+    &:before {
+      transition: opacity 0.4s ease;
+    }
+    
     &:hover {
       transform: translateY(-5px);
       
@@ -257,20 +270,23 @@ const ServiceImage = styled.div`
   background-position: center;
   filter: brightness(0.95);
   
-  /* Désactiver les transitions sur iOS pour éviter les sauts */
-  @media not all and (-webkit-min-device-pixel-ratio:0) {
-    transition: all 0.5s ease;
-  }
+  /* Utiliser will-change pour optimiser le rendu */
+  will-change: filter;
   
-  /* Désactiver les animations sur iOS */
+  /* Styles spécifiques pour iOS/Safari */
   @supports (-webkit-touch-callout: none) {
+    /* Pas de transition pour éviter les sauts */
+    transition: none;
+    
     ${ServiceCard}:hover & {
       filter: brightness(1);
     }
   }
   
-  /* Activer les animations sur les autres navigateurs */
+  /* Styles pour les autres navigateurs */
   @supports not (-webkit-touch-callout: none) {
+    transition: filter 0.5s ease;
+    
     ${ServiceCard}:hover & {
       filter: brightness(1);
     }
