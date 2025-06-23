@@ -96,15 +96,17 @@ const Section = styled.section`
 
 const SectionTitle = styled.h2`
   font-size: 2.5rem !important;
-  margin-bottom: 30px !important;
+  margin: 0 auto 30px !important;
+  padding: 0 20px !important;
   font-family: 'Inter', sans-serif !important;
   font-weight: 600 !important;
   letter-spacing: 1px !important;
   text-transform: uppercase !important;
-  text-align: ${props => props.center ? 'center' : 'left'} !important;
+  text-align: center !important;
   position: relative !important;
   color: #1a1a1a !important;
   line-height: 1.3 !important;
+  display: inline-block;
   
   @media (max-width: 768px) {
     font-size: 1.5rem !important;
@@ -112,15 +114,24 @@ const SectionTitle = styled.h2`
     margin-bottom: 20px !important;
   }
   
+  &:before,
   &:after {
     content: '';
     position: absolute;
-    bottom: -10px;
-    left: ${props => props.center ? '50%' : '0'};
-    transform: ${props => props.center ? 'translateX(-50%)' : 'none'};
+    top: 50%;
     width: 40px;
     height: 1px;
     background-color: #d4af37;
+  }
+  
+  &:before {
+    right: 100%;
+    margin-right: 15px;
+  }
+  
+  &:after {
+    left: 100%;
+    margin-left: 15px;
   }
 `;
 
@@ -315,9 +326,8 @@ const ServiceTitle = styled.h3`
   font-weight: 500 !important;
   letter-spacing: 1px !important;
   text-transform: uppercase !important;
-  color: white !important;
+  color: #1a1a1a !important;
   line-height: 1.4 !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
   
   @media (max-width: 768px) {
     font-size: 1.15rem !important;
@@ -327,14 +337,13 @@ const ServiceTitle = styled.h3`
 `;
 
 const ServiceDescription = styled.p`
-  color: white;
+  color: #444;
   margin-bottom: 25px;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   letter-spacing: 0.3px;
   line-height: 1.7;
   font-size: 0.95rem;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 `;
 
 const ServiceLink = styled(Link)`
