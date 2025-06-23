@@ -133,16 +133,23 @@ const GallerySection = styled.section`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.5rem;
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  margin-bottom: 40px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  position: relative;
-  display: inline-block;
-  padding-bottom: 10px;
-  color: #1a1a1a;
+  font-size: 2.5rem !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  margin-bottom: 40px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  position: relative !important;
+  display: inline-block !important;
+  padding-bottom: 10px !important;
+  color: #1a1a1a !important;
+  line-height: 1.3 !important;
+  
+  @media (max-width: 768px) {
+    font-size: 1.8rem !important;
+    margin-bottom: 30px !important;
+    line-height: 1.3 !important;
+  }
   
   &::after {
     content: '';

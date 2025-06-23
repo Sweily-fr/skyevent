@@ -43,16 +43,19 @@ const HeroSection = styled.section`
 `;
 
 const HeroTitle = styled.h1`
-  font-size: 3.5rem;
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 20px;
+  font-size: 3.5rem !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  margin-bottom: 20px !important;
+  line-height: 1.2 !important;
   
   @media (max-width: 768px) {
-    font-size: 2.5rem;
-  }`;
+    font-size: 1.8rem !important;
+    line-height: 1.3 !important;
+  }
+`;
 
 const HeroSubtitle = styled.p`
   font-size: 1.3rem;
@@ -92,15 +95,22 @@ const Section = styled.section`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.5rem;
-  margin-bottom: 30px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-align: ${props => props.center ? 'center' : 'left'};
-  position: relative;
-  color: #1a1a1a;
+  font-size: 2.5rem !important;
+  margin-bottom: 30px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  text-align: ${props => props.center ? 'center' : 'left'} !important;
+  position: relative !important;
+  color: #1a1a1a !important;
+  line-height: 1.3 !important;
+  
+  @media (max-width: 768px) {
+    font-size: 1.5rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 20px !important;
+  }
   
   &:after {
     content: '';
@@ -110,7 +120,7 @@ const SectionTitle = styled.h2`
     transform: ${props => props.center ? 'translateX(-50%)' : 'none'};
     width: 40px;
     height: 1px;
-    background-color: #d4af37; /* Couleur or subtile */
+    background-color: #d4af37;
   }
 `;
 
@@ -299,13 +309,20 @@ const ServiceContent = styled.div`
 `;
 
 const ServiceTitle = styled.h3`
-  font-size: 1.4rem;
-  margin-bottom: 15px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #1a1a1a;
+  font-size: 1.4rem !important;
+  margin-bottom: 15px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 500 !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  color: #1a1a1a !important;
+  line-height: 1.4 !important;
+  
+  @media (max-width: 768px) {
+    font-size: 1.15rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 12px !important;
+  }
 `;
 
 const ServiceDescription = styled.p`

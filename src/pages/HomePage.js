@@ -1,12 +1,15 @@
-import React, { useLayoutEffect, useRef, useEffect } from 'react';
+import React, { useLayoutEffect, useRef, useEffect, lazy, Suspense, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import styled from 'styled-components';
 import HeroSection from '../components/HeroSection';
 import EventTypesGrid from '../components/EventTypesGrid';
 import TraiteurBanner from '../components/TraiteurBanner';
-import RealisationsGrid from '../components/RealisationsGrid';
-import ImageCarousel from '../components/ImageCarousel';
 import ContactSection from '../components/ContactSection';
+import MobileContactSection from '../components/MobileContactSection';
+
+// Chargement paresseux uniquement pour les composants moins critiques
+const RealisationsGrid = lazy(() => import('../components/RealisationsGrid'));
+const ImageCarousel = lazy(() => import('../components/ImageCarousel'));
 
 const HomeContainer = styled.div`
   min-height: 100vh;
@@ -16,11 +19,11 @@ const HomeContainer = styled.div`
 `;
 
 const fadeIn = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   visible: { 
     opacity: 1, 
     y: 0,
-    transition: { duration: 0.8, ease: 'easeOut' }
+    transition: { duration: 0.5, ease: 'easeOut' } // Réduire la durée de l'animation
   }
 };
 
@@ -29,8 +32,8 @@ const staggerContainer = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.3
+      staggerChildren: 0.1, // Réduire le délai entre les animations
+      delayChildren: 0.1 // Réduire le délai initial
     }
   }
 };
@@ -38,18 +41,36 @@ const staggerContainer = {
 const HomePage = () => {
   const controls = useAnimation();
   const ref = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Détecter si l'appareil est mobile
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    // Vérifier au chargement initial
+    checkIfMobile();
+    
+    // Vérifier à chaque redimensionnement
+    window.addEventListener('resize', checkIfMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
 
   useEffect(() => {
-    // Démarrer les animations dès que le composant est monté
-    controls.start('visible');
+    // Démarrer les animations avec un léger délai pour permettre le rendu initial
+    const timer = setTimeout(() => {
+      controls.start('visible');
+    }, 100);
+    return () => clearTimeout(timer);
   }, [controls]);
   
   useLayoutEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'auto'
-    });
+    // Utiliser scrollTo sans comportement fluide pour de meilleures performances
+    window.scrollTo(0, 0);
     document.title = 'SkyEvent - Traiteur Événementiel Sur Mesure';
   }, []);
 
@@ -63,6 +84,7 @@ const HomePage = () => {
         variants={staggerContainer}
         ref={ref}
       >
+        {/* Sections critiques chargées immédiatement */}
         <motion.section variants={fadeIn}>
           <HeroSection />
         </motion.section>
@@ -75,16 +97,35 @@ const HomePage = () => {
           <TraiteurBanner />
         </motion.section>
         
-        <motion.section variants={fadeIn}>
-          <RealisationsGrid />
-        </motion.section>
+        {/* Sections moins critiques chargées paresseusement */}
+        <Suspense fallback={<div style={{ height: '400px' }}></div>}>
+          <motion.section variants={fadeIn}>
+            <RealisationsGrid />
+          </motion.section>
+        </Suspense>
         
-        <motion.section variants={fadeIn}>
-          <ImageCarousel />
-        </motion.section>
+        <Suspense fallback={<div style={{ height: '400px' }}></div>}>
+          <motion.section variants={fadeIn}>
+            <ImageCarousel />
+          </motion.section>
+        </Suspense>
         
-        <motion.section variants={fadeIn}>
-          <ContactSection />
+        {/* Afficher le formulaire de contact approprié selon le type d'appareil */}
+        <motion.section 
+          variants={fadeIn} 
+          id="contact-section"
+          style={{
+            display: 'block',
+            width: '100%',
+            minHeight: '200px',
+            margin: '0 auto'
+          }}
+        >
+          {isMobile ? (
+            <MobileContactSection />
+          ) : (
+            <ContactSection />
+          )}
         </motion.section>
       </motion.main>
     </HomeContainer>

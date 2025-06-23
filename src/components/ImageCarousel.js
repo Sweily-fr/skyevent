@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Images de la galerie
+// Images préchargées pour éviter les problèmes de performance
 const carouselImages = [
   '/images/DSC05410.jpg',
   '/images/DSC05407.jpg',
@@ -10,6 +11,14 @@ const carouselImages = [
   '/images/DSC05351.jpg',
   '/images/DSC05372.jpg'
 ];
+
+// Préchargement des images
+const preloadImages = () => {
+  carouselImages.forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+};
 
 const CarouselContainer = styled.section`
   padding: 100px 0;
@@ -180,8 +189,7 @@ const CarouselDot = styled.button`
   }
 `;
 
-// Détection de Safari
-const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+// Suppression de la détection de navigateur qui était coûteuse
 
 const CarouselArrow = styled.button`
   position: absolute;
@@ -274,19 +282,16 @@ const slideVariants = {
 const ImageCarousel = () => {
   const [[currentIndex, direction], setCurrentIndex] = useState([0, 0]);
   const [autoplay, setAutoplay] = useState(true);
+  
+  // Précharger les images au montage du composant
+  useEffect(() => {
+    preloadImages();
+  }, []);
 
   const nextSlide = (e) => {
     if (e) {
       e.stopPropagation();
       e.preventDefault();
-      // Force le reflow pour Safari
-      if (isSafari) {
-        const carousel = document.querySelector('.carousel-wrapper');
-        if (carousel) carousel.style.overflow = 'hidden';
-        setTimeout(() => {
-          if (carousel) carousel.style.overflow = '';
-        }, 10);
-      }
     }
     setCurrentIndex(prev => {
       const newDirection = 1;
@@ -299,14 +304,6 @@ const ImageCarousel = () => {
     if (e) {
       e.stopPropagation();
       e.preventDefault();
-      // Force le reflow pour Safari
-      if (isSafari) {
-        const carousel = document.querySelector('.carousel-wrapper');
-        if (carousel) carousel.style.overflow = 'hidden';
-        setTimeout(() => {
-          if (carousel) carousel.style.overflow = '';
-        }, 10);
-      }
     }
     setCurrentIndex(prev => {
       const newDirection = -1;
@@ -339,7 +336,7 @@ const ImageCarousel = () => {
   useEffect(() => {
     let interval;
     if (autoplay) {
-      interval = setInterval(nextSlide, 5000);
+      interval = setInterval(nextSlide, 7000); // Augmenter l'intervalle pour réduire les re-renders
     }
     return () => clearInterval(interval);
   }, [autoplay]);

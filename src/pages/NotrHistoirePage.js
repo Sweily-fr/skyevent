@@ -20,7 +20,9 @@ const PageContainer = styled.div`
   background-color: #ffffff; /* Fond blanc */
 `;
 
-const FullWidthSection = styled.section`
+const FullWidthSection = styled(({ bgImage, ...rest }) => <section {...rest} style={{ 
+  backgroundImage: bgImage ? `url(${bgImage})` : 'none'
+}} />)`
   width: 100%;
   padding: 0;
   margin: 80px 0;
@@ -32,7 +34,6 @@ const FullWidthSection = styled.section`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url(${props => props.bgImage || 'none'});
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,15 +62,18 @@ const OverlayContent = styled.div`
 `;
 
 const OverlayTitle = styled.h2`
-  font-size: 3.5rem;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  margin-bottom: 20px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
+  font-size: 3.5rem !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  margin-bottom: 20px !important;
+  letter-spacing: 4px !important;
+  text-transform: uppercase !important;
+  line-height: 1.3 !important;
   
   @media (max-width: 768px) {
-    font-size: 2.5rem;
+    font-size: 2rem !important;
+    letter-spacing: 3px !important;
+    margin-bottom: 15px !important;
   }
 `;
 
@@ -98,15 +102,16 @@ const Section = styled.section`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.8rem;
-  margin-bottom: 30px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  text-align: ${props => props.center ? 'center' : 'left'};
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  position: relative;
-  display: inline-block;
+  font-size: 2.8rem !important;
+  margin-bottom: 30px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  text-align: ${props => props.center ? 'center' : 'left'} !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  position: relative !important;
+  display: inline-block !important;
+  line-height: 1.3 !important;
   
   &:after {
     content: '';
@@ -120,7 +125,15 @@ const SectionTitle = styled.h2`
   }
   
   @media (max-width: 768px) {
-    font-size: 2.2rem;
+    font-size: 1.8rem !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
+    width: 100%;
+    
+    &:after {
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+    }
   }
 `;
 

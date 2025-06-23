@@ -8,6 +8,8 @@ const SectionContainer = styled.section`
   max-width: 1400px;
   margin: 0 auto;
   position: relative;
+  display: block;
+  width: 100%;
   
   &:after {
     content: '';
@@ -21,20 +23,23 @@ const SectionContainer = styled.section`
   }
   
   @media (max-width: 768px) {
-    padding: 80px 20px;
+    padding: 60px 15px;
+    display: block !important;
+    visibility: visible !important;
   }
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.8rem;
-  text-align: center;
-  margin-bottom: 20px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  position: relative;
-  padding-bottom: 20px;
+  font-size: 2.8rem !important;
+  text-align: center !important;
+  margin-bottom: 20px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase !important;
+  position: relative !important;
+  padding-bottom: 20px !important;
+  line-height: 1.3 !important;
   
   &:after {
     content: '';
@@ -48,7 +53,9 @@ const SectionTitle = styled.h2`
   }
   
   @media (max-width: 768px) {
-    font-size: 2.2rem;
+    font-size: 1.8rem !important;
+    padding-bottom: 15px !important;
+    margin-bottom: 15px !important;
   }
 `;
 
@@ -75,6 +82,8 @@ const ContactGrid = styled.div`
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    gap: 30px;
+    display: grid !important;
   }
 `;
 
@@ -264,6 +273,7 @@ const SuccessMessage = styled(motion.div)`
   margin-bottom: 20px;
 `;
 
+// Composant optimisé pour mobile
 const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -303,7 +313,7 @@ const ContactSection = () => {
   };
   
   return (
-    <SectionContainer>
+    <SectionContainer id="contact-form-container">
       <SectionTitle>Contactez-nous pour un devis personnalisé</SectionTitle>
       <SectionSubtitle>
         Créez des moments inoubliables avec nos services traiteur sur-mesure. Que ce soit pour un mariage, 

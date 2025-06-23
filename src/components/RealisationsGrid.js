@@ -1,22 +1,17 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import StandardButton from './StandardButton';
 
-// Images des réalisations
+// Images des réalisations - Optimisées pour le chargement
 const realisationImages = {
   realisation1: '/images/DSC05266.jpg',
   realisation2: '/images/DSC05275.jpg',
   realisation3: '/images/DSC05278.jpg',
   realisation4: '/images/DSC05281.jpg',
   realisation5: '/images/DSC05287-2.jpg',
-  realisation6: '/images/DSC05289.jpg',
-  realisation7: '/images/DSC05290.jpg',
-  realisation8: '/images/DSC05291.jpg',
-  realisation9: '/images/DSC05292.jpg',
-  realisation10: '/images/DSC05294.jpg',
-  realisation11: '/images/DSC05297.jpg',
-  realisation12: '/images/DSC05299.jpg'
+  realisation6: '/images/DSC05289.jpg'
+  // Suppression des images non utilisées pour réduire le chargement
 };
 
 const SectionContainer = styled.section`
@@ -31,17 +26,19 @@ const SectionContainer = styled.section`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.8rem;
-  text-align: center;
-  margin-bottom: 20px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 40px;
+  font-size: 2.8rem !important;
+  text-align: center !important;
+  margin-bottom: 20px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase !important;
+  margin-bottom: 40px !important;
+  line-height: 1.3 !important;
   
   @media (max-width: 768px) {
-    font-size: 2.2rem;
+    font-size: 1.8rem !important;
+    margin-bottom: 25px !important;
   }
 `;
 
@@ -81,33 +78,14 @@ const RealisationCard = styled(motion.div)`
   aspect-ratio: 1;
   border: 1px solid #f0f0f0;
   
-  /* Désactiver les animations sur mobile */
+  /* Désactiver les animations sur mobile et simplifier les effets */
   @media (min-width: 769px) {
-    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.4s ease;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     will-change: transform;
     
-    &:before {
-      content: '';
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      right: -10px;
-      bottom: -10px;
-      border: 1px solid #d4af37;
-      z-index: -1;
-      opacity: 0;
-      transition: all 0.4s ease;
-    }
-    
     &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      
-      &:before {
-        opacity: 1;
-      }
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
     }
   }
 `;
@@ -119,14 +97,12 @@ const RealisationImage = styled.div`
   background-size: cover;
   background-position: center;
   
-  /* Désactiver le zoom sur mobile */
+  /* Simplifier l'effet de zoom pour de meilleures performances */
   @media (min-width: 769px) {
-    transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
-    transform-origin: center center;
-    will-change: transform;
+    transition: transform 0.3s ease;
     
     ${RealisationCard}:hover & {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
   }
 `;
@@ -195,7 +171,7 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const RealisationsGridComponent = ({ limit }) => {
+const RealisationsGridComponent = memo(({ limit }) => {
   const realisations = [
     {
       id: 'realisation1',
@@ -246,14 +222,14 @@ const RealisationsGridComponent = ({ limit }) => {
         {realisations.map((realisation, index) => (
           <RealisationCard
             key={realisation.id}
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             transition={{
-              duration: 0.3,
-              delay: Math.min(index * 0.05, 0.3), // Délai limité pour éviter les problèmes sur iOS
+              duration: 0.2,
+              delay: Math.min(index * 0.03, 0.15), // Réduire encore plus le délai
               ease: "easeOut"
             }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, amount: 0.1 }}
           >
             <RealisationImage src={realisation.image} />
             <RealisationOverlay>
@@ -270,6 +246,6 @@ const RealisationsGridComponent = ({ limit }) => {
       </ButtonContainer>
     </SectionContainer>
   );
-};
+});
 
 export default RealisationsGridComponent;

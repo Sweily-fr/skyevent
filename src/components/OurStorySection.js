@@ -111,7 +111,7 @@ const HeroSubtitle = styled.p`
   }
 `;
 
-const ScrollIndicator = styled.div`
+const ScrollIndicator = styled(({ scrollY, scrollProgress, ...rest }) => <div {...rest} />)`
   position: absolute;
   bottom: 40px;
   left: 50%;
@@ -121,7 +121,7 @@ const ScrollIndicator = styled.div`
   align-items: center;
   color: white;
   z-index: 4;
-  opacity: ${props => props.scrollY === 0 ? 1 : Math.max(0, 1 - props.scrollProgress * 5)};
+  opacity: ${props => props.$scrollY === 0 ? 1 : Math.max(0, 1 - props.$scrollProgress * 5)};
   transition: opacity 0.3s ease;
 `;
 
@@ -315,7 +315,7 @@ const OurStorySection = () => {
             />
           </VideoBackground>
           <Overlay opacity={overlayOpacity} />
-          <ScrollIndicator scrollProgress={scrollY / 500} scrollY={scrollY}>
+          <ScrollIndicator $scrollProgress={scrollY / 500} $scrollY={scrollY}>
             <ScrollText>Découvrir</ScrollText>
             <ScrollLine />
           </ScrollIndicator>
