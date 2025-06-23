@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import StandardButton from './StandardButton';
 
-// Images des réalisations - Optimisées pour le chargement
+// Images des réalisations avec attributs alt pour le SEO - Optimisées pour le chargement
 const realisationImages = {
-  realisation1: '/images/DSC05266.jpg',
-  realisation2: '/images/DSC05275.jpg',
-  realisation3: '/images/DSC05278.jpg',
-  realisation4: '/images/DSC05281.jpg',
-  realisation5: '/images/DSC05287-2.jpg',
-  realisation6: '/images/DSC05289.jpg'
+  realisation1: { src: '/images/DSC05266.jpg', alt: 'Décoration élégante pour mariage SkyEvent' },
+  realisation2: { src: '/images/DSC05275.jpg', alt: 'Soirée d\'entreprise organisée par SkyEvent' },
+  realisation3: { src: '/images/DSC05278.jpg', alt: 'Anniversaire VIP avec service traiteur SkyEvent' },
+  realisation4: { src: '/images/DSC05281.jpg', alt: 'Lancement de produit événementiel par SkyEvent' },
+  realisation5: { src: '/images/DSC05287-2.jpg', alt: 'Baby shower chic organisé par SkyEvent' },
+  realisation6: { src: '/images/DSC05289.jpg', alt: 'Baptême traditionnel avec traiteur SkyEvent' }
   // Suppression des images non utilisées pour réduire le chargement
 };
 
@@ -90,12 +90,11 @@ const RealisationCard = styled(motion.div)`
   }
 `;
 
-const RealisationImage = styled.div`
+const RealisationImage = styled.img`
   width: 100%;
   height: 100%;
-  background-image: url(${props => props.src});
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
+  object-position: center;
   
   /* Simplifier l'effet de zoom pour de meilleures performances */
   @media (min-width: 769px) {
@@ -176,37 +175,43 @@ const RealisationsGridComponent = memo(({ limit }) => {
     {
       id: 'realisation1',
       title: 'Mariage élégant',
-      image: realisationImages.realisation1,
+      image: realisationImages.realisation1.src,
+      alt: realisationImages.realisation1.alt,
       link: '/realisations/mariage-elegant'
     },
     {
       id: 'realisation2',
       title: 'Soirée d\'entreprise',
-      image: realisationImages.realisation2,
+      image: realisationImages.realisation2.src,
+      alt: realisationImages.realisation2.alt,
       link: '/realisations/soiree-entreprise'
     },
     {
       id: 'realisation3',
       title: 'Anniversaire VIP',
-      image: realisationImages.realisation3,
+      image: realisationImages.realisation3.src,
+      alt: realisationImages.realisation3.alt,
       link: '/realisations/anniversaire-vip'
     },
     {
       id: 'realisation4',
       title: 'Lancement de produit',
-      image: realisationImages.realisation4,
+      image: realisationImages.realisation4.src,
+      alt: realisationImages.realisation4.alt,
       link: '/realisations/lancement-produit'
     },
     {
       id: 'realisation5',
       title: 'Baby shower chic',
-      image: realisationImages.realisation5,
+      image: realisationImages.realisation5.src,
+      alt: realisationImages.realisation5.alt,
       link: '/realisations/baby-shower-chic'
     },
     {
       id: 'realisation6',
       title: 'Baptême traditionnel',
-      image: realisationImages.realisation6,
+      image: realisationImages.realisation6.src,
+      alt: realisationImages.realisation6.alt,
       link: '/realisations/bapteme-traditionnel'
     }
   ];
@@ -231,7 +236,7 @@ const RealisationsGridComponent = memo(({ limit }) => {
             }}
             viewport={{ once: true, amount: 0.1 }}
           >
-            <RealisationImage src={realisation.image} />
+            <RealisationImage src={realisation.image} alt={realisation.alt} />
             <RealisationOverlay>
               <RealisationTitle>{realisation.title}</RealisationTitle>
             </RealisationOverlay>

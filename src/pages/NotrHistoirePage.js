@@ -1,4 +1,5 @@
 import React, { useLayoutEffect } from 'react';
+import SEOSchema from '../components/SEOSchema';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import OurStorySection from '../components/OurStorySection';
@@ -291,6 +292,13 @@ const NotrHistoirePage = () => {
 
   return (
     <PageContainer>
+      <SEOSchema 
+        pageType="AboutPage" 
+        pageName="Notre Histoire | SkyEvent - Traiteur Événementiel" 
+        pageDescription="Découvrez l'histoire de SkyEvent, traiteur événementiel de luxe. Notre passion pour la gastronomie et l'art de recevoir au service de vos événements." 
+        pageUrl="https://skyevent.fr/notre-histoire" 
+        pageImage="/images/DSC05270.jpg" 
+      />
       <OurStorySection />
       
       <Section>

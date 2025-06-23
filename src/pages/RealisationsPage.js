@@ -1,47 +1,48 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import SEOSchema from '../components/SEOSchema';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import ContactSection from '../components/ContactSection';
 import StandardButton from '../components/StandardButton';
 
-// Liste des images des réalisations
+// Liste des images des réalisations avec descriptions pour le SEO
 const realisationsImages = [
-  '/images/DSC05266.jpg',
-  '/images/DSC05275.jpg',
-  '/images/DSC05278.jpg',
-  '/images/DSC05281.jpg',
-  '/images/DSC05287-2.jpg',
-  '/images/DSC05289.jpg',
-  '/images/DSC05290.jpg',
-  '/images/DSC05291.jpg',
-  '/images/DSC05292.jpg',
-  '/images/DSC05294.jpg',
-  '/images/DSC05297.jpg',
-  '/images/DSC05299.jpg',
-  '/images/DSC05305.jpg',
-  '/images/DSC05318.jpg',
-  '/images/DSC05319.jpg',
-  '/images/DSC05325.jpg',
-  '/images/DSC05328.jpg',
-  '/images/DSC05331.jpg',
-  '/images/DSC05335.jpg',
-  '/images/DSC05336.jpg',
-  '/images/DSC05338.jpg',
-  '/images/DSC05340.jpg',
-  '/images/DSC05343.jpg',
-  '/images/DSC05345.jpg',
-  '/images/DSC05351.jpg',
-  '/images/DSC05354.jpg',
-  '/images/DSC05361.jpg',
-  '/images/DSC05363.jpg',
-  '/images/DSC05372.jpg',
-  '/images/DSC05386.jpg',
-  '/images/DSC05388.jpg',
-  '/images/DSC05391.jpg',
-  '/images/DSC05395.jpg',
-  '/images/DSC05396.jpg',
-  '/images/DSC05400.jpg',
-  '/images/DSC05435.jpg'
+  { src: '/images/DSC05266.jpg', alt: 'Décoration élégante pour événement SkyEvent' },
+  { src: '/images/DSC05275.jpg', alt: 'Buffet gastronomique préparé par SkyEvent' },
+  { src: '/images/DSC05278.jpg', alt: 'Présentation culinaire raffinée pour réception' },
+  { src: '/images/DSC05281.jpg', alt: 'Décoration de table pour mariage par SkyEvent' },
+  { src: '/images/DSC05287-2.jpg', alt: 'Mise en place événementielle professionnelle' },
+  { src: '/images/DSC05289.jpg', alt: 'Cocktail dînatoire pour événement d\'entreprise' },
+  { src: '/images/DSC05290.jpg', alt: 'Présentation artistique de plats pour réception' },
+  { src: '/images/DSC05291.jpg', alt: 'Décoration florale pour événement de prestige' },
+  { src: '/images/DSC05292.jpg', alt: 'Service traiteur haut de gamme pour soirée' },
+  { src: '/images/DSC05294.jpg', alt: 'Aménagement d\'espace pour événement corporate' },
+  { src: '/images/DSC05297.jpg', alt: 'Buffet cocktail pour réception privée' },
+  { src: '/images/DSC05299.jpg', alt: 'Décoration de salle pour événement spécial' },
+  { src: '/images/DSC05305.jpg', alt: 'Présentation culinaire créative SkyEvent' },
+  { src: '/images/DSC05318.jpg', alt: 'Mise en scène événementielle pour gala' },
+  { src: '/images/DSC05319.jpg', alt: 'Décoration de table pour dîner d\'exception' },
+  { src: '/images/DSC05325.jpg', alt: 'Service traiteur pour événement luxueux' },
+  { src: '/images/DSC05328.jpg', alt: 'Préparation culinaire pour événement privé' },
+  { src: '/images/DSC05331.jpg', alt: 'Décoration florale pour réception de mariage' },
+  { src: '/images/DSC05335.jpg', alt: 'Buffet gastronomique pour événement corporate' },
+  { src: '/images/DSC05336.jpg', alt: 'Aménagement d\'espace pour cocktail dînatoire' },
+  { src: '/images/DSC05338.jpg', alt: 'Présentation de desserts pour événement' },
+  { src: '/images/DSC05340.jpg', alt: 'Décoration de salle pour gala d\'entreprise' },
+  { src: '/images/DSC05343.jpg', alt: 'Service traiteur élégant pour réception' },
+  { src: '/images/DSC05345.jpg', alt: 'Mise en place de table pour dîner de gala' },
+  { src: '/images/DSC05351.jpg', alt: 'Buffet raffiné pour événement professionnel' },
+  { src: '/images/DSC05354.jpg', alt: 'Décoration événementielle sur mesure' },
+  { src: '/images/DSC05361.jpg', alt: 'Présentation artistique de mets pour réception' },
+  { src: '/images/DSC05363.jpg', alt: 'Service traiteur pour soirée d\'exception' },
+  { src: '/images/DSC05372.jpg', alt: 'Aménagement d\'espace pour événement de luxe' },
+  { src: '/images/DSC05386.jpg', alt: 'Buffet gastronomique pour réception privée' },
+  { src: '/images/DSC05388.jpg', alt: 'Décoration florale pour événement corporate' },
+  { src: '/images/DSC05391.jpg', alt: 'Service traiteur pour mariage élégant' },
+  { src: '/images/DSC05395.jpg', alt: 'Mise en scène culinaire pour événement VIP' },
+  { src: '/images/DSC05396.jpg', alt: 'Décoration de table pour dîner de prestige' },
+  { src: '/images/DSC05400.jpg', alt: 'Buffet cocktail pour événement d\'entreprise' },
+  { src: '/images/DSC05435.jpg', alt: 'Présentation gastronomique pour réception SkyEvent' }
 ];
 
 const PageContainer = styled.div`
@@ -68,6 +69,7 @@ const HeroSection = styled.section`
   background-position: center;
   background-repeat: no-repeat;
   margin-bottom: 60px;
+  /* L'image d'arrière-plan est décorative, le texte du titre et de la description fournit le contexte */
   
   & > * {
     position: relative;
@@ -195,12 +197,11 @@ const RealisationCard = styled(motion.div)`
   }
 `;
 
-const RealisationImage = styled(motion.div)`
+const RealisationImage = styled(motion.img)`
   width: 100%;
   height: 100%;
-  background-image: url(${props => props.src});
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
+  object-position: center;
   
   /* Activer le zoom uniquement sur desktop */
   @media (min-width: 769px) {
@@ -260,6 +261,7 @@ const ModalImage = styled.img`
   max-width: 90%;
   max-height: 90vh;
   object-fit: contain;
+  /* L'attribut alt sera ajouté dynamiquement */
 `;
 
 const CloseButton = styled.button`
@@ -289,13 +291,13 @@ const RealisationsPage = () => {
     document.title = 'Nos réalisations - SkyEvent';
     
     // Préchargement des images
-    realisationsImages.forEach((src) => {
+    realisationsImages.forEach((image) => {
       const img = new Image();
-      img.src = src;
+      img.src = image.src;
       img.onload = () => {
         setLoadedImages(prev => ({
           ...prev,
-          [src]: true
+          [image.src]: true
         }));
       };
     });
@@ -307,8 +309,8 @@ const RealisationsPage = () => {
   };
   
   // Ouvrir l'image en modal
-  const openImageModal = (imageSrc) => {
-    setSelectedImage(imageSrc);
+  const openImageModal = (image) => {
+    setSelectedImage(image);
     setIsModalOpen(true);
     document.body.style.overflow = 'hidden'; // Empêcher le scroll du body
   };
@@ -321,6 +323,13 @@ const RealisationsPage = () => {
 
   return (
     <PageContainer>
+      <SEOSchema 
+        pageType="CollectionPage" 
+        pageName="Nos Réalisations | SkyEvent - Traiteur Événementiel" 
+        pageDescription="Découvrez nos réalisations en matière d'événementiel et de traiteur. Mariages, événements d'entreprise, anniversaires et plus encore." 
+        pageUrl="https://skyevent.fr/realisations" 
+        pageImage="/images/DSC05266.jpg" 
+      />
       <HeroSection>
         <HeroTitle>Nos Réalisations</HeroTitle>
         <HeroDescription>
@@ -340,13 +349,13 @@ const RealisationsPage = () => {
       <GallerySection>
         <SectionTitle>Galerie Photos</SectionTitle>
         <RealisationsGrid ref={gridRef}>
-          {realisationsImages.slice(0, visibleImages).map((imageSrc, index) => (
+          {realisationsImages.slice(0, visibleImages).map((image, index) => (
             <RealisationCard
               key={index}
               initial={{ opacity: 0, y: 30 }}
               animate={{
-                opacity: loadedImages[imageSrc] ? 1 : 0,
-                y: loadedImages[imageSrc] ? 0 : 30
+                opacity: loadedImages[image.src] ? 1 : 0,
+                y: loadedImages[image.src] ? 0 : 30
               }}
               transition={{
                 opacity: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
@@ -354,14 +363,15 @@ const RealisationsPage = () => {
                 delay: index % 6 * 0.05
               }}
               viewport={{ once: true, margin: "-100px 0px -100px 0px" }}
-              onClick={() => openImageModal(imageSrc)}
+              onClick={() => openImageModal(image)}
             >
               <RealisationImage 
-                src={imageSrc}
+                src={image.src}
+                alt={image.alt}
                 initial={false}
                 animate={{
-                  opacity: loadedImages[imageSrc] ? 1 : 0,
-                  scale: loadedImages[imageSrc] ? 1 : 0.97
+                  opacity: loadedImages[image.src] ? 1 : 0,
+                  scale: loadedImages[image.src] ? 1 : 0.97
                 }}
                 transition={{
                   opacity: { duration: 0.3 },
@@ -377,10 +387,10 @@ const RealisationsPage = () => {
                   backfaceVisibility: 'hidden'
                 }}
               />
-              {!loadedImages[imageSrc] && (
+              {!loadedImages[image.src] && (
                 <ImagePlaceholder 
                   initial={{ opacity: 1 }}
-                  animate={{ opacity: loadedImages[imageSrc] ? 0 : 1 }}
+                  animate={{ opacity: loadedImages[image.src] ? 0 : 1 }}
                   transition={{ duration: 0.2 }}
                 />
               )}
@@ -410,8 +420,10 @@ const RealisationsPage = () => {
         )}
         
         <ImageModal isOpen={isModalOpen} onClick={closeImageModal}>
-          <CloseButton onClick={closeImageModal}>×</CloseButton>
-          {selectedImage && <ModalImage src={selectedImage} />}
+          {selectedImage && (
+            <ModalImage src={selectedImage.src} alt={selectedImage.alt} />
+          )}
+          <CloseButton onClick={closeImageModal} aria-label="Fermer l'image">&times;</CloseButton>
         </ImageModal>
       </GallerySection>
       

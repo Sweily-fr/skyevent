@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Images de la galerie
+// Images de la galerie avec attributs alt pour le SEO
 // Images préchargées pour éviter les problèmes de performance
 const carouselImages = [
-  '/images/DSC05410.jpg',
-  '/images/DSC05407.jpg',
-  '/images/DSC05400.jpg',
-  '/images/DSC05351.jpg',
-  '/images/DSC05372.jpg'
+  { src: '/images/DSC05410.jpg', alt: 'Service traiteur événementiel de luxe par SkyEvent' },
+  { src: '/images/DSC05407.jpg', alt: 'Décoration élégante pour réception par SkyEvent' },
+  { src: '/images/DSC05400.jpg', alt: 'Présentation culinaire raffinée pour événement' },
+  { src: '/images/DSC05351.jpg', alt: 'Buffet gastronomique pour mariage par SkyEvent' },
+  { src: '/images/DSC05372.jpg', alt: 'Aménagement d\'espace pour événement corporate' }
 ];
 
 // Préchargement des images
 const preloadImages = () => {
-  carouselImages.forEach(src => {
+  carouselImages.forEach(image => {
     const img = new Image();
-    img.src = src;
+    img.src = image.src;
   });
 };
 
@@ -134,13 +134,11 @@ const CarouselSlide = styled(motion.div)`
   }
 `;
 
-const CarouselImage = styled.div`
+const CarouselImage = styled.img`
   width: 100%;
   height: 100%;
-  background-image: url(${props => props.src});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  object-fit: cover;
+  object-position: center;
   will-change: transform; /* Optimisation des performances */
   transform: translateZ(0); /* Force l'accélération matérielle */
   -webkit-transform: translateZ(0);
@@ -372,7 +370,10 @@ const ImageCarousel = () => {
               opacity: { duration: 0.2 }
             }}
           >
-            <CarouselImage src={carouselImages[currentIndex]} />
+            <CarouselImage 
+            src={carouselImages[currentIndex].src} 
+            alt={carouselImages[currentIndex].alt} 
+          />
           </CarouselSlide>
         </AnimatePresence>
         

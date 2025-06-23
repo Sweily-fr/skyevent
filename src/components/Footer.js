@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 
 const FooterContainer = styled.footer`
   background-color: #f8f8f8;
@@ -106,14 +106,8 @@ const Footer = () => {
           <FooterTitle>Contact</FooterTitle>
           <FooterLink as="a" href="mailto:contact@skyevent.fr">contact@skyevent.fr</FooterLink>
           <SocialLinks>
-            <SocialIcon href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faFacebookF} />
-            </SocialIcon>
-            <SocialIcon href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faTwitter} />
-            </SocialIcon>
-            <SocialIcon href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faYoutube} />
+            <SocialIcon href="https://www.instagram.com/skyevent.fr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <FontAwesomeIcon icon={faInstagram} size="lg" />
             </SocialIcon>
           </SocialLinks>
         </FooterSection>

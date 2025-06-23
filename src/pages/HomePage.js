@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useRef, useEffect, lazy, Suspense, useState } from 'react';
+import SEOSchema from '../components/SEOSchema';
 import { motion, useAnimation } from 'framer-motion';
 import styled from 'styled-components';
 import HeroSection from '../components/HeroSection';
@@ -92,6 +93,13 @@ const HomePage = () => {
 
   return (
     <HomeContainer>
+      <SEOSchema 
+        pageType="WebPage" 
+        pageName="SkyEvent - Traiteur Événementiel Sur Mesure" 
+        pageDescription="Créez des moments inoubliables avec nos services traiteur sur-mesure pour mariages, événements privés et professionnels." 
+        pageUrl="https://skyevent.fr" 
+        pageImage="/images/DSC05325.jpg" 
+      />
       <motion.main
         initial="hidden"
         animate={controls}
