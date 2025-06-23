@@ -255,9 +255,25 @@ const NotrHistoirePage = () => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'auto'
+      behavior: 'smooth'
     });
     document.title = 'Notre histoire - SkyEvent';
+    
+    // Désactiver les animations pendant le défilement pour améliorer les performances
+    let scrollTimeout;
+    const handleScroll = () => {
+      document.body.classList.add('is-scrolling');
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        document.body.classList.remove('is-scrolling');
+      }, 100);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
+    };
   }, []);
 
   return (
@@ -283,7 +299,7 @@ const NotrHistoirePage = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-50px" }}
           >
             <StyledImage src={experienceImage} alt="Notre expérience" />
           </ImageContainer>
@@ -311,7 +327,7 @@ const NotrHistoirePage = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-50px" }}
             className="image-content"
           >
             <StyledImage src={chefImage} alt="Notre Chef Cuistot" />
@@ -337,7 +353,7 @@ const NotrHistoirePage = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-50px" }}
           >
             <TeamMemberImage src={teamImage1} alt="Membre de l'équipe" />
             <TeamMemberInfo>
@@ -350,7 +366,7 @@ const NotrHistoirePage = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-50px" }}
           >
             <TeamMemberImage src={teamImage2} alt="Membre de l'équipe" />
             <TeamMemberInfo>
@@ -363,7 +379,7 @@ const NotrHistoirePage = () => {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-50px" }}
           >
             <TeamMemberImage src={teamImage3} alt="Membre de l'équipe" />
             <TeamMemberInfo>

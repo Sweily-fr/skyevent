@@ -29,6 +29,8 @@ const VideoContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #000; /* Fond noir pour un aspect plus luxueux */
+  /* Assurer que le conteneur reste sticky pendant tout le défilement */
+  will-change: transform;
 `;
 
 const VideoBackground = styled.video`
@@ -58,12 +60,17 @@ const LogoContainer = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   padding-top: 30vh;
-  padding-bottom: 60vh;
+  padding-bottom: 60vh; /* Réduction du padding pour moins d'espace vide */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   letter-spacing: 2px; /* Espacement des lettres pour un aspect luxueux */
+  pointer-events: auto; /* Réactiver les événements pour ce conteneur */
+  
+  @media (max-width: 768px) {
+    padding-bottom: 30vh; /* Réduction de l'espace sur mobile */
+  }
 `;
 
 const Logo = styled.img`
@@ -163,8 +170,13 @@ const ScrollLine = styled.div`
 
 const StickyContainer = styled.div`
   position: relative;
-  height: 200vh; /* Augmentation de la hauteur pour un défilement plus long */
+  height: 160vh; /* Réduction de la hauteur pour éviter trop de défilement après le texte */
   width: 100%;
+  overflow: visible; /* Permettre au contenu de déborder */
+  
+  @media (max-width: 768px) {
+    height: 180vh; /* Hauteur optimisée pour mobile */
+  }
 `;
 
 const CTAContainer = styled.div`
@@ -186,12 +198,18 @@ const ContentWrapper = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 400vh;
+  height: 300vh; /* Réduction de la hauteur pour éviter trop de défilement après le texte */
   z-index: 3;
-  transition: transform 0.1s ease;
+  transition: transform 0.2s ease-out;
   display: flex;
   flex-direction: column;
   align-items: center;
+  will-change: transform; /* Optimisation pour les navigateurs modernes */
+  pointer-events: none; /* Permettre aux événements de passer à travers pour le conteneur vidéo */
+  
+  @media (max-width: 768px) {
+    height: 350vh; /* Hauteur optimisée pour mobile */
+  }
 `;
 
 const TextSection = styled(motion.div)`
@@ -201,11 +219,13 @@ const TextSection = styled(motion.div)`
   width: 80%;
   max-width: 800px;
   padding: 40px 0;
-  margin-bottom: 30vh;
+  margin-bottom: 20vh; /* Réduction de la marge pour moins d'espace vide après le texte */
+  pointer-events: auto; /* Réactiver les événements pour ce conteneur */
   
   @media (max-width: 768px) {
     width: 90%;
-    padding: 40px 20px;
+    padding: 30px 20px;
+    margin-bottom: 15vh; /* Réduction de la marge sur mobile */
   }
 `;
 
@@ -243,13 +263,20 @@ const OurStorySection = () => {
   const containerRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
   
-  // Effet pour détecter le défilement
+  // Effet pour détecter le défilement avec optimisation des performances
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     
     // Nettoyage de l'écouteur d'événement lors du démontage
     return () => {
@@ -266,7 +293,10 @@ const OurStorySection = () => {
   ];
   
   // Calcul de l'opacité de l'overlay en fonction du défilement
-  const overlayOpacity = Math.min(1, scrollY / 300); // Augmente progressivement jusqu'à 1 après 300px de défilement
+  // Augmentation plus lente sur mobile pour que l'overlay reste visible plus longtemps
+  const overlayOpacity = window.innerWidth <= 768 
+    ? Math.min(1, scrollY / 500) 
+    : Math.min(1, scrollY / 300);
 
   return (
     <StoryContainer>
@@ -291,7 +321,14 @@ const OurStorySection = () => {
           </ScrollIndicator>
         </VideoContainer>
         
-        <ContentWrapper style={{ transform: `translateY(-${scrollY * 0.5}px)` }}>
+        <ContentWrapper 
+          style={{ 
+            transform: `translateY(-${
+              window.innerWidth <= 768 
+                ? Math.min(scrollY * 0.2, 400) 
+                : Math.min(scrollY * 0.3, 600)
+            }px)` 
+          }}>
           <LogoContainer>
             <Logo src="/images/Sky Event ..svg" alt="SkyEvent Logo" />
             <HeroTitle>L'Art Culinaire</HeroTitle>
