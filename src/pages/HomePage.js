@@ -16,6 +16,10 @@ const HomeContainer = styled.div`
   font-family: 'Playfair Display', serif;
   color: #1a1a1a;
   background-color: #ffffff;
+  
+  @media (max-width: 768px) {
+    overflow-x: hidden;
+  }
 `;
 
 const fadeIn = {
@@ -24,6 +28,16 @@ const fadeIn = {
     opacity: 1, 
     y: 0,
     transition: { duration: 0.5, ease: 'easeOut' } // Réduire la durée de l'animation
+  }
+};
+
+// Variante spécifique pour mobile avec moins d'espace
+const fadeInMobile = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.3, ease: 'easeOut' }
   }
 };
 
@@ -83,28 +97,48 @@ const HomePage = () => {
         animate={controls}
         variants={staggerContainer}
         ref={ref}
+        style={{
+          overflow: 'hidden',
+          width: '100%'
+        }}
       >
         {/* Sections critiques chargées immédiatement */}
         <motion.section variants={fadeIn}>
           <HeroSection />
         </motion.section>
         
-        <motion.section variants={fadeIn}>
+        <motion.section variants={isMobile ? fadeInMobile : fadeIn} style={{ marginTop: isMobile ? '-20px' : '0' }}>
           <EventTypesGrid />
         </motion.section>
         
-        <motion.section variants={fadeIn}>
+        <motion.section variants={isMobile ? fadeInMobile : fadeIn} style={{ marginTop: isMobile ? '-20px' : '0' }}>
           <TraiteurBanner />
         </motion.section>
         
-        {/* Sections moins critiques chargées paresseusement */}
-        <Suspense fallback={<div style={{ height: '400px' }}></div>}>
+        {/* Sections moins critiques chargées paresseusement avec fallback adapté au mobile */}
+        <Suspense fallback={
+          <div style={{
+            height: isMobile ? '200px' : '400px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+          </div>
+        }>
           <motion.section variants={fadeIn}>
             <RealisationsGrid />
           </motion.section>
         </Suspense>
         
-        <Suspense fallback={<div style={{ height: '400px' }}></div>}>
+        <Suspense fallback={
+          <div style={{
+            height: isMobile ? '150px' : '400px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+          </div>
+        }>
           <motion.section variants={fadeIn}>
             <ImageCarousel />
           </motion.section>
@@ -112,13 +146,13 @@ const HomePage = () => {
         
         {/* Afficher le formulaire de contact approprié selon le type d'appareil */}
         <motion.section 
-          variants={fadeIn} 
+          variants={isMobile ? fadeInMobile : fadeIn} 
           id="contact-section"
           style={{
             display: 'block',
             width: '100%',
-            minHeight: '200px',
-            margin: '0 auto'
+            minHeight: isMobile ? '100px' : '200px',
+            margin: isMobile ? '-20px auto 0' : '0 auto'
           }}
         >
           {isMobile ? (

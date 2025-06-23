@@ -5,7 +5,7 @@ import StandardButton from './StandardButton';
 
 // Version simplifiée et optimisée pour mobile
 const SectionContainer = styled.section`
-  padding: 60px 15px;
+  padding: 40px 15px;
   max-width: 100%;
   margin: 0 auto;
   position: relative;
@@ -26,15 +26,15 @@ const SectionContainer = styled.section`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2rem !important;
+  font-size: 1.8rem !important;
   text-align: center !important;
-  margin-bottom: 15px !important;
+  margin-bottom: 10px !important;
   font-family: 'Inter', sans-serif !important;
   font-weight: 700 !important;
   letter-spacing: 2px !important;
   text-transform: uppercase !important;
   position: relative !important;
-  padding-bottom: 15px !important;
+  padding-bottom: 10px !important;
   line-height: 1.3 !important;
   
   &:after {
@@ -50,40 +50,41 @@ const SectionTitle = styled.h2`
 `;
 
 const SectionSubtitle = styled.p`
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-align: center;
   max-width: 100%;
-  margin: 0 auto 30px;
+  margin: 0 auto 20px;
   color: #666;
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
   letter-spacing: 0.5px;
-  line-height: 1.6;
-  padding: 0 10px;
+  line-height: 1.5;
+  padding: 0 5px;
 `;
 
 const ContactForm = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 25px 15px;
+  gap: 15px;
+  padding: 20px 15px;
   background-color: #fff;
   border: 1px solid #f0f0f0;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 `;
 
 const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 5px;
 `;
 
 const FormLabel = styled.label`
   font-family: 'Poppins', sans-serif;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   font-weight: 400;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   letter-spacing: 0.5px;
   color: #444;
 `;
@@ -122,7 +123,7 @@ const FormTextarea = styled.textarea`
   color: #333;
   background-color: #fafafa;
   resize: vertical;
-  min-height: 120px;
+  min-height: 80px;
   transition: all 0.3s ease;
   
   &:focus {

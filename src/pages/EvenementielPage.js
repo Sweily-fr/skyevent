@@ -315,8 +315,9 @@ const ServiceTitle = styled.h3`
   font-weight: 500 !important;
   letter-spacing: 1px !important;
   text-transform: uppercase !important;
-  color: #1a1a1a !important;
+  color: white !important;
   line-height: 1.4 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
   
   @media (max-width: 768px) {
     font-size: 1.15rem !important;
@@ -326,13 +327,14 @@ const ServiceTitle = styled.h3`
 `;
 
 const ServiceDescription = styled.p`
-  color: #444;
+  color: white;
   margin-bottom: 25px;
   font-family: 'Poppins', sans-serif;
   font-weight: 400;
   letter-spacing: 0.3px;
   line-height: 1.7;
   font-size: 0.95rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 `;
 
 const ServiceLink = styled(Link)`

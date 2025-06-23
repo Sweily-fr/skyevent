@@ -76,19 +76,19 @@ const HeroImage = styled.div`
 
 const HeroContent = styled.div`
   position: absolute;
-  bottom: 100px;
-  left: 50px;
-  max-width: 600px;
-  text-align: left;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
   padding: 30px;
   z-index: 3;
   background: transparent;
   
   @media (max-width: 768px) {
-    left: 20px;
-    bottom: 60px;
-    right: 20px;
-    max-width: none;
+    padding: 20px;
+    max-width: 100%;
   }
 `;
 
@@ -96,32 +96,52 @@ const HeroTitle = styled(motion.h1)`
   font-size: 3.5rem;
   margin-bottom: 20px;
   font-family: 'Inter', sans-serif;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
   color: white;
   line-height: 1.2;
+  margin: 0 auto 20px;
+  max-width: 90%;
+  
+  @media (max-width: 1200px) {
+    font-size: 3rem;
+  }
+  
+  @media (max-width: 992px) {
+    font-size: 2.5rem;
+  }
   
   @media (max-width: 768px) {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    letter-spacing: 1px;
   }
 `;
 
 const HeroSubtitle = styled(motion.p)`
-  font-size: 1.3rem;
-  margin-bottom: 30px;
+  font-size: 1.5rem;
+  margin: 0 auto 30px;
   font-family: 'Poppins', sans-serif;
-  font-weight: 400;
-  line-height: 1.8;
-  max-width: 90%;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  color: white;
-  line-height: 1.2;
+  font-weight: 300;
+  line-height: 1.6;
+  max-width: 80%;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  
+  @media (max-width: 1200px) {
+    font-size: 1.3rem;
+  }
+  
+  @media (max-width: 992px) {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 90%;
+  }
   
   @media (max-width: 768px) {
-    font-size: 1.8rem;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
   }
 `;
 
@@ -249,7 +269,7 @@ const OfferOverlay = styled.div`
   width: 100%;
   height: 100%;
   background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
-  opacity: 0.7;
+  opacity: 0.9;
   transition: all 0.5s ease;
 `;
 
@@ -260,31 +280,30 @@ const OfferContent = styled.div`
   width: 100%;
   padding: 30px;
   color: white;
-  transform: translateY(20px);
-  opacity: 0;
-  transition: all 0.5s ease 0.1s;
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 0.5s ease;
   z-index: 2;
 `;
 
 const OfferTitle = styled.h3`
   font-size: 1.5rem;
-  color: #1a1a1a;
+  color: white;
   margin-bottom: 15px;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 `;
 
 const OfferDescription = styled.p`
-  color: #444;
+  color: white;
   line-height: 1.8;
   margin-bottom: 20px;
   font-family: 'Poppins', sans-serif;
-  font-weight: 400;
   font-weight: 300;
-  color: #444;
-  font-family: 'Poppins', sans-serif;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 `;
 
 const OfferItem = styled(OfferCard)`
@@ -298,7 +317,7 @@ const OfferItem = styled(OfferCard)`
     transform: translateY(-5px);
     
     .offer-overlay {
-      opacity: 0.9;
+      opacity: 1;
     }
     
     .offer-content {

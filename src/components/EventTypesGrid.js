@@ -31,7 +31,7 @@ const SectionContainer = styled.section`
   }
   
   @media (max-width: 768px) {
-    padding: 80px 20px;
+    padding: 50px 20px;
   }
 `;
 
@@ -77,7 +77,10 @@ const SectionSubtitle = styled.p`
   line-height: 1.8;
   
   @media (max-width: 768px) {
-    padding: 0 20px;
+    padding: 0 15px;
+    font-size: 1.1rem;
+    margin: 0 auto 30px;
+    line-height: 1.6;
   }
 `;
 
@@ -92,6 +95,7 @@ const EventsGrid = styled.div`
   
   @media (max-width: 576px) {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 `;
 
