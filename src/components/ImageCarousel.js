@@ -12,12 +12,16 @@ const carouselImages = [
   { src: '/images/DSC05372.jpg', alt: 'Aménagement d\'espace pour événement corporate' }
 ];
 
-// Préchargement des images
+// Préchargement des images avec gestion d'état de chargement
 const preloadImages = () => {
-  carouselImages.forEach(image => {
-    const img = new Image();
-    img.src = image.src;
-  });
+  return Promise.all(carouselImages.map(image => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve();
+      img.onerror = () => resolve(); // Continue même en cas d'erreur
+      img.src = image.src;
+    });
+  }));
 };
 
 const CarouselContainer = styled.section`
@@ -280,10 +284,45 @@ const slideVariants = {
 const ImageCarousel = () => {
   const [[currentIndex, direction], setCurrentIndex] = useState([0, 0]);
   const [autoplay, setAutoplay] = useState(true);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   
   // Précharger les images au montage du composant
   useEffect(() => {
-    preloadImages();
+    // S'assurer que le composant est monté avant de charger les images
+    const loadImages = async () => {
+      try {
+        await preloadImages();
+        setImagesLoaded(true);
+      } catch (error) {
+        console.error('Erreur lors du chargement des images:', error);
+        // Afficher quand même le carousel même si certaines images n'ont pas chargé
+        setImagesLoaded(true);
+      }
+    };
+    
+    loadImages();
+    
+    // Observer l'intersection pour détecter si le carousel est visible
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          setIsVisible(entry.isIntersecting);
+        },
+        { threshold: 0.1 }
+      );
+      
+      const carouselElement = document.querySelector('.carousel-wrapper');
+      if (carouselElement) {
+        observer.observe(carouselElement);
+      }
+      
+      return () => {
+        if (carouselElement) {
+          observer.unobserve(carouselElement);
+        }
+      };
+    }
   }, []);
 
   const nextSlide = (e) => {
@@ -333,17 +372,17 @@ const ImageCarousel = () => {
 
   useEffect(() => {
     let interval;
-    if (autoplay) {
+    if (autoplay && isVisible && imagesLoaded) {
       interval = setInterval(nextSlide, 7000); // Augmenter l'intervalle pour réduire les re-renders
     }
     return () => clearInterval(interval);
-  }, [autoplay]);
+  }, [autoplay, isVisible, imagesLoaded]);
 
   const handleMouseEnter = () => setAutoplay(false);
   const handleMouseLeave = () => setAutoplay(true);
 
   return (
-    <CarouselContainer>
+    <CarouselContainer style={{ opacity: imagesLoaded ? 1 : 0.5, transition: 'opacity 0.5s ease' }}>
       <CarouselTitle>Notre galerie d'images</CarouselTitle>
       <CarouselWrapper 
         className="carousel-wrapper"
@@ -354,7 +393,8 @@ const ImageCarousel = () => {
         tabIndex="0"
         style={{
           WebkitOverflowScrolling: 'touch',
-          WebkitTransform: 'translateZ(0)'
+          WebkitTransform: 'translateZ(0)',
+          visibility: isVisible ? 'visible' : 'visible' // Toujours visible mais l'autoplay s'arrête quand non visible
         }}
       >
         <AnimatePresence initial={false} custom={direction}>

@@ -8,10 +8,8 @@ import EventTypesGrid from '../components/EventTypesGrid';
 import TraiteurBanner from '../components/TraiteurBanner';
 import ContactSection from '../components/ContactSection';
 import MobileContactSection from '../components/MobileContactSection';
-
-// Chargement paresseux uniquement pour les composants moins critiques
-const RealisationsGrid = lazy(() => import('../components/RealisationsGrid'));
-const ImageCarousel = lazy(() => import('../components/ImageCarousel'));
+import ImageCarousel from '../components/ImageCarousel';
+import RealisationsGrid from '../components/RealisationsGrid';
 
 const HomeContainer = styled.div`
   min-height: 100vh;
@@ -129,34 +127,13 @@ const HomePage = () => {
           <TraiteurBanner />
         </motion.section>
         
-        {/* Sections moins critiques chargées paresseusement avec fallback adapté au mobile */}
-        <Suspense fallback={
-          <div style={{
-            height: isMobile ? '200px' : '400px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
-          </div>
-        }>
-          <motion.section variants={fadeIn}>
-            <RealisationsGrid />
-          </motion.section>
-        </Suspense>
+        <motion.section variants={fadeIn}>
+          <RealisationsGrid />
+        </motion.section>
         
-        <Suspense fallback={
-          <div style={{
-            height: isMobile ? '150px' : '400px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
-          </div>
-        }>
-          <motion.section variants={fadeIn}>
-            <ImageCarousel />
-          </motion.section>
-        </Suspense>
+        <motion.section variants={fadeIn}>
+          <ImageCarousel />
+        </motion.section>
         
         {/* Afficher le formulaire de contact approprié selon le type d'appareil */}
         <motion.section 
