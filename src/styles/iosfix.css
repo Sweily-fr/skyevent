@@ -24,7 +24,7 @@
     top: 0;
     right: 0;
     bottom: 0;
-    width: 1px; /* Juste assez pour couvrir la bande blanche */
+    width: 2px; /* Élargi pour couvrir complètement la bande blanche */
     background-color: #fff; /* Couleur de fond identique */
     z-index: 9999;
   }

@@ -324,6 +324,14 @@ const OurStorySection = () => {
           parent.style.maxWidth = '100%';
         }
       }
+      
+      // Technique 4: Créer un élément pour masquer complètement la bande blanche
+      if (!document.getElementById('sticky-edge-fix')) {
+        const edgeFix = document.createElement('div');
+        edgeFix.id = 'sticky-edge-fix';
+        edgeFix.style.cssText = 'position:fixed;top:0;right:0;bottom:0;width:3px;background-color:#fff;z-index:9999;';
+        document.body.appendChild(edgeFix);
+      }
     };
     
     // Appliquer immédiatement et lors des changements de taille
