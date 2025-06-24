@@ -183,13 +183,10 @@ const ScrollLine = styled.div`
 
 const StickyContainer = styled.div`
   position: relative;
-  height: 160vh; /* Réduction de la hauteur pour éviter trop de défilement après le texte */
+  /* Hauteur déterminée dynamiquement par le contenu */
   width: 100%;
   overflow: visible; /* Permettre au contenu de déborder */
-  
-  @media (max-width: 768px) {
-    height: 180vh; /* Hauteur optimisée pour mobile */
-  }
+  /* La hauteur sera définie en JavaScript en fonction du contenu */
 `;
 
 const CTAContainer = styled.div`
@@ -211,7 +208,7 @@ const ContentWrapper = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 300vh; /* Réduction de la hauteur pour éviter trop de défilement après le texte */
+  /* Hauteur déterminée dynamiquement par le contenu */
   z-index: 3;
   transition: transform 0.2s ease-out;
   display: flex;
@@ -221,10 +218,7 @@ const ContentWrapper = styled.div`
   pointer-events: none; /* Permettre aux événements de passer à travers pour le conteneur vidéo */
   max-width: 100vw;
   box-sizing: border-box;
-  
-  @media (max-width: 768px) {
-    height: 350vh; /* Hauteur optimisée pour mobile */
-  }
+  /* La hauteur sera définie en JavaScript en fonction du contenu */
 `;
 
 const TextSection = styled(motion.div)`
@@ -276,7 +270,10 @@ const StoryText = styled.p`
 
 const OurStorySection = () => {
   const containerRef = useRef(null);
+  const contentRef = useRef(null);
+  const textSectionRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
+  const [contentHeight, setContentHeight] = useState(0);
   
   // Ajout d'un effet pour corriger le problème de défilement horizontal sur iOS
   useEffect(() => {
@@ -370,6 +367,37 @@ const OurStorySection = () => {
     };
   }, []);
   
+  // Effet pour ajuster la hauteur du conteneur sticky en fonction du contenu
+  useEffect(() => {
+    if (!textSectionRef.current || !containerRef.current || !contentRef.current) return;
+    
+    // Fonction pour calculer la hauteur nécessaire
+    const calculateHeight = () => {
+      // Obtenir la hauteur du contenu texte
+      const textHeight = textSectionRef.current.offsetHeight;
+      // Ajouter un espace supplémentaire pour l'animation et le défilement
+      const viewportHeight = window.innerHeight;
+      // Calculer la hauteur totale nécessaire pour que le sticky persiste jusqu'à la fin du texte
+      // Formule : hauteur du viewport + hauteur du texte + espace supplémentaire pour l'animation
+      const totalHeight = viewportHeight + textHeight + 200;
+      
+      // Définir la hauteur du conteneur
+      containerRef.current.style.height = `${totalHeight}px`;
+      contentRef.current.style.height = `${totalHeight}px`;
+      setContentHeight(totalHeight);
+    };
+    
+    // Calculer la hauteur initiale
+    calculateHeight();
+    
+    // Recalculer lors du redimensionnement
+    window.addEventListener('resize', calculateHeight);
+    
+    return () => {
+      window.removeEventListener('resize', calculateHeight);
+    };
+  }, []);
+  
   // Texte à afficher lors du défilement
   const storyTexts = [
     {
@@ -384,6 +412,22 @@ const OurStorySection = () => {
     ? Math.min(1, scrollY / 500) 
     : Math.min(1, scrollY / 300);
 
+  // Calculer la distance de défilement maximale en fonction de la hauteur du contenu
+  const maxScrollDistance = contentHeight > 0 ? contentHeight - window.innerHeight : 600;
+  
+  // Calculer le facteur de parallaxe en fonction de la hauteur du contenu
+  const getParallaxOffset = () => {
+    // Si la hauteur du contenu n'est pas encore calculée, utiliser les valeurs par défaut
+    if (contentHeight <= 0) {
+      return window.innerWidth <= 768 ? Math.min(scrollY * 0.2, 400) : Math.min(scrollY * 0.3, 600);
+    }
+    
+    // Sinon, calculer le décalage en fonction de la progression du défilement par rapport à la hauteur totale
+    const scrollProgress = Math.min(scrollY / maxScrollDistance, 1);
+    const maxOffset = window.innerWidth <= 768 ? 400 : 600;
+    return scrollProgress * maxOffset;
+  };
+  
   return (
     <StoryContainer>
       <StickyContainer ref={containerRef}>
@@ -408,12 +452,9 @@ const OurStorySection = () => {
         </VideoContainer>
         
         <ContentWrapper 
+          ref={contentRef}
           style={{ 
-            transform: `translateY(-${
-              window.innerWidth <= 768 
-                ? Math.min(scrollY * 0.2, 400) 
-                : Math.min(scrollY * 0.3, 600)
-            }px)` 
+            transform: `translateY(-${getParallaxOffset()}px)` 
           }}>
           <LogoContainer>
             <Logo src="/images/Sky Event ..svg" alt="SkyEvent Logo" />
@@ -422,6 +463,7 @@ const OurStorySection = () => {
           </LogoContainer>
           
           <TextSection
+            ref={textSectionRef}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
