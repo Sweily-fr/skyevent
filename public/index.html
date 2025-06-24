@@ -38,35 +38,48 @@
     -->
     <title>SkyEvent - Traiteur Événementiel Sur Mesure</title>
     
-    <!-- Script pour corriger le défilement horizontal sur iOS sans casser l'effet sticky -->
+    <!-- Script pour détecter iOS et appliquer des correctifs spécifiques -->
     <script>
-      (function() {
-        // Détection des appareils iOS
-        var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+      // Détecter iOS
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
                    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-        
-        if (isIOS) {
-          // Fonction pour corriger la largeur du viewport sans overflow-x: hidden
-          function fixIOSViewport() {
-            // Définir la largeur exacte du viewport
-            var vw = window.innerWidth;
-            document.documentElement.style.setProperty('--vw', vw + 'px');
-            
-            // Créer un élément pour masquer la bande blanche
-            if (!document.getElementById('ios-edge-fix')) {
-              var edgeFix = document.createElement('div');
-              edgeFix.id = 'ios-edge-fix';
-              edgeFix.style.cssText = 'position:fixed;top:0;right:0;bottom:0;width:2px;background-color:#fff;z-index:9999;';
-              document.body.appendChild(edgeFix);
-            }
+      
+      if (isIOS) {
+        // Définir la variable CSS vw pour iOS
+        const setIOSViewportWidth = () => {
+          document.documentElement.style.setProperty('--vw', `${window.innerWidth}px`);
+          
+          // Forcer la largeur maximale sur tous les éléments pour éviter le débordement
+          // sans utiliser overflow-x: hidden qui casse l'effet sticky
+          document.documentElement.style.width = '100%';
+          document.documentElement.style.maxWidth = '100%';
+          document.body.style.width = '100%';
+          document.body.style.maxWidth = '100%';
+          
+          // Créer un élément pour masquer la bande blanche sur le côté droit
+          if (!document.getElementById('ios-edge-fix')) {
+            const edgeFix = document.createElement('div');
+            edgeFix.id = 'ios-edge-fix';
+            edgeFix.style.cssText = 'position:fixed;top:0;right:0;bottom:0;width:4px;background-color:#fff;z-index:9999;';
+            document.body.appendChild(edgeFix);
           }
           
-          // Appliquer immédiatement et lors des changements de taille/orientation
-          document.addEventListener('DOMContentLoaded', fixIOSViewport);
-          window.addEventListener('resize', fixIOSViewport);
-          window.addEventListener('orientationchange', fixIOSViewport);
-        }
-      })();
+          // Ajouter un correctif spécifique pour les éléments sticky
+          const stickyElements = document.querySelectorAll('[style*="position: sticky"], [style*="position:sticky"]');
+          stickyElements.forEach(el => {
+            el.style.transform = 'translateZ(0)';
+            el.style.willChange = 'transform';
+          });
+        };
+        
+        // Appliquer immédiatement et lors des changements de taille
+        setIOSViewportWidth();
+        window.addEventListener('resize', setIOSViewportWidth);
+        window.addEventListener('orientationchange', setIOSViewportWidth);
+        
+        // Appliquer également après un court délai pour s'assurer que tout est chargé
+        setTimeout(setIOSViewportWidth, 500);
+      }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>

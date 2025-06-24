@@ -63,20 +63,57 @@ const GlobalStyle = createGlobalStyle`
 function App() {
   // Effet pour corriger le défilement horizontal sur iOS sans casser l'effet sticky
   React.useEffect(() => {
-    // Fonction pour s'assurer que la largeur est correctement définie
-    const fixHorizontalScroll = () => {
+    // Détection des appareils iOS
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                 (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    
+    if (!isIOS) return; // Ne rien faire si ce n'est pas iOS
+    
+    // Solution complète pour iOS
+    const fixIOSScroll = () => {
+      // Technique 1: Ajuster la largeur du viewport sans overflow-x: hidden
       document.documentElement.style.width = '100%';
       document.documentElement.style.maxWidth = '100%';
       document.body.style.width = '100%';
       document.body.style.maxWidth = '100%';
+      // Ne pas utiliser overflow-x: hidden sur les éléments parents pour préserver l'effet sticky
+      
+      // Technique 2: Définir la variable CSS vw pour iOS
+      document.documentElement.style.setProperty('--vw', `${window.innerWidth}px`);
+      
+      // Technique 3: Ajuster les éléments sticky pour iOS
+      const stickyElements = document.querySelectorAll('[style*="position: sticky"], [style*="position:sticky"]');
+      stickyElements.forEach(el => {
+        el.style.transform = 'translateZ(0)';
+        el.style.willChange = 'transform';
+        // Permettre aux éléments sticky de déborder sans causer de défilement horizontal
+        el.style.overflow = 'visible';
+      });
+      
+      // Technique 4: Traiter uniquement les conteneurs non-sticky sans affecter les parents des éléments sticky
+      const nonStickyContainers = document.querySelectorAll('.non-sticky-container, .ios-fix-container');
+      nonStickyContainers.forEach(el => {
+        // Vérifier si cet élément ne contient pas d'éléments sticky
+        const hasStickyChildren = el.querySelector('[style*="position: sticky"], [style*="position:sticky"]');
+        if (!hasStickyChildren) {
+          el.style.width = '100%';
+          el.style.maxWidth = '100%';
+        }
+      });
     };
     
     // Appliquer immédiatement et lors des changements de taille
-    fixHorizontalScroll();
-    window.addEventListener('resize', fixHorizontalScroll);
+    fixIOSScroll();
+    window.addEventListener('resize', fixIOSScroll);
+    window.addEventListener('orientationchange', fixIOSScroll);
+    
+    // Appliquer également après un court délai pour s'assurer que tout est chargé
+    const timeoutId = setTimeout(fixIOSScroll, 500);
     
     return () => {
-      window.removeEventListener('resize', fixHorizontalScroll);
+      window.removeEventListener('resize', fixIOSScroll);
+      window.removeEventListener('orientationchange', fixIOSScroll);
+      clearTimeout(timeoutId);
     };
   }, []);
   

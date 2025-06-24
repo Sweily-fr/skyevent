@@ -14,9 +14,17 @@ const StoryContainer = styled.section`
   margin-top: -120px; /* Pour compenser la hauteur du header et éliminer l'écart */
   padding-top: 0; /* Suppression du padding pour éliminer tout espace */
   font-family: 'Playfair Display', serif;
-  max-width: 100vw;
+  max-width: 100%;
   box-sizing: border-box;
-  /* Ne pas utiliser overflow-x: hidden pour préserver l'effet sticky */
+  /* Ne pas utiliser overflow-x: hidden directement ici pour préserver l'effet sticky */
+  
+  /* Styles spécifiques pour iOS */
+  @supports (-webkit-touch-callout: none) {
+    width: 100%;
+    max-width: 100%;
+    left: 0;
+    right: 0;
+  }
 `;
 
 const VideoContainer = styled.div`
@@ -41,7 +49,7 @@ const VideoContainer = styled.div`
     width: 100%;
     left: 0;
     right: 0;
-    transform: translateX(0);
+    transform: translateZ(0); /* Forcer l'accélération matérielle */
   }
 `;
 
@@ -288,47 +296,33 @@ const OurStorySection = () => {
       // Forcer le recalcul de la largeur pour iOS
       document.documentElement.style.setProperty('--vw', `${window.innerWidth}px`);
       
-      // Solution spécifique pour iOS qui n'utilise pas overflow-x: hidden
-      // Technique 1: Ajuster la largeur du viewport
-      const viewportWidth = window.innerWidth;
-      document.documentElement.style.width = `${viewportWidth}px`;
-      document.body.style.width = `${viewportWidth}px`;
-      
-      // Technique 2: Ajuster la position des éléments qui débordent
-      const allElements = document.querySelectorAll('*');
-      allElements.forEach(el => {
-        // Ne pas toucher aux éléments sticky ou fixed
-        const style = window.getComputedStyle(el);
-        if (style.position === 'sticky' || style.position === 'fixed') return;
-        
-        const rect = el.getBoundingClientRect();
-        // Si l'élément déborde à droite
-        if (rect.right > viewportWidth) {
-          // Calculer le débordement
-          const overflow = rect.right - viewportWidth;
-          // Si l'élément a une largeur fixe, la réduire
-          if (style.width !== 'auto' && !style.width.includes('%')) {
-            el.style.width = `${rect.width - overflow}px`;
-          }
-        }
-      });
-      
-      // Technique 3: Forcer les conteneurs parents à la bonne taille
-      if (containerRef.current) {
-        const parent = containerRef.current.parentElement;
-        if (parent) {
-          parent.style.width = '100%';
-          parent.style.maxWidth = '100%';
-        }
-      }
-      
-      // Technique 4: Créer un élément pour masquer complètement la bande blanche
+      // Nouvelle approche pour iOS qui préserve l'effet sticky
+      // Technique 1: Créer un élément pour masquer la bande blanche
       if (!document.getElementById('sticky-edge-fix')) {
         const edgeFix = document.createElement('div');
         edgeFix.id = 'sticky-edge-fix';
-        edgeFix.style.cssText = 'position:fixed;top:0;right:0;bottom:0;width:3px;background-color:#fff;z-index:9999;';
+        edgeFix.style.cssText = 'position:fixed;top:0;right:0;bottom:0;width:5px;background-color:#fff;z-index:9999;pointer-events:none;';
         document.body.appendChild(edgeFix);
       }
+      
+      // Technique 2: Optimiser les éléments sticky
+      const stickyElements = document.querySelectorAll('[style*="position: sticky"], [style*="position:sticky"]');
+      stickyElements.forEach(el => {
+        // Optimiser le rendu des éléments sticky
+        el.style.transform = 'translateZ(0)';
+        el.style.willChange = 'transform';
+        el.style.backfaceVisibility = 'hidden';
+        
+        // S'assurer que les parents des éléments sticky n'ont pas overflow-x: hidden
+        let parent = el.parentElement;
+        while (parent && parent !== document.body) {
+          const style = window.getComputedStyle(parent);
+          if (style.overflowX === 'hidden') {
+            parent.style.overflowX = 'visible';
+          }
+          parent = parent.parentElement;
+        }
+      });
     };
     
     // Appliquer immédiatement et lors des changements de taille
@@ -415,6 +409,10 @@ const OurStorySection = () => {
   // Calculer la distance de défilement maximale en fonction de la hauteur du contenu
   const maxScrollDistance = contentHeight > 0 ? contentHeight - window.innerHeight : 600;
   
+  // Détecter iOS pour des ajustements spécifiques
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+               (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  
   // Calculer le facteur de parallaxe en fonction de la hauteur du contenu
   const getParallaxOffset = () => {
     // Si la hauteur du contenu n'est pas encore calculée, utiliser les valeurs par défaut
@@ -427,6 +425,19 @@ const OurStorySection = () => {
     const maxOffset = window.innerWidth <= 768 ? 400 : 600;
     return scrollProgress * maxOffset;
   };
+  
+  // Appliquer des styles spécifiques pour iOS
+  useEffect(() => {
+    if (!isIOS) return;
+    
+    // S'assurer que les éléments sticky sont correctement configurés sur iOS
+    const stickyElements = document.querySelectorAll('[style*="position: sticky"], [style*="position:sticky"]');
+    stickyElements.forEach(el => {
+      el.style.transform = 'translateZ(0)';
+      el.style.willChange = 'transform';
+      el.style.maxWidth = '100%';
+    });
+  }, [isIOS]);
   
   return (
     <StoryContainer>

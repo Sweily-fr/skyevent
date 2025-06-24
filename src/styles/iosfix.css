@@ -9,12 +9,13 @@
   
   /* Styles pour le corps et le conteneur racine */
   html, body, #root {
-    width: 100%;
-    max-width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    /* Ne pas utiliser overflow-x: hidden pour préserver l'effet sticky */
     position: relative;
     margin: 0;
     padding: 0;
-    /* Ne pas utiliser overflow-x: hidden ici pour préserver l'effet sticky */
   }
   
   /* Technique pour éliminer la bande blanche sans overflow-x: hidden */
@@ -24,15 +25,27 @@
     top: 0;
     right: 0;
     bottom: 0;
-    width: 2px; /* Élargi pour couvrir complètement la bande blanche */
+    width: 4px; /* Élargi davantage pour couvrir complètement la bande blanche */
     background-color: #fff; /* Couleur de fond identique */
     z-index: 9999;
   }
   
+  /* Styles globaux pour tous les éléments */
+  * {
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+  
+  /* Classes spécifiques pour les conteneurs non-sticky */
+  .ios-fix-container, .non-sticky-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    /* Ne pas utiliser overflow-x: hidden sur les conteneurs qui pourraient contenir des éléments sticky */
+  }
+  
   /* Correctifs spécifiques pour les conteneurs */
   .ios-fix-container {
-    width: 100%;
-    max-width: 100%;
     position: relative;
     left: 0;
     right: 0;
