@@ -1,4 +1,5 @@
 import React from 'react';
+import SEO from '../../components/SEO';
 import OccasionTemplate from './OccasionTemplate';
 
 const AnniversairePage = () => {
@@ -33,7 +34,17 @@ const AnniversairePage = () => {
     bannerImage: "/images/DSC05270.jpg"
   };
 
-  return <OccasionTemplate {...pageData} occasionType="anniversaire" />;
+  return (
+    <>
+      <SEO 
+        title="Traiteur Anniversaire"
+        description="Organisez un anniversaire inoubliable avec SkyEvent. Buffets élégants, gâteaux personnalisés et service complet pour une célébration mémorable."
+        path="/anniversaire"
+        image="/images/DSC05355.jpg"
+      />
+      <OccasionTemplate {...pageData} occasionType="anniversaire" />
+    </>
+  );
 };
 
 export default AnniversairePage;

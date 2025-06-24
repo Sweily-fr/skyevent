@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import SEO from '../components/SEO';
 import SEOSchema from '../components/SEOSchema';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -323,6 +324,12 @@ const RealisationsPage = () => {
 
   return (
     <PageContainer>
+      <SEO 
+        title="Nos Réalisations"
+        description="Découvrez nos plus belles réalisations événementielles. Mariages, séminaires, anniversaires - chaque événement est unique et reflète l'excellence de notre savoir-faire."
+        path="/realisations"
+        image="/images/DSC05266.jpg"
+      />
       <SEOSchema 
         pageType="CollectionPage" 
         pageName="Nos Réalisations | SkyEvent - Traiteur Événementiel" 

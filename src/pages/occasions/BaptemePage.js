@@ -1,4 +1,5 @@
 import React from 'react';
+import SEO from '../../components/SEO';
 import OccasionTemplate from './OccasionTemplate';
 
 const BaptemePage = () => {
@@ -33,7 +34,17 @@ const BaptemePage = () => {
     useVideo: true
   };
 
-  return <OccasionTemplate {...pageData} occasionType="bapteme" />;
+  return (
+    <>
+      <SEO 
+        title="Traiteur pour Baptême"
+        description="Organisez une réception de baptême élégante et raffinée avec SkyEvent. Menus adaptés, décoration soignée et service attentionné pour célébrer ce moment sacré."
+        path="/bapteme"
+        image="/images/DSC05415.jpg"
+      />
+      <OccasionTemplate {...pageData} occasionType="bapteme" />
+    </>
+  );
 };
 
 export default BaptemePage;

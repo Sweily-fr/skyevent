@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import SEO from '../components/SEO';
 import SEOSchema from '../components/SEOSchema';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
@@ -422,6 +423,12 @@ const EvenementielPage = () => {
 
   return (
     <PageContainer>
+      <SEO 
+        title="Événementiel"
+        description="Organisation d'événements sur mesure par SkyEvent. De la conception à la réalisation, notre équipe s'occupe de tout pour des moments exceptionnels. Découvrez nos services traiteur d'exception."
+        path="/evenementiel"
+        image="/images/DSC05297.jpg"
+      />
       <SEOSchema 
         pageType="ServicePage" 
         pageName="Nos Services Événementiels | SkyEvent - Traiteur Événementiel" 

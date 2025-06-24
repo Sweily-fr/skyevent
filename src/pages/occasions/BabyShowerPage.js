@@ -1,4 +1,5 @@
 import React, { useLayoutEffect } from 'react';
+import SEO from '../../components/SEO';
 import OccasionTemplate from './OccasionTemplate';
 
 const BabyShowerPage = () => {
@@ -42,7 +43,17 @@ const BabyShowerPage = () => {
     bannerImage: "/images/DSC05355.jpg"
   };
 
-  return <OccasionTemplate {...pageData} occasionType="babyshower" />;
+  return (
+    <>
+      <SEO 
+        title="Traiteur Baby Shower"
+        description="Organisez un baby shower magique avec SkyEvent. Buffets créatifs, décoration thématique et animations pour célébrer l'arrivée de bébé dans la douceur."
+        path="/baby-shower"
+        image="/images/DSC05372.jpg"
+      />
+      <OccasionTemplate {...pageData} occasionType="babyshower" />
+    </>
+  );
 };
 
 export default BabyShowerPage;
