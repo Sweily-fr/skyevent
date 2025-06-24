@@ -6,6 +6,25 @@
   padding: 0;
 }
 
+:root {
+  --vw: 100vw;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  /* Ne pas utiliser overflow-x: hidden ici pour préserver les effets sticky */
+}
+
+/* Styles spécifiques pour iOS pour éviter le défilement horizontal */
+@supports (-webkit-touch-callout: none) {
+  html, body {
+    width: var(--vw);
+    /* Ne pas utiliser overflow-x: hidden directement pour préserver les effets sticky */
+  }
+}
+
 
 body {
   margin: 0;
@@ -15,6 +34,9 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Ces propriétés aideront à résoudre le problème sur iOS sans casser les effets */
+  position: relative;
+  width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {

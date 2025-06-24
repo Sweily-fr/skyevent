@@ -14,6 +14,9 @@ const StoryContainer = styled.section`
   margin-top: -120px; /* Pour compenser la hauteur du header et éliminer l'écart */
   padding-top: 0; /* Suppression du padding pour éliminer tout espace */
   font-family: 'Playfair Display', serif;
+  max-width: 100vw;
+  box-sizing: border-box;
+  /* Ne pas utiliser overflow-x: hidden pour préserver l'effet sticky */
 `;
 
 const VideoContainer = styled.div`
@@ -31,6 +34,15 @@ const VideoContainer = styled.div`
   background-color: #000; /* Fond noir pour un aspect plus luxueux */
   /* Assurer que le conteneur reste sticky pendant tout le défilement */
   will-change: transform;
+  max-width: 100%;
+  box-sizing: border-box;
+  /* Styles pour iOS */
+  @supports (-webkit-touch-callout: none) {
+    width: 100%;
+    left: 0;
+    right: 0;
+    transform: translateX(0);
+  }
 `;
 
 const VideoBackground = styled.video`
@@ -40,6 +52,7 @@ const VideoBackground = styled.video`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  max-width: 100vw;
 `;
 
 const Overlay = styled.div`
@@ -206,6 +219,8 @@ const ContentWrapper = styled.div`
   align-items: center;
   will-change: transform; /* Optimisation pour les navigateurs modernes */
   pointer-events: none; /* Permettre aux événements de passer à travers pour le conteneur vidéo */
+  max-width: 100vw;
+  box-sizing: border-box;
   
   @media (max-width: 768px) {
     height: 350vh; /* Hauteur optimisée pour mobile */
@@ -262,6 +277,69 @@ const StoryText = styled.p`
 const OurStorySection = () => {
   const containerRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
+  
+  // Ajout d'un effet pour corriger le problème de défilement horizontal sur iOS
+  useEffect(() => {
+    // Fonction pour s'assurer que la largeur est correctement définie sur iOS sans casser l'effet sticky
+    const fixIOSHorizontalScroll = () => {
+      // Détection des appareils iOS
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      
+      if (!isIOS) return; // Ne rien faire si ce n'est pas iOS
+      
+      // Forcer le recalcul de la largeur pour iOS
+      document.documentElement.style.setProperty('--vw', `${window.innerWidth}px`);
+      
+      // Solution spécifique pour iOS qui n'utilise pas overflow-x: hidden
+      // Technique 1: Ajuster la largeur du viewport
+      const viewportWidth = window.innerWidth;
+      document.documentElement.style.width = `${viewportWidth}px`;
+      document.body.style.width = `${viewportWidth}px`;
+      
+      // Technique 2: Ajuster la position des éléments qui débordent
+      const allElements = document.querySelectorAll('*');
+      allElements.forEach(el => {
+        // Ne pas toucher aux éléments sticky ou fixed
+        const style = window.getComputedStyle(el);
+        if (style.position === 'sticky' || style.position === 'fixed') return;
+        
+        const rect = el.getBoundingClientRect();
+        // Si l'élément déborde à droite
+        if (rect.right > viewportWidth) {
+          // Calculer le débordement
+          const overflow = rect.right - viewportWidth;
+          // Si l'élément a une largeur fixe, la réduire
+          if (style.width !== 'auto' && !style.width.includes('%')) {
+            el.style.width = `${rect.width - overflow}px`;
+          }
+        }
+      });
+      
+      // Technique 3: Forcer les conteneurs parents à la bonne taille
+      if (containerRef.current) {
+        const parent = containerRef.current.parentElement;
+        if (parent) {
+          parent.style.width = '100%';
+          parent.style.maxWidth = '100%';
+        }
+      }
+    };
+    
+    // Appliquer immédiatement et lors des changements de taille
+    fixIOSHorizontalScroll();
+    window.addEventListener('resize', fixIOSHorizontalScroll);
+    window.addEventListener('orientationchange', fixIOSHorizontalScroll);
+    
+    // Appliquer également après un court délai pour s'assurer que tout est chargé
+    const timeoutId = setTimeout(fixIOSHorizontalScroll, 500);
+    
+    return () => {
+      window.removeEventListener('resize', fixIOSHorizontalScroll);
+      window.removeEventListener('orientationchange', fixIOSHorizontalScroll);
+      clearTimeout(timeoutId);
+    };
+  }, []);
   
   // Effet pour détecter le défilement avec optimisation des performances
   useEffect(() => {

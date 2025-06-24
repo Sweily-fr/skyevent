@@ -1,9 +1,10 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import SEOSchema from '../components/SEOSchema';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import OurStorySection from '../components/OurStorySection';
 import ContactSection from '../components/ContactSection';
+import '../styles/iosfix.css'; // Import des styles spécifiques pour iOS
 
 // Images uniques pour chaque section
 const chefImage = '/images/DSC05270.jpg';
@@ -19,12 +20,17 @@ const PageContainer = styled.div`
   font-family: 'Poppins', sans-serif;
   color: #1a1a1a;
   background-color: #ffffff; /* Fond blanc */
+  width: 100%;
+  max-width: 100vw;
+  /* Ne pas utiliser overflow-x: hidden ici pour préserver l'effet sticky */
+  position: relative;
 `;
 
 const FullWidthSection = styled(({ bgImage, ...rest }) => <section {...rest} style={{ 
   backgroundImage: bgImage ? `url(${bgImage})` : 'none'
 }} />)`
   width: 100%;
+  max-width: 100vw;
   padding: 0;
   margin: 80px 0;
   position: relative;
@@ -96,9 +102,13 @@ const Section = styled.section`
   max-width: 1400px;
   margin: 0 auto;
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
   
   @media (max-width: 768px) {
     padding: 40px 20px;
+    width: 100%;
+    max-width: 100%;
   }
 `;
 
@@ -154,6 +164,8 @@ const Grid = styled.div`
   gap: 40px;
   align-items: center;
   margin: 40px 0;
+  width: 100%;
+  box-sizing: border-box;
   
   @media (max-width: 992px) {
     grid-template-columns: 1fr;
@@ -193,6 +205,8 @@ const ImageContainer = styled(motion.div)`
   overflow: hidden;
   box-shadow: none;
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
   
   &:after {
     content: '';
@@ -210,6 +224,7 @@ const StyledImage = styled.img`
   width: 100%;
   height: auto;
   display: block;
+  max-width: 100%;
   filter: saturate(0.9) brightness(1.05); /* Légère modification pour un aspect plus luxueux */
 `;
 
@@ -218,6 +233,13 @@ const TeamGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 60px;
   margin-top: 80px;
+  width: 100%;
+  box-sizing: border-box;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+  }
 `;
 
 const TeamMember = styled(motion.div)`
@@ -265,33 +287,43 @@ const TeamMemberRole = styled.p`
 `;
 
 const NotrHistoirePage = () => {
-  useLayoutEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
-    document.title = 'Notre histoire - SkyEvent';
-    
-    // Désactiver les animations pendant le défilement pour améliorer les performances
-    let scrollTimeout;
-    const handleScroll = () => {
-      document.body.classList.add('is-scrolling');
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        document.body.classList.remove('is-scrolling');
-      }, 100);
+  const pageRef = useRef(null);
+  
+  useEffect(() => {
+    // Effet pour corriger le problème de défilement horizontal sur iOS sans casser l'effet sticky
+    const fixIOSHorizontalScroll = () => {
+      // Utiliser CSS variables pour définir la largeur correcte du viewport
+      document.documentElement.style.setProperty('--vw', `${window.innerWidth}px`);
+      
+      // Détection des appareils iOS
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      
+      if (isIOS && pageRef.current) {
+        // Trouver tous les éléments non-sticky qui pourraient causer un défilement horizontal
+        const nonStickyElements = pageRef.current.querySelectorAll('.non-sticky-container');
+        nonStickyElements.forEach(el => {
+          el.style.width = '100%';
+          el.style.maxWidth = '100%';
+        });
+        
+        // Ajouter des classes pour le correctif iOS
+        pageRef.current.classList.add('ios-fix-container');
+      }
     };
     
-    window.addEventListener('scroll', handleScroll);
+    fixIOSHorizontalScroll();
+    window.addEventListener('resize', fixIOSHorizontalScroll);
+    window.addEventListener('orientationchange', fixIOSHorizontalScroll);
+    
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearTimeout(scrollTimeout);
+      window.removeEventListener('resize', fixIOSHorizontalScroll);
+      window.removeEventListener('orientationchange', fixIOSHorizontalScroll);
     };
   }, []);
 
   return (
-    <PageContainer>
+    <PageContainer ref={pageRef}>
       <SEOSchema 
         pageType="AboutPage" 
         pageName="Notre Histoire | SkyEvent - Traiteur Événementiel" 
@@ -301,7 +333,7 @@ const NotrHistoirePage = () => {
       />
       <OurStorySection />
       
-      <Section>
+      <Section className="non-sticky-container" style={{ backgroundColor: '#f9f9f9' }}>
         <Grid>
           <div>
             <SectionTitle>L'Excellence</SectionTitle>

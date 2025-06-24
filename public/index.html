@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/images/Sky-Event-.webp" />
     
     <!-- Viewport et métadonnées de base -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="SkyEvent - Traiteur événementiel sur mesure pour vos mariages, anniversaires et événements d'entreprise. Créons ensemble des moments inoubliables." />
     
@@ -37,6 +37,37 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>SkyEvent - Traiteur Événementiel Sur Mesure</title>
+    
+    <!-- Script pour corriger le défilement horizontal sur iOS sans casser l'effet sticky -->
+    <script>
+      (function() {
+        // Détection des appareils iOS
+        var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                   (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        
+        if (isIOS) {
+          // Fonction pour corriger la largeur du viewport sans overflow-x: hidden
+          function fixIOSViewport() {
+            // Définir la largeur exacte du viewport
+            var vw = window.innerWidth;
+            document.documentElement.style.setProperty('--vw', vw + 'px');
+            
+            // Créer un élément pour masquer la bande blanche
+            if (!document.getElementById('ios-edge-fix')) {
+              var edgeFix = document.createElement('div');
+              edgeFix.id = 'ios-edge-fix';
+              edgeFix.style.cssText = 'position:fixed;top:0;right:0;bottom:0;width:1px;background-color:#fff;z-index:9999;';
+              document.body.appendChild(edgeFix);
+            }
+          }
+          
+          // Appliquer immédiatement et lors des changements de taille/orientation
+          document.addEventListener('DOMContentLoaded', fixIOSViewport);
+          window.addEventListener('resize', fixIOSViewport);
+          window.addEventListener('orientationchange', fixIOSViewport);
+        }
+      })();
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>

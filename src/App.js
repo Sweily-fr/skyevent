@@ -24,6 +24,21 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
   
+  /* Styles pour empêcher le défilement horizontal sans casser l'effet sticky */
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+  }
+  
+  /* Styles spécifiques pour iOS */
+  @supports (-webkit-touch-callout: none) {
+    html, body {
+      width: 100%;
+      position: relative;
+    }
+  }
+  
   body {
     font-family: 'Poppins', sans-serif;
     color: #333;
@@ -35,11 +50,36 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Playfair Display', serif;
     font-weight: 600;
   }
+  
+  /* Fix pour les éléments qui pourraient causer un défilement horizontal */
+  #root {
+    width: 100%;
+    max-width: 100%;
+  }
 `;
 
 // Les styles de conteneur ont été déplacés vers le composant Layout
 
 function App() {
+  // Effet pour corriger le défilement horizontal sur iOS sans casser l'effet sticky
+  React.useEffect(() => {
+    // Fonction pour s'assurer que la largeur est correctement définie
+    const fixHorizontalScroll = () => {
+      document.documentElement.style.width = '100%';
+      document.documentElement.style.maxWidth = '100%';
+      document.body.style.width = '100%';
+      document.body.style.maxWidth = '100%';
+    };
+    
+    // Appliquer immédiatement et lors des changements de taille
+    fixHorizontalScroll();
+    window.addEventListener('resize', fixHorizontalScroll);
+    
+    return () => {
+      window.removeEventListener('resize', fixHorizontalScroll);
+    };
+  }, []);
+  
   return (
     <BrowserRouter>
       <ScrollToTop />
