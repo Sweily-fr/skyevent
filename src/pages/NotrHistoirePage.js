@@ -104,6 +104,7 @@ const Section = styled.section`
   position: relative;
   width: 100%;
   box-sizing: border-box;
+  overflow-x: hidden; /* Empêcher le défilement horizontal */
   
   @media (max-width: 768px) {
     padding: 40px 20px;
@@ -213,8 +214,8 @@ const ImageContainer = styled(motion.div)`
     position: absolute;
     top: 20px;
     left: 20px;
-    right: -20px;
-    bottom: -20px;
+    right: 0; /* Modifié de -20px à 0 pour éviter le débordement */
+    bottom: 0; /* Modifié de -20px à 0 pour éviter le débordement */
     border: 1px solid #d4c9b6;
     z-index: -1;
   }
@@ -352,7 +353,7 @@ const NotrHistoirePage = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, margin: "-50px 0px -50px 0px" }}
           >
             <StyledImage src={experienceImage} alt="Notre expérience" />
           </ImageContainer>
@@ -380,7 +381,7 @@ const NotrHistoirePage = () => {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, margin: "50px 0px 50px 0px" }}
             className="image-content"
           >
             <StyledImage src={chefImage} alt="Notre Chef Cuistot" />
