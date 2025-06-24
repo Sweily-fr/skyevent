@@ -107,7 +107,8 @@ const SectionTitle = styled.h2`
   position: relative !important;
   color: #1a1a1a !important;
   line-height: 1.3 !important;
-  display: inline-block;
+  display: block;
+  width: 100%;
   
   @media (max-width: 768px) {
     font-size: 1.5rem !important;
@@ -115,25 +116,7 @@ const SectionTitle = styled.h2`
     margin-bottom: 20px !important;
   }
   
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 40px;
-    height: 1px;
-    background-color: #d4af37;
-  }
-  
-  &:before {
-    right: 100%;
-    margin-right: 15px;
-  }
-  
-  &:after {
-    left: 100%;
-    margin-left: 15px;
-  }
+
 `;
 
 const SectionSubtitle = styled.p`

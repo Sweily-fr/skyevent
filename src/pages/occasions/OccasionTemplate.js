@@ -213,7 +213,6 @@ const SectionTitle = styled.h2`
 
 const OfferSection = styled.section`
   padding: 80px 5%;
-  background-color: #f9f9f9;
   font-family: 'Poppins', sans-serif;
   position: relative;
   overflow: hidden;
