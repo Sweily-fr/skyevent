@@ -30,31 +30,32 @@ const SectionContainer = styled.section`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.8rem !important;
+  font-size: 3rem !important;
   text-align: center !important;
   margin-bottom: 20px !important;
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 700 !important;
-  letter-spacing: 3px !important;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 4px !important;
   text-transform: uppercase !important;
   position: relative !important;
-  padding-bottom: 20px !important;
-  line-height: 1.3 !important;
-  
+  padding-bottom: 25px !important;
+  line-height: 1.2 !important;
+  color: #0a0a0a !important;
+
   &:after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
+    width: 60px;
     height: 1px;
     background-color: #d4af37;
   }
-  
+
   @media (max-width: 768px) {
-    font-size: 1.8rem !important;
-    padding-bottom: 15px !important;
+    font-size: 2rem !important;
+    padding-bottom: 20px !important;
     margin-bottom: 15px !important;
   }
 `;
@@ -91,12 +92,10 @@ const ContactForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 25px;
-  padding: 40px;
+  padding: 50px;
   background-color: #fff;
-  border: 1px solid #f0f0f0;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
   position: relative;
-  
+
   @media (max-width: 768px) {
     padding: 30px 20px;
   }
@@ -117,52 +116,52 @@ const FormLabel = styled.label`
 `;
 
 const FormInput = styled.input`
-  padding: 12px 15px;
-  border: 1px solid #e0e0e0;
+  padding: 14px 0;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
   border-radius: 0;
   font-size: 1rem;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
   letter-spacing: 0.5px;
-  color: #333;
-  background-color: #fafafa;
+  color: #1a1a1a;
+  background-color: transparent;
   transition: all 0.3s ease;
-  
+
   &:focus {
     outline: none;
-    border-color: #d4af37;
-    background-color: #fff;
-    box-shadow: 0 0 0 1px #d4af37;
+    border-bottom-color: #000;
   }
-  
+
   &::placeholder {
-    color: #999;
-    font-style: italic;
+    color: #bbb;
+    font-weight: 300;
   }
 `;
 
 const FormTextarea = styled.textarea`
-  padding: 12px 15px;
-  border: 1px solid #e0e0e0;
+  padding: 14px 0;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
   border-radius: 0;
   font-size: 1rem;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
   letter-spacing: 0.5px;
-  color: #333;
-  background-color: #fafafa;
+  color: #1a1a1a;
+  background-color: transparent;
   resize: vertical;
-  min-height: 150px;
+  min-height: 120px;
   transition: all 0.3s ease;
-  
+
   &:focus {
     outline: none;
-    border-color: #d4af37;
-    background-color: #fff;
-    box-shadow: 0 0 0 1px #d4af37;
+    border-bottom-color: #000;
   }
-  
+
   &::placeholder {
-    color: #999;
-    font-style: italic;
+    color: #bbb;
+    font-weight: 300;
   }
 `;
 
@@ -174,12 +173,11 @@ const ContactInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding: 40px;
-  background-color: #f9f9f9;
+  padding: 50px;
+  background-color: #0a0a0a;
   height: 100%;
-  border: 1px solid #f0f0f0;
   position: relative;
-  
+
   @media (max-width: 768px) {
     padding: 30px 20px;
   }
@@ -190,13 +188,13 @@ const InfoItem = styled(motion.div)`
   align-items: flex-start;
   gap: 20px;
   padding: 15px 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.3s ease;
-  
+
   &:last-child {
     border-bottom: none;
   }
-  
+
   &:hover {
     transform: translateX(5px);
   }
@@ -204,14 +202,15 @@ const InfoItem = styled(motion.div)`
 
 const InfoIcon = styled.div`
   font-size: 1.5rem;
-  color: #d4af37;
+  color: rgba(255, 255, 255, 0.4);
   margin-top: 4px;
   min-width: 30px;
   text-align: center;
   transition: all 0.3s ease;
-  
+
   ${InfoItem}:hover & {
     transform: scale(1.1);
+    color: rgba(255, 255, 255, 0.7);
   }
 `;
 
@@ -222,28 +221,28 @@ const InfoContent = styled.div`
 const InfoTitle = styled.h3`
   margin: 0 0 8px;
   font-size: 1.2rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  color: #1a1a1a;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: #fff;
   text-transform: uppercase;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Cormorant Garamond', serif;
 `;
 
 const InfoText = styled.p`
   margin: 0;
-  color: #666;
+  color: rgba(255, 255, 255, 0.55);
   line-height: 1.8;
   font-size: 1rem;
   font-weight: 300;
   font-family: 'Poppins', sans-serif;
   letter-spacing: 0.3px;
-  
+
   a {
-    color: #1a1a1a;
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     transition: all 0.3s ease;
     position: relative;
-    
+
     &:after {
       content: '';
       position: absolute;
@@ -254,10 +253,10 @@ const InfoText = styled.p`
       background-color: #d4af37;
       transition: all 0.3s ease;
     }
-    
+
     &:hover {
-      color: #d4af37;
-      
+      color: #fff;
+
       &:after {
         width: 100%;
       }

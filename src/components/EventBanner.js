@@ -49,8 +49,8 @@ const ContentWrapper = styled.div`
 const Title = styled(motion.h2)`
   font-size: 3.5rem;
   margin: 0 auto 30px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 500; /* Réduit de 700 à 500 pour un rendu plus léger */
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
   letter-spacing: 3px;
   text-transform: uppercase;
   max-width: 900px;

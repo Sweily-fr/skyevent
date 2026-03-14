@@ -42,7 +42,7 @@ const ContentContainer = styled.div`
 const SectionTitle = styled.h2`
   font-size: 2.5rem;
   margin-bottom: 20px;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', serif;
 `;
 
 const SectionText = styled.p`

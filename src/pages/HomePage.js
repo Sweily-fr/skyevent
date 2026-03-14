@@ -13,7 +13,7 @@ import RealisationsGrid from '../components/RealisationsGrid';
 
 const HomeContainer = styled.div`
   min-height: 100vh;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', serif;
   color: #1a1a1a;
   background-color: #ffffff;
   

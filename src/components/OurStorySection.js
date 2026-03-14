@@ -13,7 +13,7 @@ const StoryContainer = styled.section`
   width: 100%;
   margin-top: -120px; /* Pour compenser la hauteur du header et éliminer l'écart */
   padding-top: 0; /* Suppression du padding pour éliminer tout espace */
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', serif;
   max-width: 100%;
   box-sizing: border-box;
   /* Ne pas utiliser overflow-x: hidden directement ici pour préserver l'effet sticky */
@@ -102,33 +102,35 @@ const Logo = styled.img`
 `;
 
 const HeroTitle = styled.h1`
-  font-size: 4.5rem;
-  font-weight: 500; /* Poids réduit pour un aspect plus élégant */
+  font-size: 5rem;
+  font-weight: 300;
   color: white;
   margin-bottom: 20px;
-  font-family: 'Inter', sans-serif;
-  line-height: 1.1;
-  letter-spacing: 2px;
+  font-family: 'Cormorant Garamond', serif;
+  line-height: 1.05;
+  letter-spacing: 6px;
   text-transform: uppercase;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  
+
   @media (max-width: 768px) {
-    font-size: 2.8rem;
+    font-size: 3rem;
+    letter-spacing: 4px;
   }
 `;
 
 const HeroSubtitle = styled.p`
-  font-size: 1.5rem;
-  color: white;
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.7);
   margin-top: 15px;
-  font-weight: 400;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: 2px;
+  font-weight: 300;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 4px;
   text-transform: uppercase;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  
+
   @media (max-width: 768px) {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    letter-spacing: 3px;
   }
 `;
 
@@ -247,15 +249,15 @@ const TextSection = styled(motion.div)`
 `;
 
 const StoryTitle = styled.h1`
-  font-size: 2.8rem;
-  font-weight: 600;
+  font-size: 3rem;
+  font-weight: 400;
   margin-bottom: 30px;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: 2px;
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 4px;
   text-transform: uppercase;
   color: white;
   line-height: 1.2;
-  
+
   @media (max-width: 768px) {
     font-size: 2rem;
   }

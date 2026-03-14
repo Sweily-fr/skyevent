@@ -23,7 +23,7 @@ const SectionTitle = styled.h2`
   font-size: 2.5rem;
   text-align: center;
   margin-bottom: 20px;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', serif;
 `;
 
 const SectionSubtitle = styled.p`
@@ -85,7 +85,7 @@ const ServiceContent = styled.div`
 const ServiceTitle = styled.h3`
   font-size: 1.5rem;
   margin-bottom: 10px;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', serif;
 `;
 
 const ServiceDescription = styled.p`

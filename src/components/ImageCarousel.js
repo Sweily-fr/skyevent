@@ -40,9 +40,9 @@ const CarouselContainer = styled.section`
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(to right, transparent, #d4af37, transparent);
+    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.08), transparent);
   }
-  
+
   &:after {
     content: '';
     position: absolute;
@@ -50,7 +50,7 @@ const CarouselContainer = styled.section`
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(to right, transparent, #d4af37, transparent);
+    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.08), transparent);
   }
   
   @media (max-width: 768px) {
@@ -59,29 +59,30 @@ const CarouselContainer = styled.section`
 `;
 
 const CarouselTitle = styled.h2`
-  font-size: 2.8rem;
+  font-size: 3rem;
   text-align: center;
   margin-bottom: 60px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
-  letter-spacing: 3px;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  letter-spacing: 4px;
   text-transform: uppercase;
   position: relative;
-  padding-bottom: 20px;
-  
+  padding-bottom: 25px;
+  color: #0a0a0a;
+
   &:after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
+    width: 60px;
     height: 1px;
     background-color: #d4af37;
   }
-  
+
   @media (max-width: 768px) {
-    font-size: 2.2rem;
+    font-size: 2rem;
     padding: 0 20px 20px;
   }
 `;
@@ -121,8 +122,7 @@ const CarouselSlide = styled(motion.div)`
   right: 20px;
   height: 100%;
   overflow: hidden;
-  border: 1px solid #f0f0f0;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
   will-change: transform, opacity; /* Optimisation des performances */
   backface-visibility: hidden; /* Empêche les effets de scintillement */
   -webkit-backface-visibility: hidden;
@@ -162,7 +162,7 @@ const CarouselDot = styled.button`
   height: 12px;
   min-width: 12px;
   border-radius: 50%;
-  background-color: ${props => props.active ? '#d4af37' : '#e0e0e0'};
+  background-color: ${props => props.active ? '#000' : '#d0d0d0'};
   border: none;
   cursor: pointer;
   margin: 0 4px;
@@ -170,24 +170,11 @@ const CarouselDot = styled.button`
   outline: none;
   flex-shrink: 0;
   
-  /* Désactiver les transitions sur iOS pour éviter les sauts */
-  @media not all and (-webkit-min-device-pixel-ratio:0) {
-    transition: all 0.3s ease;
-  }
-  
-  /* Désactiver les animations sur iOS */
-  @supports (-webkit-touch-callout: none) {
-    &:hover {
-      background-color: ${props => props.active ? '#d4af37' : '#c0c0c0'};
-    }
-  }
-  
-  /* Activer les animations sur les autres navigateurs */
-  @supports not (-webkit-touch-callout: none) {
-    &:hover {
-      background-color: ${props => props.active ? '#d4af37' : '#c0c0c0'};
-      transform: scale(1.2);
-    }
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: ${props => props.active ? '#000' : '#999'};
+    transform: scale(1.2);
   }
 `;
 
@@ -218,10 +205,10 @@ const CarouselArrow = styled.button`
   margin: 0 20px;
   
   &:hover {
-    background-color: #d4af37 !important;
+    background-color: #000 !important;
     color: white;
-    border-color: #d4af37 !important;
-    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3) !important;
+    border-color: #000 !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2) !important;
     transform: translateY(-50%) scale(1.1) translateZ(0);
     -webkit-transform: translateY(-50%) scale(1.1) translateZ(0);
   }
@@ -229,7 +216,8 @@ const CarouselArrow = styled.button`
   /* Styles spécifiques pour le mode tactile sur iOS */
   @media (hover: none) and (pointer: coarse) {
     &:active {
-      background-color: #d4af37 !important;
+      background-color: #000 !important;
+      color: white;
       transform: translateY(-50%) scale(0.95) translateZ(0);
       -webkit-transform: translateY(-50%) scale(0.95) translateZ(0);
     }

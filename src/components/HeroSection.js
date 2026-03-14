@@ -85,16 +85,16 @@ const HeroContent = styled.div`
 `;
 
 const HeroTitle = styled(motion.h1)`
-  font-size: 2.8rem;
-  font-weight: 700;
+  font-size: 3.5rem;
+  font-weight: 400;
   margin-bottom: 20px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Cormorant Garamond', serif;
   color: #fff;
-  letter-spacing: 3px;
+  letter-spacing: 5px;
   text-transform: uppercase;
-  line-height: 1.2;
+  line-height: 1.1;
   max-width: 800px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   
   @media (max-width: 1200px) {
     font-size: 2.5rem;

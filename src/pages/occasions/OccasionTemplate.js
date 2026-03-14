@@ -93,15 +93,15 @@ const HeroContent = styled.div`
 `;
 
 const HeroTitle = styled(motion.h1)`
-  font-size: 3.5rem;
+  font-size: 4rem;
   margin-bottom: 20px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+  letter-spacing: 6px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   color: white;
-  line-height: 1.2;
+  line-height: 1.1;
   margin: 0 auto 20px;
   max-width: 90%;
   
@@ -156,16 +156,16 @@ const HeroSubtitle = styled(motion.p)`
 // `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin-bottom: 30px;
   text-align: center;
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  color: #0a0a0a;
   position: relative;
-  padding-bottom: 15px;
+  padding-bottom: 20px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 4px;
   
   &::after {
     content: '';
@@ -194,7 +194,7 @@ const SectionTitle = styled.h2`
 //   font-size: 1.5rem;
 //   margin-bottom: 15px;
 //   color: #1a1a1a;
-//   font-family: 'Inter', sans-serif;
+//   font-family: 'Cormorant Garamond', serif;
 //   font-weight: 600;
 //   text-transform: uppercase;
 //   letter-spacing: 0.5px;
@@ -239,16 +239,14 @@ const OfferGrid = styled.div`
 
 const OfferCard = styled(motion.div)`
   background: white;
-  border-radius: 8px;
+  border-radius: 0;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  border: 1px solid #f0f0f0;
-  
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    border-color: #e0e0e0;
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
   }
 `;
 
@@ -289,7 +287,7 @@ const OfferTitle = styled.h3`
   font-size: 1.5rem;
   color: white;
   margin-bottom: 15px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -342,16 +340,16 @@ const OfferSectionTitle = styled(SectionTitle)`
 `;
 
 const CarouselTitle = styled.h2`
-  font-family: 'Inter', sans-serif;
-  font-size: 2.5rem;
-  font-weight: 600;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 400;
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #1a1a1a;
+  letter-spacing: 4px;
+  color: #0a0a0a;
   margin-bottom: 50px;
   position: relative;
-  padding-bottom: 15px;
+  padding-bottom: 20px;
   
   &::after {
     content: '';
@@ -386,9 +384,9 @@ const CarouselSection = styled.section`
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(to right, transparent, #d4af37, transparent);
+    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.08), transparent);
   }
-  
+
   &:after {
     content: '';
     position: absolute;
@@ -396,7 +394,7 @@ const CarouselSection = styled.section`
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(to right, transparent, #d4af37, transparent);
+    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.08), transparent);
   }
   
   @media (max-width: 768px) {
@@ -458,28 +456,15 @@ const CarouselDot = styled.button`
   height: 12px;
   border-radius: 50%;
   border: none;
-  background-color: ${props => props.active ? '#d4af37' : '#e0e0e0'};
+  background-color: ${props => props.active ? '#000' : '#d0d0d0'};
   cursor: pointer;
   padding: 0;
   
-  /* Désactiver les transitions sur iOS pour éviter les sauts */
-  @media not all and (-webkit-min-device-pixel-ratio:0) {
-    transition: all 0.3s ease;
-  }
-  
-  /* Désactiver les animations sur iOS */
-  @supports (-webkit-touch-callout: none) {
-    &:hover {
-      background-color: #d4af37;
-    }
-  }
-  
-  /* Activer les animations sur les autres navigateurs */
-  @supports not (-webkit-touch-callout: none) {
-    &:hover {
-      transform: scale(1.2);
-      background-color: #d4af37;
-    }
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.2);
+    background-color: ${props => props.active ? '#000' : '#999'};
   }
 `;
 

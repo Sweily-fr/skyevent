@@ -26,18 +26,18 @@ const SectionContainer = styled.section`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.8rem !important;
+  font-size: 3rem !important;
   text-align: center !important;
-  margin-bottom: 20px !important;
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 700 !important;
-  letter-spacing: 3px !important;
-  text-transform: uppercase !important;
   margin-bottom: 40px !important;
-  line-height: 1.3 !important;
-  
+  font-family: 'Cormorant Garamond', serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 4px !important;
+  text-transform: uppercase !important;
+  line-height: 1.2 !important;
+  color: #0a0a0a !important;
+
   @media (max-width: 768px) {
-    font-size: 1.8rem !important;
+    font-size: 2rem !important;
     margin-bottom: 25px !important;
   }
 `;
@@ -76,16 +76,15 @@ const RealisationCard = styled(motion.div)`
   position: relative;
   overflow: hidden;
   aspect-ratio: 1;
-  border: 1px solid #f0f0f0;
-  
+
   /* Désactiver les animations sur mobile et simplifier les effets */
   @media (min-width: 769px) {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
     will-change: transform;
-    
+
     &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
     }
   }
 `;
@@ -132,7 +131,7 @@ const RealisationTitle = styled.h3`
   color: white;
   font-size: 1.5rem;
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;

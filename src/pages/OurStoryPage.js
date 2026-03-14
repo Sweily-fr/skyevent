@@ -16,7 +16,7 @@ const AdditionalContent = styled.section`
 const SectionTitle = styled.h2`
   font-size: 2.5rem;
   margin-bottom: 30px;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', serif;
   text-align: center;
 `;
 
@@ -42,7 +42,7 @@ const GridItem = styled.div`
 const ItemTitle = styled.h3`
   font-size: 1.5rem;
   margin-bottom: 15px;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', serif;
 `;
 
 const ItemText = styled.p`

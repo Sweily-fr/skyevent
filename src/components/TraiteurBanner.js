@@ -83,16 +83,16 @@ const TitleContainer = styled.div`
 `;
 
 const MainTitle = styled(motion.h1)`
-  font-size: 2.8rem;
-  font-weight: 700;
+  font-size: 4rem;
+  font-weight: 300;
   margin: 0 0 10px 0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Cormorant Garamond', serif;
   color: #fff;
-  letter-spacing: 3px;
+  letter-spacing: 6px;
   text-transform: uppercase;
-  line-height: 1.2;
+  line-height: 1.1;
   max-width: 800px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   position: relative;
   display: block;
   
@@ -134,7 +134,7 @@ const SubTitle = styled(motion.h2)`
   font-size: 1.8rem;
   font-weight: 300;
   margin: 5px 0 0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Cormorant Garamond', serif;
   line-height: 1.6;
   letter-spacing: 1px;
   color: #f0f0f0;

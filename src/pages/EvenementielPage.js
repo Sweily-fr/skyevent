@@ -45,17 +45,18 @@ const HeroSection = styled.section`
 `;
 
 const HeroTitle = styled.h1`
-  font-size: 3.5rem !important;
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 600 !important;
-  letter-spacing: 2px !important;
+  font-size: 4rem !important;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-weight: 300 !important;
+  letter-spacing: 6px !important;
   text-transform: uppercase !important;
   margin-bottom: 20px !important;
-  line-height: 1.2 !important;
-  
+  line-height: 1.1 !important;
+
   @media (max-width: 768px) {
-    font-size: 1.8rem !important;
-    line-height: 1.3 !important;
+    font-size: 2.2rem !important;
+    line-height: 1.2 !important;
+    letter-spacing: 4px !important;
   }
 `;
 
@@ -97,26 +98,26 @@ const Section = styled.section`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.5rem !important;
+  font-size: 3rem !important;
   margin: 0 auto 30px !important;
   padding: 0 20px !important;
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 600 !important;
-  letter-spacing: 1px !important;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 4px !important;
   text-transform: uppercase !important;
   text-align: center !important;
   position: relative !important;
-  color: #1a1a1a !important;
-  line-height: 1.3 !important;
+  color: #0a0a0a !important;
+  line-height: 1.2 !important;
   display: block;
   width: 100%;
-  
+
   @media (max-width: 768px) {
-    font-size: 1.5rem !important;
-    line-height: 1.3 !important;
+    font-size: 1.8rem !important;
+    line-height: 1.2 !important;
     margin-bottom: 20px !important;
+    letter-spacing: 3px !important;
   }
-  
 
 `;
 
@@ -147,23 +148,11 @@ const Grid = styled.div`
 const ImageContainer = styled(motion.div)`
   overflow: hidden;
   position: relative;
-  border: 1px solid #f0f0f0;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
-  
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
   /* Optimisation pour iOS */
   will-change: transform;
   -webkit-transform: translateZ(0);
-  
-  &:before {
-    content: '';
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    right: -12px;
-    bottom: -12px;
-    border: 1px solid #d4af37;
-    z-index: -1;
-  }
 `;
 
 const StyledImage = styled.img`
@@ -199,10 +188,11 @@ const FeatureItem = styled.li`
   &:before {
     content: '';
     display: block;
-    width: 8px;
-    height: 8px;
-    background-color: #d4af37;
+    width: 6px;
+    height: 6px;
+    background-color: #0a0a0a;
     margin-right: 15px;
+    border-radius: 50%;
   }
 `;
 
@@ -222,50 +212,13 @@ const ServicesGrid = styled.div`
 const ServiceCard = styled(motion.div)`
   overflow: hidden;
   position: relative;
-  border: 1px solid #f0f0f0;
   cursor: pointer;
-  
-  /* Utiliser will-change pour optimiser les performances */
   will-change: transform;
-  
-  &:before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: -10px;
-    bottom: -10px;
-    border: 1px solid #d4af37;
-    z-index: -1;
-    opacity: 0;
-  }
-  
-  /* Styles spécifiques pour iOS/Safari */
-  @supports (-webkit-touch-callout: none) {
-    /* Désactiver la transition de transform pour éviter les sauts */
-    transition: none;
-    
-    &:hover:before {
-      opacity: 1;
-      transition: opacity 0.4s ease;
-    }
-  }
-  
-  /* Styles pour les autres navigateurs */
-  @supports not (-webkit-touch-callout: none) {
-    transition: transform 0.4s ease;
-    
-    &:before {
-      transition: opacity 0.4s ease;
-    }
-    
-    &:hover {
-      transform: translateY(-5px);
-      
-      &:before {
-        opacity: 1;
-      }
-    }
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
   }
 `;
 
@@ -305,17 +258,17 @@ const ServiceContent = styled.div`
 `;
 
 const ServiceTitle = styled.h3`
-  font-size: 1.4rem !important;
+  font-size: 1.5rem !important;
   margin-bottom: 15px !important;
-  font-family: 'Inter', sans-serif !important;
+  font-family: 'Cormorant Garamond', serif !important;
   font-weight: 500 !important;
-  letter-spacing: 1px !important;
+  letter-spacing: 2px !important;
   text-transform: uppercase !important;
-  color: #1a1a1a !important;
-  line-height: 1.4 !important;
-  
+  color: #0a0a0a !important;
+  line-height: 1.3 !important;
+
   @media (max-width: 768px) {
-    font-size: 1.15rem !important;
+    font-size: 1.2rem !important;
     line-height: 1.4 !important;
     margin-bottom: 12px !important;
   }

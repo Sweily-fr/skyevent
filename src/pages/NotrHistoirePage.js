@@ -70,17 +70,17 @@ const OverlayContent = styled.div`
 `;
 
 const OverlayTitle = styled.h2`
-  font-size: 3.5rem !important;
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 700 !important;
+  font-size: 4rem !important;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-weight: 300 !important;
   margin-bottom: 20px !important;
-  letter-spacing: 4px !important;
+  letter-spacing: 6px !important;
   text-transform: uppercase !important;
-  line-height: 1.3 !important;
-  
+  line-height: 1.2 !important;
+
   @media (max-width: 768px) {
-    font-size: 2rem !important;
-    letter-spacing: 3px !important;
+    font-size: 2.2rem !important;
+    letter-spacing: 4px !important;
     margin-bottom: 15px !important;
   }
 `;
@@ -115,16 +115,17 @@ const Section = styled.section`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.8rem !important;
+  font-size: 3rem !important;
   margin-bottom: 30px !important;
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 700 !important;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-weight: 400 !important;
   text-align: ${props => props.center ? 'center' : 'left'} !important;
-  letter-spacing: 2px !important;
+  letter-spacing: 4px !important;
   text-transform: uppercase !important;
   position: relative !important;
   display: inline-block !important;
-  line-height: 1.3 !important;
+  line-height: 1.2 !important;
+  color: #0a0a0a !important;
   
   &:after {
     content: '';
@@ -205,21 +206,10 @@ const Grid = styled.div`
 
 const ImageContainer = styled(motion.div)`
   overflow: hidden;
-  box-shadow: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   position: relative;
   width: 100%;
   box-sizing: border-box;
-  
-  &:after {
-    content: '';
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    right: 0; /* Modifié de -20px à 0 pour éviter le débordement */
-    bottom: 0; /* Modifié de -20px à 0 pour éviter le débordement */
-    border: 1px solid #d4c9b6;
-    z-index: -1;
-  }
 `;
 
 const StyledImage = styled.img`
@@ -227,7 +217,7 @@ const StyledImage = styled.img`
   height: auto;
   display: block;
   max-width: 100%;
-  filter: saturate(0.9) brightness(1.05); /* Légère modification pour un aspect plus luxueux */
+  filter: saturate(0.85) contrast(1.05);
 `;
 
 const TeamGrid = styled.div`
@@ -246,19 +236,8 @@ const TeamGrid = styled.div`
 
 const TeamMember = styled(motion.div)`
   overflow: hidden;
-  box-shadow: none;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
   position: relative;
-  
-  &:after {
-    content: '';
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    right: -15px;
-    bottom: -15px;
-    border: 1px solid #d4c9b6;
-    z-index: -1;
-  }
 `;
 
 const TeamMemberImage = styled.img`
@@ -273,7 +252,7 @@ const TeamMemberInfo = styled.div`
 
 const TeamMemberName = styled.h3`
   margin: 0 0 10px 0;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 400;
   letter-spacing: 1px;
   font-size: 1.4rem;
@@ -340,7 +319,7 @@ const NotrHistoirePage = () => {
       />
       <OurStorySection />
       
-      <Section className="non-sticky-container" style={{ backgroundColor: '#f9f9f9' }}>
+      <Section className="non-sticky-container">
         <Grid>
           <div>
             <SectionTitle>L'Excellence</SectionTitle>

@@ -11,7 +11,8 @@ const HeaderContainer = styled(({ isScrolled, ...rest }) => <header {...rest} />
   background-color: white;
   z-index: 1000;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   height: ${props => props.isScrolled ? '60px' : '120px'};
   transform: ${props => props.isScrolled === 'hidden' ? 'translateY(-100%)' : 'translateY(0)'};
   display: flex;
@@ -48,18 +49,18 @@ const LogoContainer = styled(({ isScrolled, ...rest }) => <div {...rest} />)`
 
 const Logo = styled(({ isScrolled, ...rest }) => <Link {...rest} />)`
   font-size: ${props => props.isScrolled ? '24px' : '32px'};
-  font-weight: bold;
-  color: #333;
+  font-weight: 500;
+  color: #000;
   text-decoration: none;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: 1px;
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 3px;
   transition: all 0.4s ease;
   text-transform: uppercase;
 `;
 
 const NavLinks = styled(({ isScrolled, ...rest }) => <nav {...rest} />)`
   display: flex;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Cormorant Garamond', serif;
   text-transform: uppercase;
   justify-content: center;
   width: 100%;
@@ -77,14 +78,15 @@ const NavLinks = styled(({ isScrolled, ...rest }) => <nav {...rest} />)`
 
 const NavLink = styled(Link)`
   text-decoration: none;
-  color: #333;
-  font-weight: 500;
+  color: #1a1a1a;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   padding: 0 20px 15px;
-  font-size: 14px;
+  font-size: 13px;
   position: relative;
-  
+  font-family: 'Poppins', sans-serif;
+
   &:after {
     content: '';
     position: absolute;
@@ -92,11 +94,11 @@ const NavLink = styled(Link)`
     height: 1px;
     bottom: 10px;
     left: 50%;
-    background-color: #333;
+    background-color: #000;
     transition: all 0.3s ease;
     transform: translateX(-50%);
   }
-  
+
   &:hover:after, &.active:after {
     width: 20px;
   }
@@ -150,13 +152,15 @@ const MobileMenu = styled.div`
 
 const MobileNavLink = styled(Link)`
   text-decoration: none;
-  color: #333;
-  font-weight: 500;
+  color: #1a1a1a;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
+  letter-spacing: 2px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
   text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
 `;
 
 const Header = () => {
