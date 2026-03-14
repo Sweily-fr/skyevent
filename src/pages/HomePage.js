@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useEffect, lazy, Suspense, useState } from 'react';
+import React, { useLayoutEffect, useRef, useEffect, useState } from 'react';
 import SEO from '../components/SEO';
 import SEOSchema from '../components/SEOSchema';
 import { motion, useAnimation } from 'framer-motion';
