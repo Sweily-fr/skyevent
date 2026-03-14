@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 const SEO = ({ title, description, path, image = '/images/Sky-Event-.webp' }) => {
   const siteUrl = 'https://skyevent.fr';
