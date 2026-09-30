@@ -345,9 +345,6 @@ const RealisationsPage = () => {
           Chaque image raconte une histoire unique de succès et d'innovation.
         </HeroDescription>
         <ButtonWrapper>
-          <StandardButton to="/evenementiel" darkBackground={true}>
-            Nos prestations
-          </StandardButton>
           <StandardButton to="/contact" darkBackground={true}>
             Demander un devis
           </StandardButton>

@@ -252,18 +252,18 @@ const Header = () => {
               NOTRE HISTOIRE
             </NavLink>
             <NavLink 
-              to="/evenementiel" 
-              className={activeLink === '/evenementiel' ? 'active' : ''}
-              onClick={() => handleLinkClick('/evenementiel')}
-            >
-              ÉVÈNEMENTIEL
-            </NavLink>
-            <NavLink 
               to="/realisations" 
               className={activeLink === '/realisations' ? 'active' : ''}
               onClick={() => handleLinkClick('/realisations')}
             >
               RÉALISATIONS
+            </NavLink>
+            <NavLink 
+              to="/#contact" 
+              className={activeLink === '/#contact' ? 'active' : ''}
+              onClick={() => handleLinkClick('/#contact')}
+            >
+              PRISE DE CONTACT
             </NavLink>
           </NavLinks>
           
@@ -290,16 +290,16 @@ const Header = () => {
           NOTRE HISTOIRE
         </MobileNavLink>
         <MobileNavLink 
-          to="/evenementiel" 
-          onClick={() => handleLinkClick('/evenementiel')}
-        >
-          ÉVÈNEMENTIEL
-        </MobileNavLink>
-        <MobileNavLink 
           to="/realisations" 
           onClick={() => handleLinkClick('/realisations')}
         >
           RÉALISATIONS
+        </MobileNavLink>
+        <MobileNavLink 
+          to="/#contact" 
+          onClick={() => handleLinkClick('/#contact')}
+        >
+          PRISE DE CONTACT
         </MobileNavLink>
       </MobileMenu>
     </>

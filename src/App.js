@@ -5,7 +5,6 @@ import { createGlobalStyle } from 'styled-components';
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import NotrHistoirePage from './pages/NotrHistoirePage';
-import EvenementielPage from './pages/EvenementielPage';
 import RealisationsPage from './pages/RealisationsPage';
 import BabyShowerPage from './pages/occasions/BabyShowerPage';
 import AnniversairePage from './pages/occasions/AnniversairePage';
@@ -125,7 +124,6 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/notre-histoire" element={<NotrHistoirePage />} />
-            <Route path="/evenementiel" element={<EvenementielPage />} />
             <Route path="/realisations" element={<RealisationsPage />} />
             
             {/* Routes pour les pages d'occasions */}

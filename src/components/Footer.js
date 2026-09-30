@@ -99,7 +99,6 @@ const Footer = () => {
           <FooterTitle>SkyEvent</FooterTitle>
           <FooterLink to="/">Accueil</FooterLink>
           <FooterLink to="/notre-histoire">Notre histoire</FooterLink>
-          <FooterLink to="/evenementiel">Évènementiel</FooterLink>
           <FooterLink to="/realisations">Réalisations</FooterLink>
         </FooterSection>
 

@@ -263,6 +263,7 @@ const StoryTitle = styled.h1`
   }
 `;
 
+// eslint-disable-next-line no-unused-vars -- description commentée temporairement
 const StoryText = styled.p`
   font-size: 1.15rem;
   line-height: 1.8;
@@ -482,10 +483,9 @@ const OurStorySection = () => {
             transition={{ duration: 0.8 }}
           >
             <StoryTitle>{storyTexts[0].title}</StoryTitle>
-            <StoryText>{storyTexts[0].text}</StoryText>
+            {/* <StoryText>{storyTexts[0].text}</StoryText> */}
             
             <CTAContainer>
-              <StandardButton to="/evenementiel" darkBackground={true}>Découvrir nos services</StandardButton>
               <StandardButton to="/realisations" darkBackground={true}>Voir nos réalisations</StandardButton>
             </CTAContainer>
           </TextSection>

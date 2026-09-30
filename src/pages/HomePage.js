@@ -5,11 +5,9 @@ import { motion, useAnimation } from 'framer-motion';
 import styled from 'styled-components';
 import HeroSection from '../components/HeroSection';
 import EventTypesGrid from '../components/EventTypesGrid';
-import TraiteurBanner from '../components/TraiteurBanner';
 import ContactSection from '../components/ContactSection';
 import MobileContactSection from '../components/MobileContactSection';
 import ImageCarousel from '../components/ImageCarousel';
-import RealisationsGrid from '../components/RealisationsGrid';
 
 const HomeContainer = styled.div`
   min-height: 100vh;
@@ -123,14 +121,6 @@ const HomePage = () => {
           <EventTypesGrid />
         </motion.section>
         
-        <motion.section variants={isMobile ? fadeInMobile : fadeIn} style={{ marginTop: isMobile ? '-20px' : '0' }}>
-          <TraiteurBanner />
-        </motion.section>
-        
-        <motion.section variants={fadeIn}>
-          <RealisationsGrid />
-        </motion.section>
-        
         <motion.section variants={fadeIn}>
           <ImageCarousel />
         </motion.section>
@@ -138,7 +128,7 @@ const HomePage = () => {
         {/* Afficher le formulaire de contact approprié selon le type d'appareil */}
         <motion.section 
           variants={isMobile ? fadeInMobile : fadeIn} 
-          id="contact-section"
+          id="contact"
           style={{
             display: 'block',
             width: '100%',

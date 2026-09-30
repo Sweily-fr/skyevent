@@ -243,7 +243,7 @@ const HeroSection = () => {
             L'événementiel, un savoir-faire
           </HeroSubtitle>
           <HeroTitle variants={fadeInUp}>
-            Notre histoire traiteur
+            Notre histoire
           </HeroTitle>
         </motion.div>
         <motion.div 
