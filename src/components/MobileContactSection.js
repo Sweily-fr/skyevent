@@ -333,7 +333,7 @@ const MobileContactSection = () => {
           <InfoIcon>📧</InfoIcon>
           <InfoContent>
             <InfoTitle>Email</InfoTitle>
-            <InfoText>SkyEvent.fr@hotmail.com</InfoText>
+            <InfoText>skyevent.fr@hotmail.com</InfoText>
           </InfoContent>
         </InfoItem>
         

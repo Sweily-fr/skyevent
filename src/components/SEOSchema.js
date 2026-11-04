@@ -32,7 +32,7 @@ const SEOSchema = ({
       "url": "https://skyevent.fr",
       "logo": "https://skyevent.fr/images/Sky-Event-.webp",
       "description": "SkyEvent est un traiteur événementiel sur mesure proposant des services de haute qualité pour tous types d'événements : mariages, baptêmes, anniversaires, événements d'entreprise et événements de marque.",
-      "email": "SkyEvent.fr@hotmail.com",
+      "email": "skyevent.fr@hotmail.com",
       "telephone": "+33 6 79 15 96 15",
       "address": {
         "@type": "PostalAddress",
