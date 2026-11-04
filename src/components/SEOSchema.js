@@ -32,31 +32,15 @@ const SEOSchema = ({
       "url": "https://skyevent.fr",
       "logo": "https://skyevent.fr/images/Sky-Event-.webp",
       "description": "SkyEvent est un traiteur événementiel sur mesure proposant des services de haute qualité pour tous types d'événements : mariages, baptêmes, anniversaires, événements d'entreprise et événements de marque.",
-      "email": "contact@skyevent.fr",
-      "telephone": "+33 1 23 45 67 89",
+      "email": "SkyEvent.fr@hotmail.com",
+      "telephone": "+33 6 79 15 96 15",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "123 Avenue des Champs-Élysées",
-        "addressLocality": "Paris",
-        "postalCode": "75008",
+        "addressRegion": "Île-de-France",
         "addressCountry": "FR"
       },
       "sameAs": [
         "https://www.instagram.com/skyevent.fr/"
-      ],
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "09:00",
-          "closes": "18:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Saturday",
-          "opens": "10:00",
-          "closes": "16:00"
-        }
       ]
     };
 

@@ -9,9 +9,6 @@ import '../styles/iosfix.css'; // Import des styles spécifiques pour iOS
 
 // Images uniques pour chaque section
 const chefImage = '/images/DSC05270.jpg';
-const teamImage1 = '/images/DSC05381.jpg';
-const teamImage2 = '/images/DSC05384.jpg';
-const teamImage3 = '/images/DSC05385.jpg';
 const experienceImage = '/images/DSC05354.jpg';
 const parallaxImage = '/images/DSC05297.jpg';
 
@@ -220,53 +217,6 @@ const StyledImage = styled.img`
   filter: saturate(0.85) contrast(1.05);
 `;
 
-const TeamGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 60px;
-  margin-top: 80px;
-  width: 100%;
-  box-sizing: border-box;
-  
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 30px;
-  }
-`;
-
-const TeamMember = styled(motion.div)`
-  overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
-  position: relative;
-`;
-
-const TeamMemberImage = styled.img`
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-`;
-
-const TeamMemberInfo = styled.div`
-  padding: 20px;
-`;
-
-const TeamMemberName = styled.h3`
-  margin: 0 0 10px 0;
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 400;
-  letter-spacing: 1px;
-  font-size: 1.4rem;
-`;
-
-const TeamMemberRole = styled.p`
-  margin: 0;
-  color: #666;
-  font-weight: 300;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-`;
-
 const NotrHistoirePage = () => {
   const pageRef = useRef(null);
   
@@ -386,47 +336,6 @@ const NotrHistoirePage = () => {
           soigneusement dressées pour éveiller vos papilles. Parfait pour vos repas en tête-à-tête, 
           vos dîners privés ou vos réceptions select.
         </SectionText>
-        
-        <TeamGrid>
-          <TeamMember
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true, margin: "-50px" }}
-          >
-            <TeamMemberImage src={teamImage1} alt="Membre de l'équipe" />
-            <TeamMemberInfo>
-              <TeamMemberName>Alexandre Dubois</TeamMemberName>
-              <TeamMemberRole>Chef Sushi Master</TeamMemberRole>
-            </TeamMemberInfo>
-          </TeamMember>
-          
-          <TeamMember
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true, margin: "-50px" }}
-          >
-            <TeamMemberImage src={teamImage2} alt="Membre de l'équipe" />
-            <TeamMemberInfo>
-              <TeamMemberName>Sophie Martin</TeamMemberName>
-              <TeamMemberRole>Responsable Événementiel</TeamMemberRole>
-            </TeamMemberInfo>
-          </TeamMember>
-          
-          <TeamMember
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true, margin: "-50px" }}
-          >
-            <TeamMemberImage src={teamImage3} alt="Membre de l'équipe" />
-            <TeamMemberInfo>
-              <TeamMemberName>Thomas Leroy</TeamMemberName>
-              <TeamMemberRole>Chef de Cuisine</TeamMemberRole>
-            </TeamMemberInfo>
-          </TeamMember>
-        </TeamGrid>
       </Section>
       <FullWidthSection 
         bgImage={parallaxImage}

@@ -114,7 +114,7 @@ const Footer = () => {
 
         <FooterSection>
           <FooterTitle>Contact</FooterTitle>
-          <FooterLink as="a" href="mailto:contact@skyevent.fr">contact@skyevent.fr</FooterLink>
+          <FooterLink as="a" href="mailto:SkyEvent.fr@hotmail.com">SkyEvent.fr@hotmail.com</FooterLink>
           <SocialLinks>
             <SocialIcon href="https://www.instagram.com/skyevent.fr/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <FontAwesomeIcon icon={faInstagram} size="lg" />

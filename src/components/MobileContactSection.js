@@ -333,7 +333,7 @@ const MobileContactSection = () => {
           <InfoIcon>📧</InfoIcon>
           <InfoContent>
             <InfoTitle>Email</InfoTitle>
-            <InfoText>contact@skyevent.fr</InfoText>
+            <InfoText>SkyEvent.fr@hotmail.com</InfoText>
           </InfoContent>
         </InfoItem>
         
@@ -341,7 +341,15 @@ const MobileContactSection = () => {
           <InfoIcon>📱</InfoIcon>
           <InfoContent>
             <InfoTitle>Téléphone</InfoTitle>
-            <InfoText>+33 1 23 45 67 89</InfoText>
+            <InfoText>06 79 15 96 15</InfoText>
+          </InfoContent>
+        </InfoItem>
+
+        <InfoItem>
+          <InfoIcon>📍</InfoIcon>
+          <InfoContent>
+            <InfoTitle>Zone d'intervention</InfoTitle>
+            <InfoText>Île-de-France</InfoText>
           </InfoContent>
         </InfoItem>
       </ContactInfo>

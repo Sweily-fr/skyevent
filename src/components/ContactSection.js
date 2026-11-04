@@ -408,7 +408,7 @@ const ContactSection = () => {
             <InfoIcon>📧</InfoIcon>
             <InfoContent>
               <InfoTitle>Email</InfoTitle>
-              <InfoText>contact@skyevent.fr</InfoText>
+              <InfoText>SkyEvent.fr@hotmail.com</InfoText>
             </InfoContent>
           </InfoItem>
           
@@ -416,24 +416,15 @@ const ContactSection = () => {
             <InfoIcon>📱</InfoIcon>
             <InfoContent>
               <InfoTitle>Téléphone</InfoTitle>
-              <InfoText>+33 1 23 45 67 89</InfoText>
+              <InfoText>06 79 15 96 15</InfoText>
             </InfoContent>
           </InfoItem>
           
           <InfoItem>
             <InfoIcon>📍</InfoIcon>
             <InfoContent>
-              <InfoTitle>Adresse</InfoTitle>
-              <InfoText>123 Avenue des Champs-Élysées, 75008 Paris</InfoText>
-            </InfoContent>
-          </InfoItem>
-          
-          <InfoItem>
-            <InfoIcon>⏰</InfoIcon>
-            <InfoContent>
-              <InfoTitle>Horaires</InfoTitle>
-              <InfoText>Lundi - Vendredi: 9h - 18h</InfoText>
-              <InfoText>Samedi: 10h - 16h</InfoText>
+              <InfoTitle>Zone d'intervention</InfoTitle>
+              <InfoText>Île-de-France</InfoText>
             </InfoContent>
           </InfoItem>
         </ContactInfo>
