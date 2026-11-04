@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import StandardButton from './StandardButton';
+import { sendContactMessage } from '../utils/sendContactMessage';
 
 const SectionContainer = styled.section`
   padding: 100px 40px;
@@ -272,6 +273,14 @@ const SuccessMessage = styled(motion.div)`
   margin-bottom: 20px;
 `;
 
+const ErrorMessage = styled(motion.div)`
+  background-color: #fdecea;
+  color: #b3261e;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+`;
+
 // Composant optimisé pour mobile
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -283,7 +292,9 @@ const ContactSection = () => {
   });
   
   const [formSubmitted, setFormSubmitted] = useState(false);
-  
+  const [formError, setFormError] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -292,23 +303,32 @@ const ContactSection = () => {
     }));
   };
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Ici, vous implémenteriez la logique d'envoi du formulaire
-    // Pour l'instant, on simule juste une soumission réussie
-    setFormSubmitted(true);
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      event: '',
-      message: ''
-    });
-    
-    // Réinitialiser le message de succès après 5 secondes
-    setTimeout(() => {
-      setFormSubmitted(false);
-    }, 5000);
+    setIsSending(true);
+    setFormError(false);
+
+    try {
+      await sendContactMessage(formData);
+      setFormSubmitted(true);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        event: '',
+        message: ''
+      });
+
+      // Réinitialiser le message de succès après 5 secondes
+      setTimeout(() => {
+        setFormSubmitted(false);
+      }, 5000);
+    } catch (error) {
+      console.error(error);
+      setFormError(true);
+    } finally {
+      setIsSending(false);
+    }
   };
   
   return (
@@ -330,7 +350,18 @@ const ContactSection = () => {
               Votre message a été envoyé avec succès. Nous vous contacterons très bientôt !
             </SuccessMessage>
           )}
-          
+
+          {formError && (
+            <ErrorMessage
+              role="alert"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              Votre message n'a pas pu être envoyé. Merci de réessayer ou de nous contacter au 06 79 15 96 15.
+            </ErrorMessage>
+          )}
+
           <FormGroup>
             <FormLabel htmlFor="name">Nom complet</FormLabel>
             <FormInput 
@@ -394,11 +425,12 @@ const ContactSection = () => {
             <StandardButton 
               as="button"
               type="submit"
+              disabled={isSending}
               darkBackground={false}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Demander un devis
+              {isSending ? 'Envoi en cours...' : 'Demander un devis'}
             </StandardButton>
           </ButtonWrapper>
         </ContactForm>

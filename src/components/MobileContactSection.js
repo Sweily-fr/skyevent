@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import StandardButton from './StandardButton';
+import { sendContactMessage } from '../utils/sendContactMessage';
 
 // Version simplifiée et optimisée pour mobile
 const SectionContainer = styled.section`
@@ -217,6 +218,15 @@ const SuccessMessage = styled(motion.div)`
   font-size: 0.9rem;
 `;
 
+const ErrorMessage = styled(motion.div)`
+  background-color: #fdecea;
+  color: #b3261e;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+`;
+
 // Composant spécifique pour mobile
 const MobileContactSection = () => {
   const [formData, setFormData] = useState({
@@ -227,7 +237,9 @@ const MobileContactSection = () => {
   });
   
   const [formSubmitted, setFormSubmitted] = useState(false);
-  
+  const [formError, setFormError] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -236,19 +248,30 @@ const MobileContactSection = () => {
     }));
   };
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      message: ''
-    });
-    
-    setTimeout(() => {
-      setFormSubmitted(false);
-    }, 5000);
+    setIsSending(true);
+    setFormError(false);
+
+    try {
+      await sendContactMessage(formData);
+      setFormSubmitted(true);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        message: ''
+      });
+
+      setTimeout(() => {
+        setFormSubmitted(false);
+      }, 5000);
+    } catch (error) {
+      console.error(error);
+      setFormError(true);
+    } finally {
+      setIsSending(false);
+    }
   };
   
   return (
@@ -268,7 +291,18 @@ const MobileContactSection = () => {
             Message envoyé avec succès !
           </SuccessMessage>
         )}
-        
+
+        {formError && (
+          <ErrorMessage
+            role="alert"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            Message non envoyé. Merci de réessayer ou de nous contacter au 06 79 15 96 15.
+          </ErrorMessage>
+        )}
+
         <FormGroup>
           <FormLabel htmlFor="mobile-name">Nom complet</FormLabel>
           <FormInput 
@@ -320,10 +354,11 @@ const MobileContactSection = () => {
           <StandardButton 
             as="button"
             type="submit"
+            disabled={isSending}
             darkBackground={false}
             style={{ width: '100%', maxWidth: '250px' }}
           >
-            Envoyer
+            {isSending ? 'Envoi en cours...' : 'Envoyer'}
           </StandardButton>
         </ButtonWrapper>
       </ContactForm>
