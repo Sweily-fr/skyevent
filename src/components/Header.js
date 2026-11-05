@@ -1,7 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { AnimatePresence, MotionConfig, motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 
+const MOBILE_LINKS = [
+  { to: '/', label: 'Accueil', isActive: ({ pathname, hash }) => pathname === '/' && hash !== '#contact' },
+  { to: '/notre-histoire', label: 'Notre histoire', isActive: ({ pathname }) => pathname === '/notre-histoire' },
+  { to: '/realisations', label: 'Réalisations', isActive: ({ pathname }) => pathname.startsWith('/realisations') },
+  { to: '/#contact', label: 'Prise de contact', isActive: ({ hash }) => hash === '#contact' },
+];
+
+const menuVariants = {
+  closed: { opacity: 0, transition: { duration: 0.2 } },
+  open: { opacity: 1, transition: { duration: 0.25, staggerChildren: 0.06, delayChildren: 0.05 } },
+};
+
+const menuItemVariants = {
+  closed: { opacity: 0, y: 14 },
+  open: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } },
+};
 
 const HeaderContainer = styled(({ isScrolled, ...rest }) => <header {...rest} />)`
   position: fixed;
@@ -104,18 +123,19 @@ const NavLink = styled(Link)`
   }
 `;
 
-const MobileMenuButton = styled(({ isScrolled, ...rest }) => <button {...rest} />)`
+const MobileMenuButton = styled.button`
   display: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   background: none;
   border: none;
-  font-size: 24px;
   cursor: pointer;
   position: absolute;
-  right: 20px;
-  top: ${props => props.isScrolled ? '15px' : '30px'};
-  transition: all 0.4s ease;
+  right: 8px;
   color: #000;
-  
+  -webkit-tap-highlight-color: transparent;
+
   @media (max-width: 768px) {
     display: block;
     top: 50%;
@@ -123,44 +143,114 @@ const MobileMenuButton = styled(({ isScrolled, ...rest }) => <button {...rest} /
   }
 `;
 
-const MobileMenu = styled.div`
+const MenuIconBar = styled.span`
+  position: absolute;
+  left: 11px;
+  width: 22px;
+  height: 1.5px;
+  background-color: currentColor;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+
+  &:nth-child(1) {
+    top: 15px;
+    transform: ${props => props.$open ? 'translateY(6.5px) rotate(45deg)' : 'none'};
+  }
+
+  &:nth-child(2) {
+    top: 21.5px;
+    opacity: ${props => props.$open ? 0 : 1};
+  }
+
+  &:nth-child(3) {
+    top: 28px;
+    transform: ${props => props.$open ? 'translateY(-6.5px) rotate(-45deg)' : 'none'};
+  }
+`;
+
+// Le body n'est pas verrouillé (overflow) pour ne pas interférer avec les correctifs iOS :
+// touch-action empêche la page de défiler derrière le menu.
+const MobileMenu = styled(motion.div)`
   position: fixed;
   top: 60px;
   left: 0;
   right: 0;
-  background-color: white;
-  padding: 20px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  display: none;
+  bottom: 0;
+  display: flex;
   flex-direction: column;
-  gap: 15px;
+  padding: 16px 24px calc(24px + env(safe-area-inset-bottom));
+  background-color: white;
   z-index: 999;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-  
-  &.visible {
-    display: flex;
-    opacity: 1;
-    animation: fadeIn 0.3s ease-in-out;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: none;
+
+  /* Écrans très bas (mobile à l'horizontale) : le contenu doit pouvoir défiler */
+  @media (max-height: 560px) {
+    touch-action: pan-y;
   }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+
+  @media (min-width: 769px) {
+    display: none;
   }
 `;
 
+const MobileNavList = styled.nav`
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+`;
+
 const MobileNavLink = styled(Link)`
+  display: inline-block;
+  position: relative;
+  padding: 10px 4px;
   text-decoration: none;
   color: #1a1a1a;
+  font-family: 'Cormorant Garamond', serif;
   font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  padding: 12px 0;
-  border-bottom: 1px solid #f0f0f0;
+  font-size: clamp(1.7rem, 8vw, 2.2rem);
+  letter-spacing: 1px;
   text-align: center;
-  font-family: 'Poppins', sans-serif;
-  font-size: 13px;
+  -webkit-tap-highlight-color: transparent;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 4px;
+    width: ${props => props.$active ? '32px' : '0'};
+    height: 1px;
+    background-color: #d4af37;
+    transform: translateX(-50%);
+  }
+`;
+
+const MobileMenuContact = styled(motion.div)`
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+
+  a {
+    padding: 4px;
+    color: #555;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    text-decoration: none;
+  }
+
+  a.instagram {
+    margin-top: 4px;
+    color: #1a1a1a;
+    font-size: 1.25rem;
+  }
 `;
 
 const Header = () => {
@@ -168,7 +258,8 @@ const Header = () => {
   const [activeLink, setActiveLink] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
-  
+  const location = useLocation();
+
   useEffect(() => {
     const path = window.location.pathname;
     setActiveLink(path);
@@ -267,41 +358,63 @@ const Header = () => {
             </NavLink>
           </NavLinks>
           
-          <MobileMenuButton isScrolled={isScrolled} onClick={toggleMobileMenu}>
-            {mobileMenuOpen ? '✕' : '☰'}
+          <MobileMenuButton
+            type="button"
+            onClick={toggleMobileMenu}
+            aria-label={mobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-expanded={mobileMenuOpen}
+          >
+            <MenuIconBar $open={mobileMenuOpen} />
+            <MenuIconBar $open={mobileMenuOpen} />
+            <MenuIconBar $open={mobileMenuOpen} />
           </MobileMenuButton>
         </MainNav>
       </HeaderContainer>
-      
-      <MobileMenu 
-        $isScrolled={isScrolled}
-        className={mobileMenuOpen ? 'visible' : ''}
-      >
-        <MobileNavLink 
-          to="/" 
-          onClick={() => handleLinkClick('/')}
-        >
-          ACCUEIL
-        </MobileNavLink>
-        <MobileNavLink 
-          to="/notre-histoire" 
-          onClick={() => handleLinkClick('/notre-histoire')}
-        >
-          NOTRE HISTOIRE
-        </MobileNavLink>
-        <MobileNavLink 
-          to="/realisations" 
-          onClick={() => handleLinkClick('/realisations')}
-        >
-          RÉALISATIONS
-        </MobileNavLink>
-        <MobileNavLink 
-          to="/#contact" 
-          onClick={() => handleLinkClick('/#contact')}
-        >
-          PRISE DE CONTACT
-        </MobileNavLink>
-      </MobileMenu>
+
+      <MotionConfig reducedMotion="user">
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <MobileMenu
+              variants={menuVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+            >
+              <MobileNavList aria-label="Menu principal">
+                {MOBILE_LINKS.map(({ to, label, isActive }) => {
+                  const active = isActive(location);
+                  return (
+                    <motion.div key={to} variants={menuItemVariants}>
+                      <MobileNavLink
+                        to={to}
+                        $active={active}
+                        aria-current={active ? 'page' : undefined}
+                        onClick={() => handleLinkClick(to)}
+                      >
+                        {label}
+                      </MobileNavLink>
+                    </motion.div>
+                  );
+                })}
+              </MobileNavList>
+
+              <MobileMenuContact variants={menuItemVariants}>
+                <a href="tel:+33679159615">06 79 15 96 15</a>
+                <a href="mailto:skyevent.fr@hotmail.com">skyevent.fr@hotmail.com</a>
+                <a
+                  className="instagram"
+                  href="https://www.instagram.com/skyevent.fr/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                >
+                  <FontAwesomeIcon icon={faInstagram} />
+                </a>
+              </MobileMenuContact>
+            </MobileMenu>
+          )}
+        </AnimatePresence>
+      </MotionConfig>
     </>
   );
 };
