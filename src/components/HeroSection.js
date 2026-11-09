@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import StandardButton from './StandardButton';
 
 // Chemin vers la vidéo locale dans le dossier public
-const videoSource = '/videos/IMG_0724.MP4';
+const videoSource = '/videos/IMG_4052.mp4';
 
 // Image de secours
 const fallbackImage = '/images/DSC05331.jpg';
@@ -54,6 +54,11 @@ const Overlay = styled.div`
   right: 0;
   bottom: 0;
   z-index: 2;
+  pointer-events: none;
+  /* Voile sombre pour faire ressortir le logo et les textes */
+  background:
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 70%),
+    rgba(0, 0, 0, 0.35);
 `;
 
 const HeroContent = styled.div`
@@ -81,6 +86,24 @@ const HeroContent = styled.div`
     padding: 20px;
     max-width: 100%;
     width: 90%;
+  }
+`;
+
+const HeroLogo = styled(motion.img)`
+  display: block;
+  width: 200px;
+  height: auto;
+  margin: 0 auto 25px;
+  filter: brightness(0) invert(1); /* Logo en blanc, comme sur la page Notre histoire */
+  object-fit: contain;
+
+  @media (max-width: 768px) {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 480px) {
+    width: 120px;
   }
 `;
 
@@ -239,6 +262,11 @@ const HeroSection = () => {
             }
           }}
         >
+          <HeroLogo
+            variants={fadeInUp}
+            src="/images/Sky Event ..svg"
+            alt="SkyEvent Logo"
+          />
           <HeroSubtitle variants={fadeInUp}>
             L'événementiel, un savoir-faire
           </HeroSubtitle>

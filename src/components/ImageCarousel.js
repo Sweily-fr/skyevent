@@ -9,12 +9,26 @@ const carouselImages = [
   { src: '/images/DSC05407.jpg', alt: 'Décoration élégante pour réception par SkyEvent' },
   { src: '/images/DSC05400.jpg', alt: 'Présentation culinaire raffinée pour événement' },
   { src: '/images/DSC05351.jpg', alt: 'Buffet gastronomique pour mariage par SkyEvent' },
-  { src: '/images/DSC05372.jpg', alt: 'Aménagement d\'espace pour événement corporate' }
+  { src: '/images/DSC05372.jpg', alt: 'Aménagement d\'espace pour événement corporate' },
+  { src: '/images/photo-20261106-2.jpg', alt: 'Bar à sushis SkyEvent décoré de bougies et fleurs séchées' },
+  { src: '/images/DSC05325.jpg', alt: 'Service traiteur pour événement luxueux' },
+  { src: '/images/photo-20261106-1.jpg', alt: 'Buffet de sushis et makis décoré de fleurs comestibles' },
+  { src: '/images/DSC05291.jpg', alt: 'Décoration florale pour événement de prestige' },
+  { src: '/images/IMG_1082.jpg', alt: 'Comptoir à sushis SkyEvent avec bougies et sauces maison' },
+  { src: '/images/DSC05281.jpg', alt: 'Décoration de table pour mariage par SkyEvent' },
+  { src: '/images/DSC05343.jpg', alt: 'Service traiteur élégant pour réception' },
+  { src: '/images/IMG_1085.jpg', alt: 'Bar à sushis éclairé à la bougie pour une réception' },
+  { src: '/images/DSC05363.jpg', alt: 'Service traiteur pour soirée d\'exception' },
+  { src: '/images/DSC05386.jpg', alt: 'Buffet gastronomique pour réception privée' },
+  { src: '/images/DSC05435.jpg', alt: 'Présentation gastronomique pour réception SkyEvent' }
 ];
 
+// Nombre d'images à charger avant d'afficher le carrousel (les autres se chargent ensuite)
+const INITIAL_PRELOAD_COUNT = 3;
+
 // Préchargement des images avec gestion d'état de chargement
-const preloadImages = () => {
-  return Promise.all(carouselImages.map(image => {
+const preloadImages = (images) => {
+  return Promise.all(images.map(image => {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => resolve();
@@ -152,9 +166,11 @@ const CarouselImage = styled.img`
 
 const CarouselControls = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   margin-top: 30px;
-  gap: 15px;
+  padding: 0 16px;
+  gap: 10px 6px;
 `;
 
 const CarouselDot = styled.button`
@@ -280,8 +296,10 @@ const ImageCarousel = () => {
     // S'assurer que le composant est monté avant de charger les images
     const loadImages = async () => {
       try {
-        await preloadImages();
+        await preloadImages(carouselImages.slice(0, INITIAL_PRELOAD_COUNT));
         setImagesLoaded(true);
+        // Charger les images suivantes en arrière-plan
+        preloadImages(carouselImages.slice(INITIAL_PRELOAD_COUNT));
       } catch (error) {
         console.error('Erreur lors du chargement des images:', error);
         // Afficher quand même le carousel même si certaines images n'ont pas chargé

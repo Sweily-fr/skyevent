@@ -8,6 +8,10 @@ import StandardButton from '../components/StandardButton';
 
 // Liste des images des réalisations avec descriptions pour le SEO
 const realisationsImages = [
+  { src: '/images/photo-20261106-2.jpg', alt: 'Bar à sushis SkyEvent décoré de bougies et fleurs séchées' },
+  { src: '/images/photo-20261106-1.jpg', alt: 'Buffet de sushis et makis décoré de fleurs comestibles' },
+  { src: '/images/IMG_1082.jpg', alt: 'Comptoir à sushis SkyEvent avec bougies et sauces maison' },
+  { src: '/images/IMG_1085.jpg', alt: 'Bar à sushis éclairé à la bougie pour une réception' },
   { src: '/images/DSC05266.jpg', alt: 'Décoration élégante pour événement SkyEvent' },
   { src: '/images/DSC05275.jpg', alt: 'Buffet gastronomique préparé par SkyEvent' },
   { src: '/images/DSC05278.jpg', alt: 'Présentation culinaire raffinée pour réception' },
@@ -45,6 +49,30 @@ const realisationsImages = [
   { src: '/images/DSC05400.jpg', alt: 'Buffet cocktail pour événement d\'entreprise' },
   { src: '/images/DSC05435.jpg', alt: 'Présentation gastronomique pour réception SkyEvent' }
 ];
+
+// Vidéos des réalisations (format portrait 9:16)
+const realisationsVideos = [
+  'skyevent-film.mp4',
+  'IMG_4052.mp4', 'IMG_4082.mp4', 'IMG_4080.mp4', 'IMG_4061.mp4', 'IMG_4060.mp4',
+  'IMG_4059.mp4', 'IMG_4055.mp4', 'IMG_4037.mp4', 'IMG_4025.mp4', 'IMG_2672.mp4',
+  'IMG_2671.mp4', 'IMG_2670.mp4', 'IMG_2669.mp4', 'IMG_2656.mp4', 'IMG_1104.mp4',
+  'IMG_1096.mp4'
+].map((file) => ({ type: 'video', src: `/videos/${file}`, alt: 'Vidéo de réalisation SkyEvent' }));
+
+// Photos et vidéos mélangées : une vidéo après chaque paire de photos
+const realisationsMedia = (() => {
+  const media = [];
+  const photos = realisationsImages.map((image) => ({ type: 'image', ...image }));
+  let v = 0;
+  photos.forEach((photo, i) => {
+    media.push(photo);
+    if (i % 2 === 1 && v < realisationsVideos.length) {
+      media.push(realisationsVideos[v++]);
+    }
+  });
+  return media.concat(realisationsVideos.slice(v));
+})();
+
 
 const PageContainer = styled.div`
   min-height: 100vh;
@@ -246,6 +274,51 @@ const ImagePlaceholder = styled(motion.div)`
   }
 `;
 
+const RealisationVideo = styled.video`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  background: #111;
+`;
+
+const PlayIcon = styled.span`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid #d4af37;
+  background: rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    border-style: solid;
+    border-width: 10px 0 10px 16px;
+    border-color: transparent transparent transparent #ffffff;
+  }
+
+  @media (min-width: 769px) {
+    ${RealisationCard}:hover & {
+      opacity: 0;
+    }
+  }
+`;
+
+const ModalVideo = styled.video`
+  max-width: 90%;
+  max-height: 90vh;
+`;
+
 const ImageModal = styled.div`
   position: fixed;
   top: 0;
@@ -307,7 +380,7 @@ const RealisationsPage = () => {
   
   // Fonction pour charger plus d'images
   const loadMoreImages = () => {
-    setVisibleImages(prev => Math.min(prev + 6, realisationsImages.length));
+    setVisibleImages(prev => Math.min(prev + 6, realisationsMedia.length));
   };
   
   // Ouvrir l'image en modal
@@ -320,7 +393,20 @@ const RealisationsPage = () => {
   // Fermer le modal
   const closeImageModal = () => {
     setIsModalOpen(false);
+    setSelectedImage(null); // Arrête la vidéo éventuellement en lecture
     document.body.style.overflow = 'auto'; // Réactiver le scroll du body
+  };
+
+  // Lecture au survol sur desktop uniquement
+  const handleVideoHover = (e, play) => {
+    if (window.innerWidth <= 768) return;
+    const video = e.currentTarget.querySelector('video');
+    if (!video) return;
+    if (play) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
   };
 
   return (
@@ -345,22 +431,24 @@ const RealisationsPage = () => {
           Chaque image raconte une histoire unique de succès et d'innovation.
         </HeroDescription>
         <ButtonWrapper>
-          <StandardButton to="/contact" darkBackground={true}>
+          <StandardButton to="/#contact" darkBackground={true}>
             Demander un devis
           </StandardButton>
         </ButtonWrapper>
       </HeroSection>
       
       <GallerySection>
-        <SectionTitle>Galerie Photos</SectionTitle>
+        <SectionTitle>Galerie</SectionTitle>
         <RealisationsGrid ref={gridRef}>
-          {realisationsImages.slice(0, visibleImages).map((image, index) => (
+          {realisationsMedia.slice(0, visibleImages).map((item, index) => {
+            const isLoaded = item.type === 'video' || loadedImages[item.src];
+            return (
             <RealisationCard
-              key={index}
+              key={item.src}
               initial={{ opacity: 0, y: 30 }}
               animate={{
-                opacity: loadedImages[image.src] ? 1 : 0,
-                y: loadedImages[image.src] ? 0 : 30
+                opacity: isLoaded ? 1 : 0,
+                y: isLoaded ? 0 : 30
               }}
               transition={{
                 opacity: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
@@ -368,15 +456,30 @@ const RealisationsPage = () => {
                 delay: index % 6 * 0.05
               }}
               viewport={{ once: true, margin: "-100px 0px -100px 0px" }}
-              onClick={() => openImageModal(image)}
+              onClick={() => openImageModal(item)}
+              onMouseEnter={item.type === 'video' ? (e) => handleVideoHover(e, true) : undefined}
+              onMouseLeave={item.type === 'video' ? (e) => handleVideoHover(e, false) : undefined}
             >
+              {item.type === 'video' ? (
+                <>
+                  <RealisationVideo
+                    src={`${item.src}#t=0.1`}
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    aria-label={item.alt}
+                  />
+                  <PlayIcon />
+                </>
+              ) : (
               <RealisationImage 
-                src={image.src}
-                alt={image.alt}
+                src={item.src}
+                alt={item.alt}
                 initial={false}
                 animate={{
-                  opacity: loadedImages[image.src] ? 1 : 0,
-                  scale: loadedImages[image.src] ? 1 : 0.97
+                  opacity: isLoaded ? 1 : 0,
+                  scale: isLoaded ? 1 : 0.97
                 }}
                 transition={{
                   opacity: { duration: 0.3 },
@@ -392,18 +495,20 @@ const RealisationsPage = () => {
                   backfaceVisibility: 'hidden'
                 }}
               />
-              {!loadedImages[image.src] && (
+              )}
+              {!isLoaded && (
                 <ImagePlaceholder 
                   initial={{ opacity: 1 }}
-                  animate={{ opacity: loadedImages[image.src] ? 0 : 1 }}
+                  animate={{ opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 />
               )}
             </RealisationCard>
-          ))}
+            );
+          })}
         </RealisationsGrid>
         
-        {visibleImages < realisationsImages.length && (
+        {visibleImages < realisationsMedia.length && (
           <div style={{ textAlign: 'center', margin: '40px 0' }}>
             <StandardButton onClick={loadMoreImages}>
               Voir plus de réalisations
@@ -411,13 +516,13 @@ const RealisationsPage = () => {
           </div>
         )}
         
-        {visibleImages === realisationsImages.length && (
+        {visibleImages === realisationsMedia.length && (
           <div style={{ marginTop: '40px' }}>
             <p style={{ marginBottom: '20px', fontSize: '1.1rem' }}>
               Vous souhaitez en voir plus ou discuter de votre projet ?
             </p>
             <ButtonWrapper style={{ justifyContent: 'center' }}>
-              <StandardButton to="/contact" darkBackground={false}>
+              <StandardButton to="/#contact" darkBackground={false}>
                 Contactez-nous
               </StandardButton>
             </ButtonWrapper>
@@ -426,9 +531,19 @@ const RealisationsPage = () => {
         
         <ImageModal isOpen={isModalOpen} onClick={closeImageModal}>
           {selectedImage && (
-            <ModalImage src={selectedImage.src} alt={selectedImage.alt} />
+            selectedImage.type === 'video' ? (
+              <ModalVideo
+                src={selectedImage.src}
+                controls
+                autoPlay
+                playsInline
+                onClick={(e) => e.stopPropagation()}
+              />
+            ) : (
+              <ModalImage src={selectedImage.src} alt={selectedImage.alt} />
+            )
           )}
-          <CloseButton onClick={closeImageModal} aria-label="Fermer l'image">&times;</CloseButton>
+          <CloseButton onClick={closeImageModal} aria-label="Fermer">&times;</CloseButton>
         </ImageModal>
       </GallerySection>
       
