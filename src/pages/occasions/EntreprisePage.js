@@ -38,12 +38,7 @@ const EntreprisePage = () => {
 
   return (
     <>
-      <SEO 
-        title="Traiteur Événements d'Entreprise"
-        description="Services traiteur professionnels pour vos événements d'entreprise. Cocktails d'affaires, séminaires et team building culinaires sur mesure."
-        path="/evenement-entreprise"
-        image="/images/DSC05410.jpg"
-      />
+      <SEO path="/realisations/evenements-dentreprise" />
       <OccasionTemplate {...pageData} occasionType="entreprise" />
     </>
   );

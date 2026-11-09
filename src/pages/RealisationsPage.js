@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SEO from '../components/SEO';
-import SEOSchema from '../components/SEOSchema';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import ContactSection from '../components/ContactSection';
@@ -363,7 +362,6 @@ const RealisationsPage = () => {
       left: 0,
       behavior: 'auto'
     });
-    document.title = 'Nos réalisations - SkyEvent';
     
     // Préchargement des images
     realisationsImages.forEach((image) => {
@@ -411,19 +409,7 @@ const RealisationsPage = () => {
 
   return (
     <PageContainer>
-      <SEO 
-        title="Nos Réalisations"
-        description="Découvrez nos plus belles réalisations événementielles. Mariages, séminaires, anniversaires - chaque événement est unique et reflète l'excellence de notre savoir-faire."
-        path="/realisations"
-        image="/images/DSC05266.jpg"
-      />
-      <SEOSchema 
-        pageType="CollectionPage" 
-        pageName="Nos Réalisations | SkyEvent - Traiteur Événementiel" 
-        pageDescription="Découvrez nos réalisations en matière d'événementiel et de traiteur. Mariages, événements d'entreprise, anniversaires et plus encore." 
-        pageUrl="https://skyevent.fr/realisations" 
-        pageImage="/images/DSC05266.jpg" 
-      />
+      <SEO path="/realisations" />
       <HeroSection>
         <HeroTitle>Nos Réalisations</HeroTitle>
         <HeroDescription>

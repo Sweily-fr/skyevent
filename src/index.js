@@ -5,6 +5,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Balises SEO écrites dans le HTML statique au build (scripts/prerender.js) :
+// on les retire avant le rendu, le composant SEO (React Helmet) les recrée.
+document.querySelectorAll('[data-prerender]').forEach((el) => el.remove());
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

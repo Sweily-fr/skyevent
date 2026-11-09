@@ -1,6 +1,5 @@
 import React, { useLayoutEffect, useRef, useEffect, useState } from 'react';
 import SEO from '../components/SEO';
-import SEOSchema from '../components/SEOSchema';
 import { motion, useAnimation } from 'framer-motion';
 import styled from 'styled-components';
 import HeroSection from '../components/HeroSection';
@@ -83,25 +82,13 @@ const HomePage = () => {
   useLayoutEffect(() => {
     // Utiliser scrollTo sans comportement fluide pour de meilleures performances
     window.scrollTo(0, 0);
-    document.title = 'SkyEvent - Traiteur Événementiel Sur Mesure';
   }, []);
 
   // Pas besoin de créer des versions animées des composants
 
   return (
     <HomeContainer>
-      <SEO 
-        title="Accueil"
-        description="Découvrez SkyEvent, votre traiteur événementiel sur mesure à Paris. Mariages, anniversaires, événements d'entreprise - créez des moments uniques avec notre cuisine raffinée et notre service d'exception."
-        path="/"
-      />
-      <SEOSchema 
-        pageType="WebPage" 
-        pageName="SkyEvent - Traiteur Événementiel Sur Mesure" 
-        pageDescription="Créez des moments inoubliables avec nos services traiteur sur-mesure pour mariages, événements privés et professionnels." 
-        pageUrl="https://skyevent.fr" 
-        pageImage="/images/DSC05325.jpg" 
-      />
+      <SEO path="/" />
       <motion.main
         initial="hidden"
         animate={controls}

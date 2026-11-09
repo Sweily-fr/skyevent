@@ -1,0 +1,123 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/index.php/nous-contacter",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/nous-contacter/",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/evenementiel",
+      "destination": "/realisations",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/evenementiel/",
+      "destination": "/realisations",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/communication",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/communication/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/politique-de-confidentialite",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/politique-de-confidentialite/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/politique-de-cookies-ue",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/politique-de-cookies-ue/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index.php/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-:path*",
+      "destination": "/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Content-Language",
+          "value": "fr"
+        }
+      ]
+    },
+    {
+      "source": "/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(images|videos)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=86400"
+        }
+      ]
+    }
+  ]
+}

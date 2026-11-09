@@ -36,12 +36,7 @@ const AnniversairePage = () => {
 
   return (
     <>
-      <SEO 
-        title="Traiteur Anniversaire"
-        description="Organisez un anniversaire inoubliable avec SkyEvent. Buffets élégants, gâteaux personnalisés et service complet pour une célébration mémorable."
-        path="/anniversaire"
-        image="/images/DSC05355.jpg"
-      />
+      <SEO path="/realisations/anniversaire" />
       <OccasionTemplate {...pageData} occasionType="anniversaire" />
     </>
   );

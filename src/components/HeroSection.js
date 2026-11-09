@@ -67,7 +67,7 @@ const HeroContent = styled.div`
   left: 50%;
   transform: translateX(-50%);
   -webkit-transform: translateX(-50%); /* Compatibilité iOS */
-  max-width: 800px;
+  max-width: 960px;
   text-align: center;
   padding: 30px;
   z-index: 3;
@@ -105,35 +105,30 @@ const HeroLogo = styled(motion.img)`
   @media (max-width: 480px) {
     width: 120px;
   }
+
+  @media (max-height: 760px) {
+    width: 130px;
+    margin-bottom: 15px;
+  }
 `;
 
 const HeroTitle = styled(motion.h1)`
-  font-size: 3.5rem;
+  /* Taille fluide : le titre tient sur 1 à 2 lignes sans pousser le logo hors de l'écran */
+  font-size: clamp(1.5rem, 3.2vw, 2.9rem);
   font-weight: 400;
-  margin-bottom: 20px;
+  margin: 0 auto 20px;
   font-family: 'Cormorant Garamond', serif;
   color: #fff;
-  letter-spacing: 5px;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  line-height: 1.1;
-  max-width: 800px;
+  line-height: 1.15;
+  max-width: 900px;
+  text-wrap: balance; /* Répartit le titre de façon équilibrée sur les lignes */
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  
-  @media (max-width: 1200px) {
-    font-size: 2.5rem;
-  }
-  
-  @media (max-width: 992px) {
-    font-size: 2.5rem;
-  }
-  
+
   @media (max-width: 768px) {
-    font-size: 2.2rem;
-    letter-spacing: 3px;
-  }
-  
-  @media (max-width: 480px) {
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 6.5vw, 2rem);
+    letter-spacing: 2px;
   }
 `;
 
@@ -271,7 +266,7 @@ const HeroSection = () => {
             L'événementiel, un savoir-faire
           </HeroSubtitle>
           <HeroTitle variants={fadeInUp}>
-            Notre histoire
+            Traiteur événementiel sur mesure
           </HeroTitle>
         </motion.div>
         <motion.div 

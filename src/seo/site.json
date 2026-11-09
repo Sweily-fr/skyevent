@@ -1,0 +1,43 @@
+{
+  "siteUrl": "https://skyevent.fr",
+  "siteName": "SkyEvent",
+  "defaultImage": "/images/og-skyevent.jpg",
+  "defaultImageWidth": 1200,
+  "defaultImageHeight": 630,
+  "business": {
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "FoodEstablishment"],
+    "@id": "https://skyevent.fr/#business",
+    "name": "SkyEvent",
+    "url": "https://skyevent.fr",
+    "logo": "https://skyevent.fr/images/Sky-Event-.webp",
+    "image": "https://skyevent.fr/images/og-skyevent.jpg",
+    "description": "SkyEvent est un traiteur événementiel sur mesure en Île-de-France : mariages, baptêmes, anniversaires, baby showers, événements d'entreprise et événements de marque.",
+    "email": "skyevent.fr@hotmail.com",
+    "telephone": "+33679159615",
+    "servesCuisine": ["Sushi", "Cuisine japonaise", "Buffet"],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Paris",
+      "addressRegion": "Île-de-France",
+      "addressCountry": "FR"
+    },
+    "areaServed": [
+      { "@type": "City", "name": "Paris" },
+      { "@type": "AdministrativeArea", "name": "Île-de-France" }
+    ],
+    "sameAs": ["https://www.instagram.com/skyevent.fr/"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Prestations traiteur",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Traiteur mariage", "url": "https://skyevent.fr/realisations/mariage" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Traiteur anniversaire", "url": "https://skyevent.fr/realisations/anniversaire" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Traiteur baptême", "url": "https://skyevent.fr/realisations/bapteme" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Traiteur baby shower", "url": "https://skyevent.fr/realisations/baby-shower" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Traiteur événements d'entreprise", "url": "https://skyevent.fr/realisations/evenements-dentreprise" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Traiteur événements de marque", "url": "https://skyevent.fr/realisations/evenements-de-marque" } }
+      ]
+    }
+  }
+}

@@ -248,7 +248,7 @@ const TextSection = styled(motion.div)`
   }
 `;
 
-const StoryTitle = styled.h1`
+const StoryTitle = styled.h2`
   font-size: 3rem;
   font-weight: 400;
   margin-bottom: 30px;

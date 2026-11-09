@@ -1,0 +1,64 @@
+{
+  "/": {
+    "title": "Traiteur événementiel sur mesure à Paris | SkyEvent",
+    "description": "Traiteur événementiel à Paris et en Île-de-France : mariages, anniversaires, entreprises. Buffets et bars à sushis sur mesure.",
+    "h1": "Traiteur événementiel sur mesure",
+    "priority": "1.0"
+  },
+  "/notre-histoire": {
+    "title": "Notre histoire | SkyEvent, traiteur événementiel",
+    "description": "Découvrez SkyEvent, traiteur événementiel en Île-de-France : notre histoire, notre savoir-faire et notre passion pour une cuisine raffinée.",
+    "h1": "Notre histoire",
+    "image": "/images/DSC05270.jpg",
+    "priority": "0.7"
+  },
+  "/realisations": {
+    "title": "Nos réalisations | Traiteur événementiel SkyEvent",
+    "description": "Photos et vidéos de nos buffets, bars à sushis et réceptions : mariages, anniversaires et événements d'entreprise en Île-de-France.",
+    "h1": "Nos réalisations",
+    "image": "/images/DSC05266.jpg",
+    "priority": "0.8"
+  },
+  "/realisations/mariage": {
+    "title": "Traiteur mariage à Paris et en Île-de-France | SkyEvent",
+    "description": "Traiteur pour votre mariage en Île-de-France : cocktail, buffet et bar à sushis sur mesure, décoration soignée et service complet le jour J.",
+    "h1": "Traiteur mariage",
+    "image": "/images/DSC05270.jpg",
+    "priority": "0.9"
+  },
+  "/realisations/anniversaire": {
+    "title": "Traiteur anniversaire à Paris | SkyEvent",
+    "description": "Traiteur pour anniversaire à Paris et en Île-de-France : buffets élégants, bar à sushis et service complet pour une fête mémorable.",
+    "h1": "Traiteur anniversaire",
+    "image": "/images/DSC05355.jpg",
+    "priority": "0.9"
+  },
+  "/realisations/bapteme": {
+    "title": "Traiteur baptême à Paris | SkyEvent",
+    "description": "Réception de baptême en Île-de-France : menus adaptés, buffet raffiné et décoration soignée pour célébrer ce moment en famille.",
+    "h1": "Traiteur baptême",
+    "image": "/images/DSC05415.jpg",
+    "priority": "0.9"
+  },
+  "/realisations/baby-shower": {
+    "title": "Traiteur baby shower à Paris | SkyEvent",
+    "description": "Baby shower en Île-de-France : buffet sucré-salé, bar à sushis et décoration thématique pour célébrer l'arrivée de bébé.",
+    "h1": "Traiteur baby shower",
+    "image": "/images/DSC05372.jpg",
+    "priority": "0.9"
+  },
+  "/realisations/evenements-dentreprise": {
+    "title": "Traiteur événement d'entreprise à Paris | SkyEvent",
+    "description": "Traiteur pour séminaires, cocktails et soirées d'entreprise à Paris et en Île-de-France : buffets et bars à sushis sur mesure.",
+    "h1": "Traiteur événements d'entreprise",
+    "image": "/images/DSC05410.jpg",
+    "priority": "0.9"
+  },
+  "/realisations/evenements-de-marque": {
+    "title": "Traiteur événement de marque à Paris | SkyEvent",
+    "description": "Lancements de produit, soirées VIP et activations de marque : des expériences culinaires sur mesure à Paris et en Île-de-France.",
+    "h1": "Traiteur événements de marque",
+    "image": "/images/DSC05381.jpg",
+    "priority": "0.9"
+  }
+}

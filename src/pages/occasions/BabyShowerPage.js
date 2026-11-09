@@ -45,12 +45,7 @@ const BabyShowerPage = () => {
 
   return (
     <>
-      <SEO 
-        title="Traiteur Baby Shower"
-        description="Organisez un baby shower magique avec SkyEvent. Buffets créatifs, décoration thématique et animations pour célébrer l'arrivée de bébé dans la douceur."
-        path="/baby-shower"
-        image="/images/DSC05372.jpg"
-      />
+      <SEO path="/realisations/baby-shower" />
       <OccasionTemplate {...pageData} occasionType="babyshower" />
     </>
   );

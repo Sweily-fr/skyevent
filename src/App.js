@@ -12,10 +12,10 @@ import BaptemePage from './pages/occasions/BaptemePage';
 import MariagePage from './pages/occasions/MariagePage';
 import EntreprisePage from './pages/occasions/EntreprisePage';
 import MarquePage from './pages/occasions/MarquePage';
+import NotFoundPage from './pages/NotFoundPage';
 
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
   
   * {
     box-sizing: border-box;
@@ -133,6 +133,9 @@ function App() {
             <Route path="/realisations/mariage" element={<MariagePage />} />
             <Route path="/realisations/evenements-dentreprise" element={<EntreprisePage />} />
             <Route path="/realisations/evenements-de-marque" element={<MarquePage />} />
+
+            {/* Page 404 pour toutes les URL inconnues */}
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Layout>
     </BrowserRouter>

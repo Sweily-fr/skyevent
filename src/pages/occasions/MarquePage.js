@@ -36,12 +36,7 @@ const MarquePage = () => {
 
   return (
     <>
-      <SEO 
-        title="Événements de Marque sur Mesure"
-        description="Renforcez l'image de votre marque avec des expériences culinaires exceptionnelles. Lancements produits, événements VIP et activations de marque mémorables."
-        path="/evenement-marque"
-        image="/images/DSC05381.jpg"
-      />
+      <SEO path="/realisations/evenements-de-marque" />
       <OccasionTemplate {...pageData} occasionType="marque" />
     </>
   );

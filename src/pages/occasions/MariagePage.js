@@ -36,12 +36,7 @@ const MariagePage = () => {
 
   return (
     <>
-      <SEO 
-        title="Traiteur Mariage"
-        description="Organisez le mariage de vos rêves avec SkyEvent. Menus gastronomiques, décoration florale et service premium pour un jour J parfait et inoubliable."
-        path="/mariage"
-        image="/images/DSC05270.jpg"
-      />
+      <SEO path="/realisations/mariage" />
       <OccasionTemplate {...pageData} occasionType="mariage" />;
     </>
   );
