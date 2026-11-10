@@ -3,19 +3,19 @@
 > SkyEvent est un traiteur événementiel sur mesure basé à Paris, intervenant en Île-de-France. Spécialités : buffets et bars à sushis pour mariages, anniversaires, baptêmes, baby showers, événements d'entreprise et événements de marque.
 
 Contact : skyevent.fr@hotmail.com – 06 79 15 96 15 – Instagram : https://www.instagram.com/skyevent.fr/
-Demande de devis : formulaire de contact sur https://skyevent.fr/#contact
+Demande de devis : formulaire de contact sur https://sky-event.fr/#contact
 
 ## Pages principales
 
-- [Accueil](https://skyevent.fr/): présentation de SkyEvent, galerie et formulaire de contact
-- [Notre histoire](https://skyevent.fr/notre-histoire): l'histoire et le savoir-faire de SkyEvent
-- [Nos réalisations](https://skyevent.fr/realisations): photos et vidéos de nos événements
+- [Accueil](https://sky-event.fr/): présentation de SkyEvent, galerie et formulaire de contact
+- [Notre histoire](https://sky-event.fr/notre-histoire): l'histoire et le savoir-faire de SkyEvent
+- [Nos réalisations](https://sky-event.fr/realisations): photos et vidéos de nos événements
 
 ## Prestations par occasion
 
-- [Traiteur mariage](https://skyevent.fr/realisations/mariage)
-- [Traiteur anniversaire](https://skyevent.fr/realisations/anniversaire)
-- [Traiteur baptême](https://skyevent.fr/realisations/bapteme)
-- [Traiteur baby shower](https://skyevent.fr/realisations/baby-shower)
-- [Traiteur événements d'entreprise](https://skyevent.fr/realisations/evenements-dentreprise)
-- [Traiteur événements de marque](https://skyevent.fr/realisations/evenements-de-marque)
+- [Traiteur mariage](https://sky-event.fr/realisations/mariage)
+- [Traiteur anniversaire](https://sky-event.fr/realisations/anniversaire)
+- [Traiteur baptême](https://sky-event.fr/realisations/bapteme)
+- [Traiteur baby shower](https://sky-event.fr/realisations/baby-shower)
+- [Traiteur événements d'entreprise](https://sky-event.fr/realisations/evenements-dentreprise)
+- [Traiteur événements de marque](https://sky-event.fr/realisations/evenements-de-marque)
