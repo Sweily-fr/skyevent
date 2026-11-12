@@ -65,7 +65,8 @@ const buildNoscript = (meta) => {
     `<p>${escapeHtml(meta.description)}</p>` +
     `<nav aria-label="Pages du site"><ul>${links}</ul></nav></main>` +
     `<footer><p>Contact : <a href="mailto:${site.business.email}">${site.business.email}</a> – ` +
-    `<a href="tel:${site.business.telephone}">06 79 15 96 15</a></p></footer>`
+    `<a href="tel:${site.business.telephone}">06 79 15 96 15</a></p>` +
+    `<p>Fait par <a href="https://newbi.fr">Newbi</a></p></footer>`
   );
 };
 

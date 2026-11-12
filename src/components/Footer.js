@@ -91,6 +91,21 @@ const Copyright = styled.div`
   letter-spacing: 0.5px;
 `;
 
+const Credit = styled.p`
+  margin: 10px 0 0;
+  font-size: 12px;
+
+  a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #d4af37;
+    }
+  }
+`;
+
 const Footer = () => {
   return (
     <FooterContainer>
@@ -125,6 +140,12 @@ const Footer = () => {
 
       <Copyright>
         © {new Date().getFullYear()} SkyEvent. Tous droits réservés.
+        <Credit>
+          Fait par{' '}
+          <a href="https://newbi.fr">
+            Newbi
+          </a>
+        </Credit>
       </Copyright>
     </FooterContainer>
   );
